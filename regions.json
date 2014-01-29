@@ -1,0 +1,45 @@
+{
+  "layers": {
+    "queensland": {
+      "src": "shapefiles/IQ_QLD_GENPUR_OUTLINE_2500K.shp",
+      "join": true
+    },
+    "reef": {
+      "src": "shapefiles/Banks_GBR/Banks_GBR.shp"
+    },
+    "cape-york": {
+      "src": "shapefiles/cape_york.shp",
+      "join": true
+    },
+    "wet-tropics": {
+      "src": "shapefiles/wet_tropics.shp",
+      "join": true
+    },
+    "burdekin": {
+      "src": "shapefiles/burdekin.shp",
+      "join": true
+    },
+    "mackay-whitsunday": {
+      "src": "shapefiles/mackay_whitsunday.shp",
+      "join": true
+    },
+    "fitzroy": {
+      "src": "shapefiles/fitzroy.shp",
+      "join": true
+    },
+    "burnett-mary": {
+      "src": "shapefiles/burnett_mary.shp",
+      "join": true
+    }
+  },
+  "proj": {
+    "id": "satellite",
+    "dist": 2,
+    "up": 0,
+    "tilt": 0
+  },
+  "bounds": {
+    "mode": "bbox", 
+    "data": [140.5, -27, 154, -10]
+  }
+}
