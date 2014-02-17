@@ -41,13 +41,12 @@
     }
   },
   "proj": {
-    "id": "satellite",
-    "dist": 2,
-    "up": 0,
-    "tilt": 0
+    "id": "mercator",
+    "lon0": 145,
+    "lat0": -20
   },
   "bounds": {
     "mode": "bbox", 
-    "data": [140.5, -27, 154, -10]
+    "data": [141.05, -27, 154, -10]
   }
 }
