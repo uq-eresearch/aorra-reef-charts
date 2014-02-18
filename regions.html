@@ -12,8 +12,6 @@
 <style type="text/css">
 
 body {
-  background-image: url('bg.jpg');
-  background-size: cover;
   margin: 0;
   padding: 0;
 }
@@ -191,10 +189,14 @@ function getRegionStyle(values) {
 }
 
 $(document).ready(function() {
+  var handlers = { onLeave: function() {} };
   $.fn.fullpage({
     verticalCentered: false,
     css3: true,
-    fixedElements: '#gradient, #regions'
+    fixedElements: '#regions',
+    onLeave: function() {
+      handlers.onLeave();
+    }
   });
   function loadSvg(containerSelector, url) {
     $(containerSelector).svg();
@@ -228,10 +230,15 @@ $(document).ready(function() {
   loadSvg('#regions', 'regions.svg').done(function(regions) {
     var setRegionStyle = (function() {
       var style = null;
-      return function (styleContent) {
+      var removeStyle = function() {
         if (style) {
           regions.remove(style);
         }
+        style = null
+      };
+      handlers['onLeave'] = removeStyle;
+      return function (styleContent) {
+        removeStyle();
         style = regions.style(styleContent);
       };
     })();
@@ -263,7 +270,6 @@ $(document).ready(function() {
 
 <body>
 
-<div id="gradient"></div>
 <div id="regions"></div>
 
 <div>
