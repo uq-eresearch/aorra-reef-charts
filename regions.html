@@ -29,7 +29,7 @@ body {
   bottom: 0;
   height: 100%;
   width: 100%;
-  z-index: -1;
+  z-index: -2;
 }
 
 #regions {
@@ -38,6 +38,7 @@ body {
   bottom: 0;
   width: 100%;
   height: 100%;
+  z-index: -1;
 } 
 
 #regions svg {
@@ -49,10 +50,105 @@ body {
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 30%;
+  width: 50%;
 }
 </style>
 <script type="text/javascript">
+var conditions = ["Very Good", "Good", "Moderate", "Poor", "Very Poor"];
+var regions = [
+  'gbr',
+  'cape-york',
+  'wet-tropics',
+  'burdekin',
+  'mackay-whitsunday',
+  'fitzroy',
+  'burnett-mary'
+];
+var indicators = [
+  'overall',
+  'water-chlorophyll',
+  'coral-change',
+  'coral-juvenile',
+  'coral-macroalgae',
+  'coral-cover',
+  'seagrass-abundance',
+  'seagrass-reproduction',
+  'seagrass-nutrient',
+  'water',
+  'coral',
+  'seagrass',
+  'water-solids'
+];
+
+var marineData = regions.reduce(function(hr, vr) {
+  hr[vr] = indicators.reduce(function(hi, vi) {
+    var randomIndex = Math.floor(Math.random()*conditions.length);
+    if (vi.indexOf('coral') == 0 && (vr == 'cape-york' || vr == 'burnett-mary')) {
+      hi[vi] = 'NA';
+    } else {
+      hi[vi] = conditions[randomIndex];
+    }
+    return hi;
+  }, {});
+  return hr;
+}, {})
+
+function getFill(v) {
+  var fills = {
+    'Very Good': {
+      'normal': '#7aff66',
+      'active': '#22ff00'
+    },
+    'Good': {
+      'normal': '#cfff66',
+      'active': '#b0ff00'
+    },
+    'Moderate': {
+      'normal': '#fff666',
+      'active': '#fff000'
+    },
+    'Poor': {
+      'normal': '#ffc766',
+      'active': '#ffa200'
+    },
+    'Very Poor': {
+      'normal': '#ff6966',
+      'active': '#ff0400'
+    }
+  };
+  if (fills[v]) {
+    return fills[v];
+  } else {
+    return { normal: '#e5e5e5', active: '#e5e5e5' };
+  }
+}
+
+function getRegionData(indicator) {
+  return Object.keys(marineData).reduce(function(h, k) {
+    console.log(k, indicator);
+    h[k] = marineData[k][indicator];
+    return h;
+  }, {});
+}
+
+function getMarineStyle(values) {
+  return Object.keys(values).map(function(key) {
+    var value = values[key];
+    return '#'+key+" { fill: "+getFill(value).normal+"; pointer-events: all; }\n" +
+           '#'+key+":hover, #"+key+".active { fill: "+getFill(value).active+"; cursor: pointer; }";
+  }).join("\n");
+}
+
+function getRegionStyle(values) {
+  return Object.keys(values).map(function(key) {
+    var value = values[key];
+    if (value == 'NA') {
+      return '#'+key+" { display: none; }";
+    }
+    return '#'+key+" { fill: "+getFill(value).normal+"; }";
+  }).join("\n");
+}
+
 $(document).ready(function() {
   $.fn.fullpage({
     verticalCentered: false,
@@ -62,6 +158,7 @@ $(document).ready(function() {
   function loadSvg(containerSelector, url) {
     $(containerSelector).svg();
     var svg = $(containerSelector).svg('get');
+    var d = $.Deferred();
     svg.load(url, { 
       onLoad: function() {
         svg.configure({
@@ -69,11 +166,45 @@ $(document).ready(function() {
           'width': '100%',
           'preserveAspectRatio': 'xMinYMin meet'
         }, false);
+        d.resolve(svg);
       }
     });
+    return d.promise();
   }
-  loadSvg('#regions', 'regions.svg');
-  loadSvg('#marine', 'marine.svg');
+  var setFocus = (function() { 
+    var focused = null;
+    return function (element) {
+      if (focused) {
+        $(focused).attr('class', '');
+      }
+      focused = element;
+      $(focused).attr('class', 'active');
+    };
+  })();
+
+  loadSvg('#regions', 'regions.svg').done(function(regions) {
+    var setRegionStyle = (function() {
+      var style = null;
+      return function (styleContent) {
+        if (style) {
+          regions.remove(style);
+        }
+        style = regions.style(styleContent);
+      };
+    })();
+    loadSvg('#marine', 'marine.svg').done(function(marine) {
+      marine.style(getMarineStyle(marineData.gbr));
+      Object.keys(marineData.gbr).forEach(function(id) {
+        var e = marine.getElementById(id);
+        if (e) {
+          $(e).on('click', function(evt) {
+            setFocus(evt.delegateTarget);
+            setRegionStyle(getRegionStyle(getRegionData(id)));
+          });
+        }
+      });
+    });
+  });
 });
 </script>
 
@@ -87,6 +218,7 @@ $(document).ready(function() {
     <div class="row">
       <div class="col-xs-6 col-xs-offset-6">
         <h1>Map</h1>
+        <p>Scroll Down</p>
       </div>
     </div>
   </div>
