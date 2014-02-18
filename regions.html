@@ -71,17 +71,6 @@ body {
   font-size: 18px;
 }
 
-.very-good                          { background-color: #7aff66; }
-.very-good.active, .very-good:hover { background-color: #22ff00; }
-.good                               { background-color: #cfff66; }
-.good.active, .good:hover           { background-color: #b0ff00; }
-.moderate                           { background-color: #fff666; }
-.moderate.active, .moderate:hover   { background-color: #fff000; }
-.poor                               { background-color: #ffc766; }
-.poor.active, .poor:hover           { background-color: #ffa200; }
-.very-poor                          { background-color: #ff6966; }
-.very-poor.active, .very-poor:hover { background-color: #ff0400; } 
-
 </style>
 <script type="text/javascript">
 var conditions = ["Very Good", "Good", "Moderate", "Poor", "Very Poor"];
@@ -279,13 +268,32 @@ $(document).ready(function() {
 
 <div>
   <div class="section" id="section0">
-    <div id="progress-list">
+    <div class="row">
+      <div class="col-xs-6 col-xs-offset-6">
+        <h1>Scroll Down</h1>
+      </div>
     </div>
   </div>
   <div class="section" id="section1">
+    <div id="progress-list">
+    </div>
+  </div>
+  <div class="section" id="section2">
     <div id="marine"></div>
   </div>
 </div>
 
 </body>
+<style>
+.very-good                          { background-color: #7aff66; }
+.very-good.active, .very-good:hover { background-color: #22ff00; }
+.good                               { background-color: #cfff66; }
+.good.active, .good:hover           { background-color: #b0ff00; }
+.moderate                           { background-color: #fff666; }
+.moderate.active, .moderate:hover   { background-color: #fff000; }
+.poor                               { background-color: #ffc766; }
+.poor.active, .poor:hover           { background-color: #ffa200; }
+.very-poor                          { background-color: #ff6966; }
+.very-poor.active, .very-poor:hover { background-color: #ff0400; }
+</style>
 </html>
