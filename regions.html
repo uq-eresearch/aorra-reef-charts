@@ -52,6 +52,36 @@ body {
   right: 10px;
   width: 50%;
 }
+
+#progress-list {
+  float: right;
+  width: 50%;
+  padding-top: 20px;
+}
+
+#progress-list button {
+  display: inline;
+  text-align: center;
+  border: none;
+  outline: none;
+  height: 4em;
+  width: 40%;
+  margin: 10px;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.very-good                          { background-color: #7aff66; }
+.very-good.active, .very-good:hover { background-color: #22ff00; }
+.good                               { background-color: #cfff66; }
+.good.active, .good:hover           { background-color: #b0ff00; }
+.moderate                           { background-color: #fff666; }
+.moderate.active, .moderate:hover   { background-color: #fff000; }
+.poor                               { background-color: #ffc766; }
+.poor.active, .poor:hover           { background-color: #ffa200; }
+.very-poor                          { background-color: #ff6966; }
+.very-poor.active, .very-poor:hover { background-color: #ff0400; } 
+
 </style>
 <script type="text/javascript">
 var conditions = ["Very Good", "Good", "Moderate", "Poor", "Very Poor"];
@@ -64,7 +94,7 @@ var regions = [
   'fitzroy',
   'burnett-mary'
 ];
-var indicators = [
+var marineIndicators = [
   'overall',
   'water-chlorophyll',
   'coral-change',
@@ -79,9 +109,19 @@ var indicators = [
   'seagrass',
   'water-solids'
 ];
+var progressIndicators = [
+  'Grazing',
+  'Sugercane',
+  'Horticulture',
+  'Groundcover',
+  'Nitrogen',
+  'Sediment',
+  'Pesticides',
+  'Phosphates'
+];
 
 var marineData = regions.reduce(function(hr, vr) {
-  hr[vr] = indicators.reduce(function(hi, vi) {
+  hr[vr] = marineIndicators.reduce(function(hi, vi) {
     var randomIndex = Math.floor(Math.random()*conditions.length);
     if (vi.indexOf('coral') == 0 && (vr == 'cape-york' || vr == 'burnett-mary')) {
       hi[vi] = 'NA';
@@ -91,7 +131,20 @@ var marineData = regions.reduce(function(hr, vr) {
     return hi;
   }, {});
   return hr;
-}, {})
+}, {});
+
+var progressData = regions.reduce(function(hr, vr) {
+  hr[vr] = progressIndicators.reduce(function(hi, vi) {
+    var randomIndex = Math.floor(Math.random()*conditions.length);
+    if (vr == 'cape-york' && ['Sugercane', 'Groundcover', 'Pesticides'].indexOf(vi) > -1) {
+      hi[vi] = 'NA';
+    } else {
+      hi[vi] = conditions[randomIndex];
+    }
+    return hi;
+  }, {});
+  return hr;
+}, {});
 
 function getFill(v) {
   var fills = {
@@ -123,10 +176,9 @@ function getFill(v) {
   }
 }
 
-function getRegionData(indicator) {
-  return Object.keys(marineData).reduce(function(h, k) {
-    console.log(k, indicator);
-    h[k] = marineData[k][indicator];
+function getRegionData(data, indicator) {
+  return Object.keys(data).reduce(function(h, k) {
+    h[k] = data[k][indicator];
     return h;
   }, {});
 }
@@ -171,14 +223,16 @@ $(document).ready(function() {
     });
     return d.promise();
   }
-  var setFocus = (function() { 
+  
+  var setFocus = (function() {
     var focused = null;
     return function (element) {
       if (focused) {
-        $(focused).attr('class', '');
+        $(focused).attr('class', 
+          $(focused).attr('class').replace(' active', ''));
       }
       focused = element;
-      $(focused).attr('class', 'active');
+      $(focused).attr('class', $(focused).attr('class')+' active');
     };
   })();
 
@@ -192,6 +246,16 @@ $(document).ready(function() {
         style = regions.style(styleContent);
       };
     })();
+    Object.keys(progressData.gbr).forEach(function(name) {
+      var condition = progressData.gbr[name];
+      var $button = $('<button/>').text(name);
+      $button.addClass(condition.toLowerCase().replace(' ', '-'));
+      $button.on('click', function(evt) {
+        setFocus(evt.delegateTarget);
+        setRegionStyle(getRegionStyle(getRegionData(progressData, name)));
+      });
+      $('#progress-list').append($button);
+    });    
     loadSvg('#marine', 'marine.svg').done(function(marine) {
       marine.style(getMarineStyle(marineData.gbr));
       Object.keys(marineData.gbr).forEach(function(id) {
@@ -199,7 +263,7 @@ $(document).ready(function() {
         if (e) {
           $(e).on('click', function(evt) {
             setFocus(evt.delegateTarget);
-            setRegionStyle(getRegionStyle(getRegionData(id)));
+            setRegionStyle(getRegionStyle(getRegionData(marineData, id)));
           });
         }
       });
@@ -215,11 +279,7 @@ $(document).ready(function() {
 
 <div>
   <div class="section" id="section0">
-    <div class="row">
-      <div class="col-xs-6 col-xs-offset-6">
-        <h1>Map</h1>
-        <p>Scroll Down</p>
-      </div>
+    <div id="progress-list">
     </div>
   </div>
   <div class="section" id="section1">
