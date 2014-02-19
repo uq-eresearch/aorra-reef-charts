@@ -69,7 +69,33 @@ body {
   font-size: 18px;
 }
 
+#dark-style-toggle {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
 </style>
+<style id="dark-style" type="text/css">
+body {
+  background-color: #222244;
+  color: white;
+}
+
+#progress-list {
+  color: black;
+}
+
+#queensland {
+  stroke: white;
+}
+
+#cape-york, #wet-topics, #burdekin, #mackay-whitsunday, #fitzroy, #burnett-mary {
+  stroke: white;
+}
+</style>
+
+
 <script type="text/javascript">
 var conditions = ["Very Good", "Good", "Moderate", "Poor", "Very Poor"];
 var regions = [
@@ -193,12 +219,26 @@ $(document).ready(function() {
   $.fn.fullpage({
     verticalCentered: false,
     css3: true,
-    fixedElements: '#regions',
+    fixedElements: '#dark-style-toggle, #regions',
     navigation: true,
     onLeave: function() {
       handlers.onLeave();
     }
   });
+  $('#dark-style-toggle').click((function() {
+    var $darkStyle = $('#dark-style').detach();
+    var isDark = false;
+    return function() {
+      console.log($darkStyle, isDark);
+      if (isDark) {
+        $darkStyle.detach();
+      } else {
+        $('head').append($darkStyle);
+      }
+      isDark = !isDark;
+    };
+  })());
+  
   function loadSvg(containerSelector, url) {
     $(containerSelector).svg();
     var svg = $(containerSelector).svg('get');
@@ -272,6 +312,10 @@ $(document).ready(function() {
 <body>
 
 <div id="regions"></div>
+<button id="dark-style-toggle" type="button"
+  class="btn btn-default" data-toggle="button">
+  Toggle Style
+</button>
 
 <div>
   <div class="section" id="section0">
