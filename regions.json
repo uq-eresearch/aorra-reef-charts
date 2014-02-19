@@ -1,7 +1,7 @@
 {
   "layers": {
     "queensland": {
-      "src": "shapefiles/IQ_QLD_GENPUR_OUTLINE_2500K.shp",
+      "src": "shapefiles/IQ_QLD_GENPUR_LAND_RELIEF.shp",
       "join": true,
       "simplify": 1
     },
