@@ -14,20 +14,12 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: #a0c3ff;
+  background-image: linear-gradient(135deg, #c5e8ff, #a0c3ff);
 }
 
-#gradient {
-  background-image: linear-gradient(60deg, 
-    rgba(255,255,255,1.0), 
-    rgba(255,255,255,1.0), 
-    rgba(255,255,255,0.5), 
-    rgba(255,255,255,0.0));
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  height: 100%;
-  width: 100%;
-  z-index: -2;
+#queensland {
+  fill: white;
 }
 
 #regions {
@@ -45,16 +37,18 @@ body {
 }
 
 #marine {
-  position: absolute;
-  top: 40px;
-  right: 40px;
+  float: right;
+  margin-top: 20px;
+  margin-right: 60px;
   width: 50%;
 }
 
 #progress-list {
   float: right;
   width: 50%;
-  padding-top: 20px;
+  margin-top: 20px;
+  margin-right: 55px;
+  text-align: right;
 }
 
 #progress-list button {
@@ -66,7 +60,7 @@ body {
   width: 40%;
   margin: 10px;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 #dark-style-toggle {
