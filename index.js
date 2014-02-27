@@ -36,7 +36,7 @@ var viewboxes = {
   'cape-york': '100 50 100 450',
   'wet-tropics': '270 460 300 260',
   'burdekin': '220 640 100 550',
-  'mackay-whitsunday': '540 790 100 200',
+  'mackay-whitsunday': '520 740 100 300',
   'fitzroy': '410 880 100 480',
   'burnett-mary': '700 1120 100 268'
 }
@@ -173,17 +173,21 @@ $(document).ready(function() {
       var b = regions.root().viewBox.baseVal;
       return [b.x, b.y, b.width, b.height].join(' ');
     })();
-    var zoomed = false;
+    var zoomed = "gbr";
     Object.keys(viewboxes).forEach(function(regionName) {
       var e = regions.getElementById(regionName);
       if (e) {
         $(e).on('click', function() {
-          if (zoomed) {
-            regions.configure({ 'viewBox': defaultViewbox }, false);
-            zoomed = false;
+          if (zoomed == regionName) {
+            $(regions.root()).animate({
+              'svgViewBox': defaultViewbox
+            }, 1000);
+            zoomed = "gbr";
           } else {
-            regions.configure({ 'viewBox': viewboxes[regionName] });
-            zoomed = true;
+            $(regions.root()).animate({
+              'svgViewBox': viewboxes[regionName]
+            }, 1000);
+            zoomed = regionName;
           }
         });
       }
