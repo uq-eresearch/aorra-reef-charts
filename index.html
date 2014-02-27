@@ -24,10 +24,10 @@ body {
   bottom: 0;
   width: 1000px; /* This results in better portrait scaling that 100% would */
   height: 100%;
-  z-index: -1;
 }
 
 .inset-paper {
+  position: relative; /* Required to avoid z-index issues with #regions */
   float: right;
   background-color: rgba(255,255,255,0.95);
   box-shadow: 0px 0px 3px #888888;
@@ -109,9 +109,16 @@ var progressIndicators = [
   'Groundcover',
   'Nitrogen',
   'Sediment',
-  'Pesticides',
-  'Phosphates'
+  'Pesticides'
 ];
+var viewboxes = {
+  'cape-york': '100 50 100 450',
+  'wet-tropics': '270 460 300 250',
+  'burdekin': '220 640 100 550',
+  'mackay-whitsunday': '540 790 100 200',
+  'fitzroy': '410 880 100 480',
+  'burnett-mary': '700 1100 100 290'
+}
 
 var marineData = regions.reduce(function(hr, vr) {
   hr[vr] = marineIndicators.reduce(function(hi, vi) {
@@ -196,15 +203,6 @@ function getRegionStyle(values) {
 
 $(document).ready(function() {
   var handlers = { onLeave: function() {} };
-  $.fn.fullpage({
-    verticalCentered: false,
-    css3: true,
-    fixedElements: '#dark-style-toggle, #regions',
-    navigation: true,
-    onLeave: function() {
-      handlers.onLeave();
-    }
-  });
   
   function loadSvg(containerSelector, url) {
     $(containerSelector).svg();
@@ -242,7 +240,7 @@ $(document).ready(function() {
         if (style) {
           regions.remove(style);
         }
-        style = null
+        style = null;
       };
       handlers['onLeave'] = removeStyle;
       return function (styleContent) {
@@ -250,6 +248,25 @@ $(document).ready(function() {
         style = regions.style(styleContent);
       };
     })();
+    var defaultViewbox = (function() {
+      var b = regions.root().viewBox.baseVal;
+      return [b.x, b.y, b.width, b.height].join(' ');
+    })();
+    var zoomed = false;
+    Object.keys(viewboxes).forEach(function(regionName) {
+      var e = regions.getElementById(regionName);
+      if (e) {
+        $(e).on('click', function() {
+          if (zoomed) {
+            regions.configure({ 'viewBox': defaultViewbox }, false);
+            zoomed = false;
+          } else {
+            regions.configure({ 'viewBox': viewboxes[regionName] });
+            zoomed = true;
+          }
+        });
+      }
+    });
     Object.keys(progressData.gbr).forEach(function(name) {
       var condition = progressData.gbr[name];
       var $button = $('<button/>').text(name);
@@ -279,28 +296,10 @@ $(document).ready(function() {
 <body>
 
 <div id="regions"></div>
-<button id="dark-style-toggle" type="button"
-  class="btn btn-default" data-toggle="button">
-  Toggle Style
-</button>
 
-<div>
-  <div class="section" id="section0">
-    <div class="inset-paper">
-      <h1>Scroll Down</h1>
-    </div>
-  </div>
-  <div class="section" id="section1">
-    <div class="inset-paper">
-      <div id="progress-list">
-      </div>
-    </div>
-  </div>
-  <div class="section" id="section2">
-    <div class="inset-paper">
-      <div id="marine"></div>
-    </div>
-  </div>
+<div class="inset-paper">
+  <div id="progress-list"></div>
+  <div id="marine"></div>
 </div>
 
 </body>
