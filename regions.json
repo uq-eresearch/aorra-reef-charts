@@ -1,43 +1,43 @@
 {
   "layers": {
+    "reef": {
+      "src": "shapefiles/Banks_GBR/Banks_GBR.shp",
+      "simplify": 0.1
+    },
     "queensland": {
       "src": "shapefiles/queensland.shp",
       "join": true,
-      "simplify": 1
-    },
-    "reef": {
-      "src": "shapefiles/Banks_GBR/Banks_GBR.shp",
-      "simplify": 1
+      "simplify": 0.1
     },
     "cape-york": {
       "src": "shapefiles/cape_york.shp",
       "join": true,
-      "simplify": 1
+      "simplify": 0.1
     },
     "wet-tropics": {
       "src": "shapefiles/wet_tropics.shp",
       "join": true,
-      "simplify": 1
+      "simplify": 0.1
     },
     "burdekin": {
       "src": "shapefiles/burdekin.shp",
       "join": true,
-      "simplify": 1
+      "simplify": 0.1
     },
     "mackay-whitsunday": {
       "src": "shapefiles/mackay_whitsunday.shp",
       "join": true,
-      "simplify": 1
+      "simplify": 0.1
     },
     "fitzroy": {
       "src": "shapefiles/fitzroy.shp",
       "join": true,
-      "simplify": 1
+      "simplify": 0.1
     },
     "burnett-mary": {
       "src": "shapefiles/burnett_mary.shp",
       "join": true,
-      "simplify": 1
+      "simplify": 0.1
     }
   },
   "proj": {

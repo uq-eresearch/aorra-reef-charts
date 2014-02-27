@@ -16,13 +16,14 @@ body {
   padding: 0;
   background-color: #a0c3ff;
   background-image: linear-gradient(135deg, #c5e8ff, #a0c3ff);
+  overflow: hidden;
 }
 
 #regions {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 1000px; /* This results in better portrait scaling that 100% would */
+  width: 1200px; /* This results in better portrait scaling that 100% would */
   height: 100%;
 }
 
@@ -113,11 +114,11 @@ var progressIndicators = [
 ];
 var viewboxes = {
   'cape-york': '100 50 100 450',
-  'wet-tropics': '270 460 300 250',
+  'wet-tropics': '270 460 300 260',
   'burdekin': '220 640 100 550',
   'mackay-whitsunday': '540 790 100 200',
   'fitzroy': '410 880 100 480',
-  'burnett-mary': '700 1100 100 290'
+  'burnett-mary': '700 1120 100 268'
 }
 
 var marineData = regions.reduce(function(hr, vr) {
@@ -204,7 +205,7 @@ function getRegionStyle(values) {
 $(document).ready(function() {
   var handlers = { onLeave: function() {} };
   
-  function loadSvg(containerSelector, url) {
+  function loadSvg(containerSelector, url, align) {
     $(containerSelector).svg();
     var svg = $(containerSelector).svg('get');
     var d = $.Deferred();
@@ -213,7 +214,7 @@ $(document).ready(function() {
         svg.configure({
           'height': '100%',
           'width': '100%',
-          'preserveAspectRatio': 'xMinYMin meet'
+          'preserveAspectRatio': 'x'+align+'Y'+align+' meet'
         }, false);
         d.resolve(svg);
       }
@@ -233,7 +234,7 @@ $(document).ready(function() {
     };
   })();
 
-  loadSvg('#regions', 'regions.svg').done(function(regions) {
+  loadSvg('#regions', 'regions.svg', 'Min').done(function(regions) {
     var setRegionStyle = (function() {
       var style = null;
       var removeStyle = function() {
@@ -277,7 +278,7 @@ $(document).ready(function() {
       });
       $('#progress-list').append($button);
     });    
-    loadSvg('#marine', 'marine.svg').done(function(marine) {
+    loadSvg('#marine', 'marine.svg', 'Mid').done(function(marine) {
       marine.style(getMarineStyle(marineData.gbr));
       Object.keys(marineData.gbr).forEach(function(id) {
         var e = marine.getElementById(id);
@@ -298,8 +299,8 @@ $(document).ready(function() {
 <div id="regions"></div>
 
 <div class="inset-paper">
-  <div id="progress-list"></div>
   <div id="marine"></div>
+  <div id="progress-list"></div>
 </div>
 
 </body>
