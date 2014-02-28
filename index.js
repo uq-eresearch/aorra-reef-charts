@@ -25,7 +25,7 @@ var marineIndicators = [
 ];
 var progressIndicators = [
   'Grazing',
-  'Sugercane',
+  'Sugarcane',
   'Horticulture',
   'Groundcover',
   'Nitrogen',
@@ -122,8 +122,8 @@ function getRegionStyle(values) {
   }).join("\n");
 }
 
+var handlers = { onLeave: function() {} };
 $(document).ready(function() {
-  var handlers = { onLeave: function() {} };
   
   function loadSvg(containerSelector, url, align) {
     $(containerSelector).svg();
@@ -197,7 +197,9 @@ $(document).ready(function() {
       var $button = $('<button/>').text(name);
       $button.addClass(condition.toLowerCase().replace(' ', '-'));
       $button.on('click', function(evt) {
-        setFocus(evt.delegateTarget);
+        //setFocus(evt.delegateTarget);
+        console.log(name.toLowerCase()+'-info');
+        switchTab(name.toLowerCase()+'-info');
         setRegionStyle(getRegionStyle(getRegionData(progressData, name)));
       });
       $('#progress-list').append($button);
@@ -208,7 +210,8 @@ $(document).ready(function() {
         var e = marine.getElementById(id);
         if (e) {
           $(e).on('click', function(evt) {
-            setFocus(evt.delegateTarget);
+            //setFocus(evt.delegateTarget);
+            switchTab(id+'-info');
             setRegionStyle(getRegionStyle(getRegionData(marineData, id)));
           });
         }
@@ -216,3 +219,9 @@ $(document).ready(function() {
     });
   });
 });
+  
+function switchTab(id) {
+  $('.inset-paper').find('.tab-pane').removeClass('active');
+  $('.inset-paper').find('.tab-pane#'+id).addClass('active');
+  handlers.onLeave();
+}

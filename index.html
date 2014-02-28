@@ -14,74 +14,157 @@
 
 <div id="regions"></div>
 
-<div class="inset-paper">
-  <div class="front">
-    <div>
-      <div id="marine"></div>
-      <div id="progress-list"></div>
-    </div>
+<div class="inset-paper tab-content">
+  <div class="tab-pane active" id="home">
+    <h1>Reef Report Card Summary</h1>
+    <p>
+      This report card measures progress from the 2009 baseline towards
+      Reef Water Quality Protection Plan (Reef Plan) targets. It assesses the
+      combined results of all Reef Plan actions up to June 2011.
+    </p>
+    <p>Click on a region, or explore the reef-wide view.</p>
+    <ul class="list-unstyled">
+      <li style="padding-top: 3em">
+        <button class="btn btn-default" onclick="switchTab('marine-select')">
+          Marine Condition
+        </button>
+      </li>
+      <li style="padding-top: 3em">
+        <button class="btn btn-default" onclick="switchTab('progress-select')">
+          Progress Indicators
+        </button>
+      </li>
+    </ul>
   </div>
-  <div style="display: none">
-    <div id="marine-info">
-      <div id="grazing-info">
-      Proportion of graziers who adopted improved practices between 2009 and 2011.
-      </div>
-      <div id="sugarcane-info">
-      Proportion of growers who adopted improved practices between 2009 and 2011.
-      </div>
-      <div id="horticulture-info">
-      Proportion of producers who adopted improved practices between 2009 and 2011.
-      </div>
-      <div id="groundcover-info">
-      Late dry season groundcover as at 2010-2011.
-      </div>
-      <div id="nitrogen-info">
-      Reduction in annual average total nitrogen load between 2009 and 2011.
-      </div>
-      <div id="sediment-info">
-      Reduction in annual average sediment load between 2009 and 2011.
-      </div>
-      <div id="pesticides-info">
-      Reduction in annual average pesticide load between 2009 and 2011.
-      </div>
-    </div>
-    <div id="progress-info">
-      <div id="water-chlorophyll-info">
-      Chlorophyll &alpha; indicates nutrient availability and productivity.
-      </div>
-      <div id="suspended-solids-info">
-      Total suspended solids measures particulate matter in water.
-      </div>
-      <div id="seagrass-abundance-info">
-      Seagrass abundance includes the cover and change in cover
-      </div>
-      <div id="seagrass-reproduction-info">
-      Reproduction indicates the potential of seagrass meadows to recover from
-      disturbances.
-      </div>
-      <div id="seagrass-nutrient-info">
-      Nutrient status measures the response of seagrass to nutrient conditions
-      in surrounding waters.
-      </div>
-      <div id="coral-cover-info">
-      Coral cover is a measure of the percentage of coral across reefs, and
-      indicates the capacity of coral to persist under the current
-      environmental conditions and its potential to recover. 
-      </div>
-      <div id="coral-change-info">
-      Coral change measures change in coral cover which indicates coral
-      resilience to disturbance.
-      </div>
-      <div id="coral-macroalgae-info">
-      Macroalgal cover - high abundance indicates poor water quality and
-      negatively affects the resilience of coral communities.
-      </div>
-      <div id="coral-juvenile-info">
-      Coral juvenile density measures the abundance of corals less than 10
-      centimetres in diameter which indicates the recovery potential from
-      disturbances.
-      </div>
-    </div>
+  <div class="tab-pane" id="marine-select">
+    <h1>Marine Condition</h1>
+    <p>
+      Improvements in catchment management will take time to translate into improved 
+      marine condition.
+    </p>
+    <div id="marine"></div>
+    <button class="btn btn-default" onclick="switchTab('home')">
+      Back
+    </button>
+  </div>
+  <div class="tab-pane" id="progress-select">
+    <h1>Progress Indicators</h1>
+    <p>
+      The Reef Water Quality Protection Plan is a joint commitment of the 
+      Australian and Queensland Governments to minimise the risk to the reef 
+      ecosystem from a decline in the quality of water entering the reef from 
+      adjacent catchments.
+    </p>
+    <div id="progress-list"></div>
+    <button class="btn btn-default" onclick="switchTab('home')">
+      Back
+    </button>
+  </div>
+  <!-- Progress info -->
+  <div id="grazing-info" class="tab-pane">
+    Proportion of graziers who adopted improved practices between 2009 and 2011.
+    <button class="btn btn-default" onclick="switchTab('progress-select')">
+      Back
+    </button>
+  </div>
+  <div id="sugarcane-info" class="tab-pane">
+    Proportion of growers who adopted improved practices between 2009 and 2011.
+    <button class="btn btn-default" onclick="switchTab('progress-select')">
+      Back
+    </button>
+  </div>
+  <div id="horticulture-info" class="tab-pane">
+    Proportion of producers who adopted improved practices between 2009 and 2011.
+    <button class="btn btn-default" onclick="switchTab('progress-select')">
+      Back
+    </button>
+  </div>
+  <div id="groundcover-info" class="tab-pane">
+    Late dry season groundcover as at 2010-2011.
+    <button class="btn btn-default" onclick="switchTab('progress-select')">
+      Back
+    </button>
+  </div>
+  <div id="nitrogen-info" class="tab-pane">
+    Reduction in annual average total nitrogen load between 2009 and 2011.
+    <button class="btn btn-default" onclick="switchTab('progress-select')">
+      Back
+    </button>
+  </div>
+  <div id="sediment-info" class="tab-pane">
+    Reduction in annual average sediment load between 2009 and 2011.
+    <button class="btn btn-default" onclick="switchTab('progress-select')">
+      Back
+    </button>
+  </div>
+  <div id="pesticides-info" class="tab-pane">
+    Reduction in annual average pesticide load between 2009 and 2011.
+    <button class="btn btn-default" onclick="switchTab('progress-select')">
+      Back
+    </button>
+  </div>
+  <!-- Marine info -->
+  <div id="water-chlorophyll-info" class="tab-pane">
+    Chlorophyll &alpha; indicates nutrient availability and productivity.
+    <button class="btn btn-default" onclick="switchTab('marine-select')">
+      Back
+    </button>
+  </div>
+  <div id="suspended-solids-info" class="tab-pane">
+    Total suspended solids measures particulate matter in water.
+    <button class="btn btn-default" onclick="switchTab('marine-select')">
+      Back
+    </button>
+  </div>
+  <div id="seagrass-abundance-info" class="tab-pane">
+    Seagrass abundance includes the cover and change in cover
+    <button class="btn btn-default" onclick="switchTab('marine-select')">
+      Back
+    </button>
+  </div>
+  <div id="seagrass-reproduction-info" class="tab-pane">
+    Reproduction indicates the potential of seagrass meadows to recover from
+    disturbances.
+    <button class="btn btn-default" onclick="switchTab('marine-select')">
+      Back
+    </button>
+  </div>
+  <div id="seagrass-nutrient-info" class="tab-pane">
+    Nutrient status measures the response of seagrass to nutrient conditions
+    in surrounding waters.
+    <button class="btn btn-default" onclick="switchTab('marine-select')">
+      Back
+    </button>
+  </div>
+  <div id="coral-cover-info" class="tab-pane">
+    Coral cover is a measure of the percentage of coral across reefs, and
+    indicates the capacity of coral to persist under the current
+    environmental conditions and its potential to recover. 
+    <button class="btn btn-default" onclick="switchTab('marine-select')">
+      Back
+    </button>
+  </div>
+  <div id="coral-change-info" class="tab-pane">
+    Coral change measures change in coral cover which indicates coral
+    resilience to disturbance.
+    <button class="btn btn-default" onclick="switchTab('marine-select')">
+      Back
+    </button>
+  </div>
+  <div id="coral-macroalgae-info" class="tab-pane">
+    Macroalgal cover - high abundance indicates poor water quality and
+    negatively affects the resilience of coral communities.
+    <button class="btn btn-default" onclick="switchTab('marine-select')">
+      Back
+    </button>
+  </div>
+  <div id="coral-juvenile-info" class="tab-pane">
+    Coral juvenile density measures the abundance of corals less than 10
+    centimetres in diameter which indicates the recovery potential from
+    disturbances.
+    <button class="btn btn-default" onclick="switchTab('marine-select')">
+      Back
+    </button>
   </div>
 </div>
 

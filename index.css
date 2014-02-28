@@ -23,6 +23,7 @@ body {
   margin-top: 65px;
   margin-right: 65px;
   width: 40%;
+  padding: 0px 20px 0px 20px;
 }
 
 #regions svg {
