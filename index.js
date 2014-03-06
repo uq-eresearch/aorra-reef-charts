@@ -24,13 +24,13 @@ var marineIndicators = [
   'water-solids'
 ];
 var progressIndicators = [
-  'Grazing',
-  'Sugarcane',
-  'Horticulture',
-  'Groundcover',
-  'Nitrogen',
-  'Sediment',
-  'Pesticides'
+  'grazing',
+  'sugarcane',
+  'horticulture',
+  'groundcover',
+  'nitrogen',
+  'sediment',
+  'pesticides'
 ];
 var viewboxes = {
   'cape-york': '100 50 100 450',
@@ -39,7 +39,65 @@ var viewboxes = {
   'mackay-whitsunday': '520 740 100 300',
   'fitzroy': '410 880 100 480',
   'burnett-mary': '700 1120 100 268'
-}
+};
+
+var app = Sammy('#main', function() {
+    
+  // Default lander
+  this.get('#/', function() {
+    // this context is a Sammy.EventContext
+    this.$element() // $('#main')
+        .html($('#tmpl-home').html());
+    this.trigger('region:show', 'gbr');
+  });
+  
+  this.get('#/marine', function() {
+    var context = this;
+    this.$element()
+        .html($('#tmpl-marine-select').html());
+    this.trigger('region:show', 'gbr');
+    this.trigger('marine:show', 'gbr');
+    Object.keys(marineData.gbr).forEach(function(id) {
+      console.log($('#marine').svg('get'));
+      // Broken from here on!
+      // var e = $('#marine').svg('get').getElementById(id);
+      // if (e) {
+      //   $(e).on('click', function(evt) {
+      //     context.redirect('#', 'marine', id);
+      //   });
+      // }
+    });
+  });
+  
+  this.get('#/marine/:indicator', function() {
+    this.$element()
+        .html($('#tmpl-'+this.params['indicator']+'-info').html());
+    this.trigger('indicator:show', this.params['indicator']);
+  });
+  
+  this.get('#/progress', function() {
+    this.$element()
+        .html($('#tmpl-progress-select').html());
+    this.$element().find('button[data-indicator]').click(function(evt) {
+      var $button = $(evt.target);
+      this.redirect('#', 'progress', $button.attr('data-indicator'));
+    }.bind(this));
+    this.trigger('region:show', 'gbr');
+  });
+  
+  this.get('#/progress/:indicator', function() {
+    this.$element()
+        .html($('#tmpl-'+this.params['indicator']+'-info').html());
+    this.trigger('indicator:show', this.params['indicator']);
+  });
+  
+  this.get('#/region/:region', function() {
+    this.$element()
+        .html($('#tmpl-'+this.params['region']+'-info').html());
+    this.trigger('region:show', this.params['region']);
+  });
+  
+});
 
 var marineData = regions.reduce(function(hr, vr) {
   hr[vr] = marineIndicators.reduce(function(hi, vi) {
@@ -122,7 +180,6 @@ function getRegionStyle(values) {
   }).join("\n");
 }
 
-var handlers = { onLeave: function() {} };
 $(document).ready(function() {
   
   function loadSvg(containerSelector, url, align) {
@@ -163,67 +220,95 @@ $(document).ready(function() {
         }
         style = null;
       };
-      handlers['onLeave'] = removeStyle;
+      Sammy('#main', function() {
+        this.bind('region:show', function(evt, region) {
+          if (region == 'gbr') {
+            removeStyle();
+          }
+        });
+      });
       return function (styleContent) {
         removeStyle();
         style = regions.style(styleContent);
       };
     })();
+        
     var defaultViewbox = (function() {
       var b = regions.root().viewBox.baseVal;
       return [b.x, b.y, b.width, b.height].join(' ');
     })();
     var zoomed = "gbr";
-    Object.keys(viewboxes).forEach(function(regionName) {
-      var e = regions.getElementById(regionName);
-      if (e) {
-        $(e).on('click', function() {
-          if (zoomed == regionName) {
-            $(regions.root()).animate({
-              'svgViewBox': defaultViewbox
-            }, 1000);
-            switchTab('home');
-            zoomed = "gbr";
-          } else {
-            $(regions.root()).animate({
-              'svgViewBox': viewboxes[regionName]
-            }, 1000);
-            switchTab(regionName+'-info');
-            zoomed = regionName;
-          }
-        });
-      }
-    });
-    Object.keys(progressData.gbr).forEach(function(name) {
-      var condition = progressData.gbr[name];
-      var $button = $('<button/>').text(name);
-      $button.addClass(condition.toLowerCase().replace(' ', '-'));
-      $button.on('click', function(evt) {
-        //setFocus(evt.delegateTarget);
-        console.log(name.toLowerCase()+'-info');
-        switchTab(name.toLowerCase()+'-info');
-        setRegionStyle(getRegionStyle(getRegionData(progressData, name)));
-      });
-      $('#progress-list').append($button);
-    });    
-    loadSvg('#marine', 'marine.svg', 'Mid').done(function(marine) {
-      marine.style(getMarineStyle(marineData.gbr));
-      Object.keys(marineData.gbr).forEach(function(id) {
-        var e = marine.getElementById(id);
-        if (e) {
-          $(e).on('click', function(evt) {
-            //setFocus(evt.delegateTarget);
-            switchTab(id+'-info');
-            setRegionStyle(getRegionStyle(getRegionData(marineData, id)));
-          });
+    Sammy('#main', function() {
+      this.bind('region:show', function(evt, region) {
+        if (region == 'gbr' && zoomed != "gbr") {
+          $(regions.root()).animate({
+            'svgViewBox': defaultViewbox
+          }, 1000);
+          zoomed = "gbr";
         }
       });
     });
+          
+    Object.keys(viewboxes).forEach(function(regionName) {
+      var e = regions.getElementById(regionName);
+      if (e) {
+        Sammy('#main', function() {
+          var application = this;
+          this.bind('region:show', function(evt, r) {
+            if (r == regionName) {
+              $(regions.root()).animate({
+                'svgViewBox': viewboxes[regionName]
+              }, 1000);
+              zoomed = regionName;
+            }
+          });
+          $(e).on('click', function() {
+            if (zoomed == regionName) {
+              application.setLocation('#/');
+            } else {
+              application.setLocation('#/region/'+regionName);
+            }
+          });
+        });
+      }
+    });
+    
+    Object.keys(progressData.gbr).forEach(function(indicator) {
+      Sammy('#main', function() {
+        var condition = progressData.gbr[indicator];
+        var name = indicator.substring(0,1).toUpperCase() + indicator.substring(1);
+        var $button = $('<button/>').text(name);
+        $button.addClass(condition.toLowerCase().replace(' ', '-'));
+        $button.attr('data-indicator', indicator);
+        $('#progress-list').append($button);
+      });
+    });
+    
+    Sammy('#main', function() {
+      this.bind('indicator:show', function(evt, id) {
+        if (getRegionData(marineData, id).gbr) {
+          setRegionStyle(getRegionStyle(getRegionData(marineData, id)));
+        } else if (getRegionData(progressData, id).gbr) {
+          setRegionStyle(getRegionStyle(getRegionData(progressData, id)));
+        }
+      });
+    });
+    
+    loadSvg('#marine', 'marine.svg', 'Mid').done(function(marine) {
+      Sammy('#main', function() {
+        this.bind('marine:show', function(evt, id) {
+          if (id == 'gbr') {
+            marine.style(getMarineStyle(marineData.gbr));
+          } else {
+            var marineRegionData = marineData[id];
+            if (marineRegionData) {
+              marine.style(getMarineStyle(marineData.gbr));
+            }
+          }
+        });
+      });
+      // Run app now that regions & marine are loaded
+      app.run('#/');
+    });
   });
 });
-  
-function switchTab(id) {
-  $('.inset-paper').find('.tab-pane').removeClass('active');
-  $('.inset-paper').find('.tab-pane#'+id).addClass('active');
-  handlers.onLeave();
-}

@@ -4,10 +4,10 @@
 <link rel="stylesheet" type="text/css" href="index.css" />
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/sammy.js/0.7.4/sammy.min.js"></script>
 <script src="jquery.svg.min.js"></script>
 <script src="jquery.svganim.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
 <script src="index.js"></script>
 
 <body>
@@ -22,260 +22,264 @@
   <li class="very-poor">Very Poor</li>
 </ul>
 
-<div class="inset-paper tab-content">
-  <div class="tab-pane active" id="home">
-    <h1>Reef Report Card Summary</h1>
-    <p>
-      This report card measures progress from the 2009 baseline towards
-      Reef Water Quality Protection Plan (Reef Plan) targets. It assesses the
-      combined results of all Reef Plan actions up to June 2011.
-    </p>
-    <p>Click on a region, or explore the reef-wide view.</p>
-    <div class="row" style="padding-top: 2em; padding-bottom: 2em;">
-      <div class="col-xs-6 text-center">
-        <button class="btn btn-default" onclick="switchTab('marine-select')">
-          Marine Condition
-        </button>
-      </div>
-      <div class="col-xs-6 text-center">
-        <button class="btn btn-default" onclick="switchTab('progress-select')">
-          Progress Indicators
-        </button>
-      </div>
+<div id="main" class="inset-paper">
+
+</div>
+
+
+<div id="tmpl-home">
+  <h1>Reef Report Card Summary</h1>
+  <p>
+    This report card measures progress from the 2009 baseline towards
+    Reef Water Quality Protection Plan (Reef Plan) targets. It assesses the
+    combined results of all Reef Plan actions up to June 2011.
+  </p>
+  <p>Click on a region, or explore the reef-wide view.</p>
+  <div class="row" style="padding-top: 2em; padding-bottom: 2em;">
+    <div class="col-xs-6 text-center">
+      <a class="btn btn-default" href="#/marine">
+        Marine Condition
+      </a>
+    </div>
+    <div class="col-xs-6 text-center">
+      <a class="btn btn-default" href="#/progress">
+        Progress Indicators
+      </a>
     </div>
   </div>
-  <div class="tab-pane" id="marine-select">
-    <h1>Marine Condition</h1>
-    <p>
-      Improvements in catchment management will take time to translate into improved 
-      marine condition.
-    </p>
-    <div id="marine"></div>
-    <button class="btn btn-default" onclick="switchTab('home')">
-      Back
-    </button>
-  </div>
-  <div class="tab-pane" id="progress-select">
-    <h1>Progress Indicators</h1>
-    <p>
-      The Reef Water Quality Protection Plan is a joint commitment of the 
-      Australian and Queensland Governments to minimise the risk to the reef 
-      ecosystem from a decline in the quality of water entering the reef from 
-      adjacent catchments.
-    </p>
-    <div id="progress-list"></div>
-    <button class="btn btn-default" onclick="switchTab('home')">
-      Back
-    </button>
-  </div>
-  <!-- Progress info -->
-  <div id="grazing-info" class="tab-pane">
-    <h1>Grazing</h1>
-    <p>
-    Proportion of graziers who adopted improved practices between 2009 and 2011.
-    </p>
-    <button class="btn btn-default" onclick="switchTab('progress-select')">
-      Back
-    </button>
-  </div>
-  <div id="sugarcane-info" class="tab-pane">
-    <h1>Sugarcane</h1>
-    <p>
-    Proportion of growers who adopted improved practices between 2009 and 2011.
-    </p>
-    <button class="btn btn-default" onclick="switchTab('progress-select')">
-      Back
-    </button>
-  </div>
-  <div id="horticulture-info" class="tab-pane">
-    <h1>Horticulture</h1>
-    <p>
-    Proportion of producers who adopted improved practices between 2009 and 2011.
-    </p>
-    <button class="btn btn-default" onclick="switchTab('progress-select')">
-      Back
-    </button>
-  </div>
-  <div id="groundcover-info" class="tab-pane">
-    <h1>Groundcover</h1>
-    <p>
-    Late dry season groundcover as at 2010-2011.
-    </p>
-    <button class="btn btn-default" onclick="switchTab('progress-select')">
-      Back
-    </button>
-  </div>
-  <div id="nitrogen-info" class="tab-pane">
-    <h1>Nitrogen</h1>
-    <p>
-    Reduction in annual average total nitrogen load between 2009 and 2011.
-    </p>
-    <button class="btn btn-default" onclick="switchTab('progress-select')">
-      Back
-    </button>
-  </div>
-  <div id="sediment-info" class="tab-pane">
-    <h1>Sediment</h1>
-    <p>
-    Reduction in annual average sediment load between 2009 and 2011.
-    </p>
-    <button class="btn btn-default" onclick="switchTab('progress-select')">
-      Back
-    </button>
-  </div>
-  <div id="pesticides-info" class="tab-pane">
-    <h1>Pesticides</h1>
-    <p>
-    Reduction in annual average pesticide load between 2009 and 2011.
-    </p>
-    <button class="btn btn-default" onclick="switchTab('progress-select')">
-      Back
-    </button>
-  </div>
-  <!-- Marine info -->
-  <div id="overall-info" class="tab-pane">
-    <h1>Overall</h1>
-    <p>
-    <!-- Description pending -->
-    </p>
-    <button class="btn btn-default" onclick="switchTab('marine-select')">
-      Back
-    </button>
-  </div>
-  <div id="coral-info" class="tab-pane">
-    <h1>Coral</h1>
-    <p>
-    <!-- Description pending -->
-    </p>
-    <button class="btn btn-default" onclick="switchTab('marine-select')">
-      Back
-    </button>
-  </div>
-  <div id="seagrass-info" class="tab-pane">
-    <h1>Seagrass</h1>
-    <p>
-    <!-- Description pending -->
-    </p>
-    <button class="btn btn-default" onclick="switchTab('marine-select')">
-      Back
-    </button>
-  </div>
-  <div id="water-info" class="tab-pane">
-    <h1>Water Quality</h1>
-    <p>
-    <!-- Description pending -->
-    </p>
-    <button class="btn btn-default" onclick="switchTab('marine-select')">
-      Back
-    </button>
-  </div>
-  <div id="water-chlorophyll-info" class="tab-pane">
-    <h1>Chlorophyll &alpha;</h1>
-    <p>
-    Indicates nutrient availability and productivity.
-    </p>
-    <button class="btn btn-default" onclick="switchTab('marine-select')">
-      Back
-    </button>
-  </div>
-  <div id="water-solids-info" class="tab-pane">
-    <h1>Total suspended solids</h1>
-    <p>
-    Measures particulate matter in water.
-    </p>
-    <button class="btn btn-default" onclick="switchTab('marine-select')">
-      Back
-    </button>
-  </div>
-  <div id="seagrass-abundance-info" class="tab-pane">
-    <h1>Seagrass abundance</h1>
-    <p>
-    Includes the cover and change in cover.
-    </p>
-    <button class="btn btn-default" onclick="switchTab('marine-select')">
-      Back
-    </button>
-  </div>
-  <div id="seagrass-reproduction-info" class="tab-pane">
-    <h1>Seagrass reproduction</h1>
-    <p>
-    Indicates the potential of seagrass meadows to recover from
-    disturbances.
-    </p>
-    <button class="btn btn-default" onclick="switchTab('marine-select')">
-      Back
-    </button>
-  </div>
-  <div id="seagrass-nutrient-info" class="tab-pane">
-    <h1>Seagrass nutrients</h1>
-    <p>
-    Nutrient status measures the response of seagrass to nutrient conditions
-    in surrounding waters.
-    </p>
-    <button class="btn btn-default" onclick="switchTab('marine-select')">
-      Back
-    </button>
-  </div>
-  <div id="coral-cover-info" class="tab-pane">
-    <h1>Coral cover</h1>
-    <p>
-    Coral cover is a measure of the percentage of coral across reefs, and
-    indicates the capacity of coral to persist under the current
-    environmental conditions and its potential to recover.
-    </p>
-    <button class="btn btn-default" onclick="switchTab('marine-select')">
-      Back
-    </button>
-  </div>
-  <div id="coral-change-info" class="tab-pane">
-    <h1>Coral change</h1>
-    <p>
-    Coral change measures change in coral cover which indicates coral
-    resilience to disturbance.
-    </p>
-    <button class="btn btn-default" onclick="switchTab('marine-select')">
-      Back
-    </button>
-  </div>
-  <div id="coral-macroalgae-info" class="tab-pane">
-    <h1>Coral macroalgal cover</h1>
-    <p>
-    Macroalgal cover - high abundance indicates poor water quality and
-    negatively affects the resilience of coral communities.
-    </p>
-    <button class="btn btn-default" onclick="switchTab('marine-select')">
-      Back
-    </button>
-  </div>
-  <div id="coral-juvenile-info" class="tab-pane">
-    <h1>Coral juvenile density</h1>
-    <p>
-    Coral juvenile density measures the abundance of corals less than 10
-    centimetres in diameter which indicates the recovery potential from
-    disturbances.
-    </p>
-    <button class="btn btn-default" onclick="switchTab('marine-select')">
-      Back
-    </button>
-  </div>
-  <div id="cape-york-info" class="tab-pane">
-    <h1>Cape York</h1>
-  </div>
-  <div id="wet-tropics-info" class="tab-pane">
-    <h1>Wet Tropics</h1>
-  </div>
-  <div id="burdekin-info" class="tab-pane">
-    <h1>Burdekin</h1>
-  </div>
-  <div id="mackay-whitsunday-info" class="tab-pane">
-    <h1>Mackay Whitsunday</h1>
-  </div>
-  <div id="fitzroy-info" class="tab-pane">
-    <h1>Fitzroy</h1>
-  </div>
-  <div id="burnett-mary-info" class="tab-pane">
-    <h1>Burnett Mary</h1>
-  </div>
+</div>
+
+<div id="tmpl-marine-select">
+  <h1>Marine Condition</h1>
+  <p>
+    Improvements in catchment management will take time to translate into improved 
+    marine condition.
+  </p>
+  <div id="marine"></div>
+  <a class="btn btn-default" href="#/">
+    Back
+  </a>
+</div>
+<div id="tmpl-progress-select">
+  <h1>Progress Indicators</h1>
+  <p>
+    The Reef Water Quality Protection Plan is a joint commitment of the 
+    Australian and Queensland Governments to minimise the risk to the reef 
+    ecosystem from a decline in the quality of water entering the reef from 
+    adjacent catchments.
+  </p>
+  <div id="progress-list"></div>
+  <a class="btn btn-default" href="#/">
+    Back
+  </a>
+</div>
+<!-- Progress info -->
+<div id="tmpl-grazing-info">
+  <h1>Grazing</h1>
+  <p>
+  Proportion of graziers who adopted improved practices between 2009 and 2011.
+  </p>
+  <a class="btn btn-default" href="#/progress">
+    Back
+  </a>
+</div>
+<div id="tmpl-sugarcane-info">
+  <h1>Sugarcane</h1>
+  <p>
+  Proportion of growers who adopted improved practices between 2009 and 2011.
+  </p>
+  <a class="btn btn-default" href="#/progress">
+    Back
+  </a>
+</div>
+<div id="tmpl-horticulture-info">
+  <h1>Horticulture</h1>
+  <p>
+  Proportion of producers who adopted improved practices between 2009 and 2011.
+  </p>
+  <a class="btn btn-default" href="#/progress">
+    Back
+  </a>
+</div>
+<div id="tmpl-groundcover-info">
+  <h1>Groundcover</h1>
+  <p>
+  Late dry season groundcover as at 2010-2011.
+  </p>
+  <a class="btn btn-default" href="#/progress">
+    Back
+  </a>
+</div>
+<div id="tmpl-nitrogen-info">
+  <h1>Nitrogen</h1>
+  <p>
+  Reduction in annual average total nitrogen load between 2009 and 2011.
+  </p>
+  <a class="btn btn-default" href="#/progress">
+    Back
+  </a>
+</div>
+<div id="tmpl-sediment-info">
+  <h1>Sediment</h1>
+  <p>
+  Reduction in annual average sediment load between 2009 and 2011.
+  </p>
+  <a class="btn btn-default" href="#/progress">
+    Back
+  </a>
+</div>
+<div id="tmpl-pesticides-info">
+  <h1>Pesticides</h1>
+  <p>
+  Reduction in annual average pesticide load between 2009 and 2011.
+  </p>
+  <a class="btn btn-default" href="#/progress">
+    Back
+  </a>
+</div>
+<!-- Marine info -->
+<div id="tmpl-overall-info">
+  <h1>Overall</h1>
+  <p>
+  <!-- Description pending -->
+  </p>
+  <a class="btn btn-default" href="#/marine">
+    Back
+  </a>
+</div>
+<div id="tmpl-coral-info">
+  <h1>Coral</h1>
+  <p>
+  <!-- Description pending -->
+  </p>
+  <a class="btn btn-default" href="#/marine">
+    Back
+  </a>
+</div>
+<div id="tmpl-seagrass-info">
+  <h1>Seagrass</h1>
+  <p>
+  <!-- Description pending -->
+  </p>
+  <a class="btn btn-default" href="#/marine">
+    Back
+  </a>
+</div>
+<div id="tmpl-water-info">
+  <h1>Water Quality</h1>
+  <p>
+  <!-- Description pending -->
+  </p>
+  <a class="btn btn-default" href="#/marine">
+    Back
+  </a>
+</div>
+<div id="tmpl-water-chlorophyll-info">
+  <h1>Chlorophyll &alpha;</h1>
+  <p>
+  Indicates nutrient availability and productivity.
+  </p>
+  <a class="btn btn-default" href="#/marine">
+    Back
+  </a>
+</div>
+<div id="tmpl-water-solids-info">
+  <h1>Total suspended solids</h1>
+  <p>
+  Measures particulate matter in water.
+  </p>
+  <a class="btn btn-default" href="#/marine">
+    Back
+  </a>
+</div>
+<div id="tmpl-seagrass-abundance-info">
+  <h1>Seagrass abundance</h1>
+  <p>
+  Includes the cover and change in cover.
+  </p>
+  <a class="btn btn-default" href="#/marine">
+    Back
+  </a>
+</div>
+<div id="tmpl-seagrass-reproduction-info">
+  <h1>Seagrass reproduction</h1>
+  <p>
+  Indicates the potential of seagrass meadows to recover from
+  disturbances.
+  </p>
+  <a class="btn btn-default" href="#/marine">
+    Back
+  </a>
+</div>
+<div id="tmpl-seagrass-nutrient-info">
+  <h1>Seagrass nutrients</h1>
+  <p>
+  Nutrient status measures the response of seagrass to nutrient conditions
+  in surrounding waters.
+  </p>
+  <a class="btn btn-default" href="#/marine">
+    Back
+  </a>
+</div>
+<div id="tmpl-coral-cover-info">
+  <h1>Coral cover</h1>
+  <p>
+  Coral cover is a measure of the percentage of coral across reefs, and
+  indicates the capacity of coral to persist under the current
+  environmental conditions and its potential to recover.
+  </p>
+  <a class="btn btn-default" href="#/marine">
+    Back
+  </a>
+</div>
+<div id="tmpl-coral-change-info">
+  <h1>Coral change</h1>
+  <p>
+  Coral change measures change in coral cover which indicates coral
+  resilience to disturbance.
+  </p>
+  <a class="btn btn-default" href="#/marine">
+    Back
+  </a>
+</div>
+<div id="tmpl-coral-macroalgae-info">
+  <h1>Coral macroalgal cover</h1>
+  <p>
+  Macroalgal cover - high abundance indicates poor water quality and
+  negatively affects the resilience of coral communities.
+  </p>
+  <a class="btn btn-default" href="#/marine">
+    Back
+  </a>
+</div>
+<div id="tmpl-coral-juvenile-info">
+  <h1>Coral juvenile density</h1>
+  <p>
+  Coral juvenile density measures the abundance of corals less than 10
+  centimetres in diameter which indicates the recovery potential from
+  disturbances.
+  </p>
+  <a class="btn btn-default" href="#/marine">
+    Back
+  </a>
+</div>
+<div id="tmpl-cape-york-info">
+  <h1>Cape York</h1>
+</div>
+<div id="tmpl-wet-tropics-info">
+  <h1>Wet Tropics</h1>
+</div>
+<div id="tmpl-burdekin-info">
+  <h1>Burdekin</h1>
+</div>
+<div id="tmpl-mackay-whitsunday-info">
+  <h1>Mackay Whitsunday</h1>
+</div>
+<div id="tmpl-fitzroy-info">
+  <h1>Fitzroy</h1>
+</div>
+<div id="tmpl-burnett-mary-info">
+  <h1>Burnett Mary</h1>
 </div>
 
 </body>

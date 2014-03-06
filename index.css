@@ -100,6 +100,10 @@ body {
   border-bottom-right-radius: 5px;
 }
 
+div[id*="tmpl-"] {
+  display: none;
+}
+
 .very-good                          { background-color: #7aff66; }
 .very-good.active, .very-good:hover { background-color: #22ff00; }
 .good                               { background-color: #cfff66; }
