@@ -182,11 +182,13 @@ $(document).ready(function() {
             $(regions.root()).animate({
               'svgViewBox': defaultViewbox
             }, 1000);
+            switchTab('home');
             zoomed = "gbr";
           } else {
             $(regions.root()).animate({
               'svgViewBox': viewboxes[regionName]
             }, 1000);
+            switchTab(regionName+'-info');
             zoomed = regionName;
           }
         });
