@@ -1,37 +1,3 @@
-var conditions = ["Very Good", "Good", "Moderate", "Poor", "Very Poor"];
-var regions = [
-  'gbr',
-  'cape-york',
-  'wet-tropics',
-  'burdekin',
-  'mackay-whitsunday',
-  'fitzroy',
-  'burnett-mary'
-];
-var marineIndicators = [
-  'overall',
-  'water-chlorophyll',
-  'coral-change',
-  'coral-juvenile',
-  'coral-macroalgae',
-  'coral-cover',
-  'seagrass-abundance',
-  'seagrass-reproduction',
-  'seagrass-nutrient',
-  'water',
-  'coral',
-  'seagrass',
-  'water-solids'
-];
-var progressIndicators = [
-  'grazing',
-  'sugarcane',
-  'horticulture',
-  'groundcover',
-  'nitrogen',
-  'sediment',
-  'pesticides'
-];
 var viewboxes = {
   'cape-york': '100 50 100 450',
   'wet-tropics': '270 460 300 260',
