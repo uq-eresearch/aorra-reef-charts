@@ -62,6 +62,7 @@ var app = Sammy('#main', function() {
   this.get('#/marine/:indicator', function() {
     this.$element()
         .html($('#tmpl-'+this.params['indicator']+'-info').html());
+    this.trigger('region:show', 'gbr');
     this.trigger('indicator:show', this.params['indicator']);
   });
   
@@ -95,8 +96,7 @@ var app = Sammy('#main', function() {
   this.bind('marine:show', function() {
     this.$element().find('.marine-chart #indicators path').click(function(evt) {
       var indicator = evt.target.id;
-      //this.redirect('/')
-      console.log(indicator);
+      this.redirect('#', 'marine', indicator);
     }.bind(this));
   });
   
