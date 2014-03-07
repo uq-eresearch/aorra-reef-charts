@@ -56,7 +56,6 @@ var app = Sammy('#main', function() {
     this.$element()
         .html($('#tmpl-marine-select').html());
     this.trigger('region:show', 'gbr');
-    this.trigger('marine:show', 'gbr');
     Object.keys(marineData.gbr).forEach(function(id) {
       console.log($('#marine').svg('get'));
       // Broken from here on!
@@ -95,16 +94,10 @@ var app = Sammy('#main', function() {
     this.$element()
         .html($('#tmpl-'+this.params['region']+'-info').html());
     this.trigger('region:show', this.params['region']);
-    this.trigger('marine:show', this.params['region']);
   });
-  
   
   this.bind('indicator:show', function(evt, id) {
     $('#regions').addClass(id);
-  });
-  
-  this.bind('marine:show', function(evt, id) {
-    this.$element().find('.marine-chart').addClass(id);
   });
   
 });
