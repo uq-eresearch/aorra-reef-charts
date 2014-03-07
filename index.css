@@ -30,7 +30,7 @@ body {
   width: 100%;
 }
 
-#marine {
+.marine-chart {
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
@@ -57,7 +57,7 @@ body {
 }
 
 @media all and (max-width: 1065px) {
-  #marine {
+  .marine-chart {
     max-height: 300px;
   }
   .inset-paper {
@@ -102,6 +102,11 @@ body {
 
 div[id*="tmpl-"] {
   display: none;
+}
+
+#cape-york, #wet-tropics, #burdekin,
+#mackay-whitsunday, #fitzroy, #burnett-mary {
+  cursor: pointer;
 }
 
 .very-good                          { background-color: #7aff66; }

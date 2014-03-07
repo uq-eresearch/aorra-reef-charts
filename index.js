@@ -95,6 +95,16 @@ var app = Sammy('#main', function() {
     this.$element()
         .html($('#tmpl-'+this.params['region']+'-info').html());
     this.trigger('region:show', this.params['region']);
+    this.trigger('marine:show', this.params['region']);
+  });
+  
+  
+  this.bind('indicator:show', function(evt, id) {
+    $('#regions').addClass(id);
+  });
+  
+  this.bind('marine:show', function(evt, id) {
+    this.$element().find('.marine-chart').addClass(id);
   });
   
 });
@@ -162,22 +172,33 @@ function getRegionData(data, indicator) {
   }, {});
 }
 
-function getMarineStyle(values) {
-  return Object.keys(values).map(function(key) {
-    var value = values[key];
-    return '#'+key+" { fill: "+getFill(value).normal+"; pointer-events: all; }\n" +
-           '#'+key+":hover, #"+key+".active { fill: "+getFill(value).active+"; cursor: pointer; }";
-  }).join("\n");
+function getMarineStyle(data) {
+  return Object.keys(data).reduce(function(lr, region) {
+    var values = data[region];
+    return lr.concat(Object.keys(values).reduce(function(li, indicator) {
+      var value = values[indicator];
+      return li.concat(
+        '.marine-chart.'+region+' #'+indicator+" { fill: "+getFill(value).normal+"; pointer-events: all; }",
+        '.marine-chart.'+region+' #'+indicator+':hover, .marine-chart.'+region+' #'+indicator+".active { fill: "+getFill(value).active+"; cursor: pointer; }"
+      );
+    }, []));
+  }, []).join("\n");
 }
 
-function getRegionStyle(values) {
-  return Object.keys(values).map(function(key) {
-    var value = values[key];
-    if (value == 'NA') {
-      return '#'+key+" { display: none; }";
-    }
-    return '#'+key+" { fill: "+getFill(value).normal+"; }";
-  }).join("\n");
+function getRegionStyle(data) {
+  return Object.keys(data).reduce(function(lr, region) {
+    var values = data[region];
+    return lr.concat(Object.keys(values).reduce(function(li, indicator) {
+      var value = values[indicator];
+      var ruleSelector = '.'+indicator+'#regions #'+region;
+      if (value == 'NA') {
+        return li.concat(ruleSelector+" { display: none; }");
+      }
+      return li.concat(
+        ruleSelector+" { fill: "+getFill(value).normal+"; }"
+      );
+    }, []));
+  }, []).join("\n");
 }
 
 $(document).ready(function() {
@@ -210,6 +231,13 @@ $(document).ready(function() {
       $(focused).attr('class', $(focused).attr('class')+' active');
     };
   })();
+  
+  [ getMarineStyle(marineData), 
+    getRegionStyle(marineData),
+    getRegionStyle(progressData) ].forEach(function(styleContent) {
+    $('body').append(
+        $('<style type="text/css"/>').html(styleContent));
+  });
 
   loadSvg('#regions', 'regions.svg', 'Min').done(function(regions) {
     var setRegionStyle = (function() {
@@ -223,7 +251,7 @@ $(document).ready(function() {
       Sammy('#main', function() {
         this.bind('region:show', function(evt, region) {
           if (region == 'gbr') {
-            removeStyle();
+            $('#regions').removeClass();
           }
         });
       });
@@ -284,29 +312,9 @@ $(document).ready(function() {
       });
     });
     
-    Sammy('#main', function() {
-      this.bind('indicator:show', function(evt, id) {
-        if (getRegionData(marineData, id).gbr) {
-          setRegionStyle(getRegionStyle(getRegionData(marineData, id)));
-        } else if (getRegionData(progressData, id).gbr) {
-          setRegionStyle(getRegionStyle(getRegionData(progressData, id)));
-        }
-      });
-    });
-    
-    loadSvg('#marine', 'marine.svg', 'Mid').done(function(marine) {
-      Sammy('#main', function() {
-        this.bind('marine:show', function(evt, id) {
-          if (id == 'gbr') {
-            marine.style(getMarineStyle(marineData.gbr));
-          } else {
-            var marineRegionData = marineData[id];
-            if (marineRegionData) {
-              marine.style(getMarineStyle(marineData.gbr));
-            }
-          }
-        });
-      });
+    loadSvg('#marine-chart', 'marine.svg', 'Mid').done(function(marine) {
+      $('.marine-chart').html($('#marine-chart').html());
+      $('#marine-chart').remove();
       // Run app now that regions & marine are loaded
       app.run('#/');
     });
