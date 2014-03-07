@@ -108,32 +108,6 @@ var app = Sammy('#main', function() {
   
 });
 
-var marineData = regions.reduce(function(hr, vr) {
-  hr[vr] = marineIndicators.reduce(function(hi, vi) {
-    var randomIndex = Math.floor(Math.random()*conditions.length);
-    if (vi.indexOf('coral') == 0 && (vr == 'cape-york' || vr == 'burnett-mary')) {
-      hi[vi] = 'NA';
-    } else {
-      hi[vi] = conditions[randomIndex];
-    }
-    return hi;
-  }, {});
-  return hr;
-}, {});
-
-var progressData = regions.reduce(function(hr, vr) {
-  hr[vr] = progressIndicators.reduce(function(hi, vi) {
-    var randomIndex = Math.floor(Math.random()*conditions.length);
-    if (vr == 'cape-york' && ['sugarcane', 'groundcover', 'pesticides'].indexOf(vi) > -1) {
-      hi[vi] = 'NA';
-    } else {
-      hi[vi] = conditions[randomIndex];
-    }
-    return hi;
-  }, {});
-  return hr;
-}, {});
-
 function getFill(v) {
   var fills = {
     'Very Good': {
