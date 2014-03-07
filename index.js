@@ -56,16 +56,7 @@ var app = Sammy('#main', function() {
     this.$element()
         .html($('#tmpl-marine-select').html());
     this.trigger('region:show', 'gbr');
-    Object.keys(marineData.gbr).forEach(function(id) {
-      console.log($('#marine').svg('get'));
-      // Broken from here on!
-      // var e = $('#marine').svg('get').getElementById(id);
-      // if (e) {
-      //   $(e).on('click', function(evt) {
-      //     context.redirect('#', 'marine', id);
-      //   });
-      // }
-    });
+    this.trigger('marine:show');
   });
   
   this.get('#/marine/:indicator', function() {
@@ -94,10 +85,19 @@ var app = Sammy('#main', function() {
     this.$element()
         .html($('#tmpl-'+this.params['region']+'-info').html());
     this.trigger('region:show', this.params['region']);
+    this.trigger('marine:show');
   });
   
   this.bind('indicator:show', function(evt, id) {
     $('#regions').addClass(id);
+  });
+  
+  this.bind('marine:show', function() {
+    this.$element().find('.marine-chart #indicators path').click(function(evt) {
+      var indicator = evt.target.id;
+      //this.redirect('/')
+      console.log(indicator);
+    }.bind(this));
   });
   
 });
