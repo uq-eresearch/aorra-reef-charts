@@ -69,16 +69,14 @@ var app = Sammy('#main', function() {
   this.get('#/progress', function() {
     this.$element()
         .html($('#tmpl-progress-select').html());
-    this.$element().find('button[data-indicator]').click(function(evt) {
-      var $button = $(evt.target);
-      this.redirect('#', 'progress', $button.attr('data-indicator'));
-    }.bind(this));
     this.trigger('region:show', 'gbr');
+    this.trigger('progress:show');
   });
   
   this.get('#/progress/:indicator', function() {
     this.$element()
         .html($('#tmpl-'+this.params['indicator']+'-info').html());
+    this.trigger('region:show', 'gbr');
     this.trigger('indicator:show', this.params['indicator']);
   });
   
@@ -87,6 +85,7 @@ var app = Sammy('#main', function() {
         .html($('#tmpl-'+this.params['region']+'-info').html());
     this.trigger('region:show', this.params['region']);
     this.trigger('marine:show');
+    this.trigger('progress:show');
   });
   
   this.bind('indicator:show', function(evt, id) {
@@ -97,6 +96,13 @@ var app = Sammy('#main', function() {
     this.$element().find('.marine-chart #indicators path').click(function(evt) {
       var indicator = evt.target.id;
       this.redirect('#', 'marine', indicator);
+    }.bind(this));
+  });
+  
+  this.bind('progress:show', function() {
+    this.$element().find('button[data-indicator]').click(function(evt) {
+      var $button = $(evt.target);
+      this.redirect('#', 'progress', $button.attr('data-indicator'));
     }.bind(this));
   });
   
@@ -118,7 +124,7 @@ var marineData = regions.reduce(function(hr, vr) {
 var progressData = regions.reduce(function(hr, vr) {
   hr[vr] = progressIndicators.reduce(function(hi, vi) {
     var randomIndex = Math.floor(Math.random()*conditions.length);
-    if (vr == 'cape-york' && ['Sugercane', 'Groundcover', 'Pesticides'].indexOf(vi) > -1) {
+    if (vr == 'cape-york' && ['sugercane', 'groundcover', 'pesticides'].indexOf(vi) > -1) {
       hi[vi] = 'NA';
     } else {
       hi[vi] = conditions[randomIndex];
@@ -294,14 +300,18 @@ $(document).ready(function() {
       }
     });
     
-    Object.keys(progressData.gbr).forEach(function(indicator) {
-      Sammy('#main', function() {
-        var condition = progressData.gbr[indicator];
-        var name = indicator.substring(0,1).toUpperCase() + indicator.substring(1);
-        var $button = $('<button/>').text(name);
-        $button.addClass(condition.toLowerCase().replace(' ', '-'));
-        $button.attr('data-indicator', indicator);
-        $('#progress-list').append($button);
+    Object.keys(progressData).forEach(function(regionName) {
+      var region = progressData[regionName];
+      console.log(regionName, region);
+      Object.keys(region).forEach(function(indicator) {
+        Sammy('#main', function() {
+          var condition = region[indicator];
+          var name = indicator.substring(0,1).toUpperCase() + indicator.substring(1);
+          var $button = $('<button/>').addClass('condition').text(name);
+          $button.addClass(condition.toLowerCase().replace(' ', '-'));
+          $button.attr('data-indicator', indicator);
+          $('.progress-list.'+regionName).append($button);
+        });
       });
     });
     

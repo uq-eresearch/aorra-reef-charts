@@ -38,13 +38,13 @@ body {
   max-height: 400px;
 }
 
-#progress-list {
+.progress-list {
   width: 100%;
   padding: 10px;
   text-align: center;
 }
 
-#progress-list button {
+.progress-list button {
   display: inline;
   text-align: center;
   border: none;
@@ -65,14 +65,14 @@ body {
     margin-top: 30px;
     margin-right: 30px;
   }
-  #progress-list button {
+  .progress-list button {
     font-size: 14px;
     margin: 5px;
   }
 }
 
 @media all and (max-width: 800px) {
-  #progress-list button {
+  .progress-list button {
     font-size: 10px;
   }
 }
@@ -109,13 +109,14 @@ div[id*="tmpl-"] {
   cursor: pointer;
 }
 
-.very-good                          { background-color: #7aff66; }
-.very-good.active, .very-good:hover { background-color: #22ff00; }
-.good                               { background-color: #cfff66; }
-.good.active, .good:hover           { background-color: #b0ff00; }
-.moderate                           { background-color: #fff666; }
-.moderate.active, .moderate:hover   { background-color: #fff000; }
-.poor                               { background-color: #ffc766; }
-.poor.active, .poor:hover           { background-color: #ffa200; }
-.very-poor                          { background-color: #ff6966; }
-.very-poor.active, .very-poor:hover { background-color: #ff0400; }
+.condition.na                                           { display: none; }
+.condition.very-good                                    { background-color: #7aff66; }
+.condition.very-good.active, .condition.very-good:hover { background-color: #22ff00; }
+.condition.good                                         { background-color: #cfff66; }
+.condition.good.active, .condition.good:hover           { background-color: #b0ff00; }
+.condition.moderate                                     { background-color: #fff666; }
+.condition.moderate.active, .condition.moderate:hover   { background-color: #fff000; }
+.condition.poor                                         { background-color: #ffc766; }
+.condition.poor.active, .condition.poor:hover           { background-color: #ffa200; }
+.condition.very-poor                                    { background-color: #ff6966; }
+.condition.very-poor.active, .condition.very-poor:hover { background-color: #ff0400; }
