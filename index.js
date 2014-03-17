@@ -2,7 +2,7 @@ var regionFill = {
   'Cape York': '#ca6722',
   'Wet Tropics': '#82be40',
   'Burdekin': '#686a57',
-  'Mackay-Whitsundays': '#dca256',
+  'Mackay-Whitsunday': '#dca256',
   'Fitzroy': '#833e15',
   'Burnett-Mary': '#e4ac24'
 };
@@ -194,25 +194,53 @@ $(document).ready(function() {
     // create the tile layer with correct attribution
     var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-    var osm = new L.TileLayer(osmUrl, {minZoom: 4, maxZoom: 12, attribution: osmAttrib});		
+    var osm = new L.TileLayer(osmUrl, {minZoom: 2, maxZoom: 12, attribution: osmAttrib});		
   
     map.setView(new L.LatLng(-18.00, 150.00), 6);
     map.addLayer(osm);
     $.get("./regions.geojson", function(data) {
-      console.log(data);
       var regionsGeo = L.geoJson(data, {
         style: function (feature) {
           //return {color: feature.properties.color};
           return { color: regionFill[feature.properties.Region] };
         },
         onEachFeature: function (feature, layer) {
-          layer.bindPopup(feature.properties.Region);
+          
         }
-      })
+      });
+      function getRegionName(region) {
+        return region.feature.properties
+            .Region.toLowerCase().replace(' ', '-');
+      }
+      var zoomed = regionsGeo;
+      regionsGeo.getLayers().forEach(function(region) {
+        region.on('click', function() {
+          var regionName = getRegionName(region);
+          if (zoomed == region) {
+            app.setLocation('#/');
+          } else {
+            app.setLocation('#/region/'+regionName);
+          }
+        });
+      });
+      Sammy('#main', function() {
+        this.bind('region:show', function(evt, region) {
+          if (region == 'gbr') {
+            zoomed = regionsGeo;
+          } else {
+            regionsGeo.getLayers().forEach(function(r) {
+              if (region == getRegionName(r)) {
+                zoomed = r;
+              }
+            });
+          }
+          map.fitBounds(zoomed.getBounds());
+        })
+      }); 
       regionsGeo.addTo(map);
       map.fitBounds(regionsGeo.getBounds());
       $(window).resize(function() {
-        map.fitBounds(regionsGeo.getBounds());  
+        map.fitBounds(zoomed.getBounds());  
       });
     }, 'json');
     return map;
@@ -282,7 +310,6 @@ $(document).ready(function() {
     
     Object.keys(progressData).forEach(function(regionName) {
       var region = progressData[regionName];
-      console.log(regionName, region);
       Object.keys(region).forEach(function(indicator) {
         Sammy('#main', function() {
           var condition = region[indicator];
