@@ -6,7 +6,16 @@ body {
   overflow: hidden;
 }
 
+#map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
 #regions {
+  display: none;
   position: absolute;
   top: 0;
   bottom: 0;

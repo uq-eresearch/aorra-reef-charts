@@ -1,3 +1,12 @@
+var regionFill = {
+  'Cape York': '#ca6722',
+  'Wet Tropics': '#82be40',
+  'Burdekin': '#686a57',
+  'Mackay-Whitsundays': '#dca256',
+  'Fitzroy': '#833e15',
+  'Burnett-Mary': '#e4ac24'
+};
+
 var viewboxes = {
   'cape-york': '100 50 100 450',
   'wet-tropics': '270 460 300 260',
@@ -177,6 +186,37 @@ $(document).ready(function() {
     $('body').append(
         $('<style type="text/css"/>').html(styleContent));
   });
+    
+  var map = (function initmap() {
+    // set up the map
+    var map = new L.Map('map');
+  
+    // create the tile layer with correct attribution
+    var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+    var osm = new L.TileLayer(osmUrl, {minZoom: 4, maxZoom: 12, attribution: osmAttrib});		
+  
+    map.setView(new L.LatLng(-18.00, 150.00), 6);
+    map.addLayer(osm);
+    $.get("./regions.geojson", function(data) {
+      console.log(data);
+      var regionsGeo = L.geoJson(data, {
+        style: function (feature) {
+          //return {color: feature.properties.color};
+          return { color: regionFill[feature.properties.Region] };
+        },
+        onEachFeature: function (feature, layer) {
+          layer.bindPopup(feature.properties.Region);
+        }
+      })
+      regionsGeo.addTo(map);
+      map.fitBounds(regionsGeo.getBounds());
+      $(window).resize(function() {
+        map.fitBounds(regionsGeo.getBounds());  
+      });
+    }, 'json');
+    return map;
+  })();
 
   loadSvg('#regions', 'regions.svg', 'Min').done(function(regions) {
     var setRegionStyle = (function() {
