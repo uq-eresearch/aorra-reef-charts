@@ -63,10 +63,6 @@ var app = Sammy('#main', function() {
     this.trigger('progress:show');
   });
   
-  this.bind('indicator:show', function(evt, id) {
-    $('#regions').addClass(id);
-  });
-  
   this.bind('marine:show', function() {
     this.$element().find('.marine-chart #indicators path').click(function(evt) {
       var indicator = evt.target.id;
@@ -133,22 +129,6 @@ function getMarineStyle(data) {
   }, []).join("\n");
 }
 
-function getRegionStyle(data) {
-  return Object.keys(data).reduce(function(lr, region) {
-    var values = data[region];
-    return lr.concat(Object.keys(values).reduce(function(li, indicator) {
-      var value = values[indicator];
-      var ruleSelector = '.'+indicator+'#regions #'+region;
-      if (value == 'NA') {
-        return li.concat(ruleSelector+" { display: none; }");
-      }
-      return li.concat(
-        ruleSelector+" { fill: "+getFill(value).normal+"; }"
-      );
-    }, []));
-  }, []).join("\n");
-}
-
 $(document).ready(function() {
   
   function loadSvg(containerSelector, url, align) {
@@ -180,14 +160,10 @@ $(document).ready(function() {
     };
   })();
   
-  [ getMarineStyle(marineData), 
-    getRegionStyle(marineData),
-    getRegionStyle(progressData) ].forEach(function(styleContent) {
-    $('body').append(
-        $('<style type="text/css"/>').html(styleContent));
-  });
+  $('body').append(
+    $('<style type="text/css"/>').html(getMarineStyle(marineData)));
     
-  var map = (function initmap() {
+  (function initmap() {
     // set up the map
     var map = new L.Map('map');
   
@@ -201,11 +177,7 @@ $(document).ready(function() {
     $.get("./regions.geojson", function(data) {
       var regionsGeo = L.geoJson(data, {
         style: function (feature) {
-          //return {color: feature.properties.color};
           return { color: regionFill[feature.properties.Region] };
-        },
-        onEachFeature: function (feature, layer) {
-          
         }
       });
       function getRegionName(region) {
@@ -242,91 +214,74 @@ $(document).ready(function() {
       $(window).resize(function() {
         map.fitBounds(zoomed.getBounds());  
       });
-    }, 'json');
-    return map;
-  })();
 
-  loadSvg('#regions', 'regions.svg', 'Min').done(function(regions) {
-    var setRegionStyle = (function() {
-      var style = null;
-      var removeStyle = function() {
-        if (style) {
-          regions.remove(style);
-        }
-        style = null;
-      };
-      Sammy('#main', function() {
-        this.bind('region:show', function(evt, region) {
-          if (region == 'gbr') {
-            $('#regions').removeClass();
-          }
-        });
-      });
-      return function (styleContent) {
-        removeStyle();
-        style = regions.style(styleContent);
-      };
-    })();
-        
-    var defaultViewbox = (function() {
-      var b = regions.root().viewBox.baseVal;
-      return [b.x, b.y, b.width, b.height].join(' ');
-    })();
-    var zoomed = "gbr";
-    Sammy('#main', function() {
-      this.bind('region:show', function(evt, region) {
-        if (region == 'gbr' && zoomed != "gbr") {
-          $(regions.root()).animate({
-            'svgViewBox': defaultViewbox
-          }, 1000);
-          zoomed = "gbr";
-        }
-      });
-    });
-          
-    Object.keys(viewboxes).forEach(function(regionName) {
-      var e = regions.getElementById(regionName);
-      if (e) {
-        Sammy('#main', function() {
-          var application = this;
-          this.bind('region:show', function(evt, r) {
-            if (r == regionName) {
-              $(regions.root()).animate({
-                'svgViewBox': viewboxes[regionName]
-              }, 1000);
-              zoomed = regionName;
-            }
-          });
-          $(e).on('click', function() {
-            if (zoomed == regionName) {
-              application.setLocation('#/');
-            } else {
-              application.setLocation('#/region/'+regionName);
+      function clearRegionFills() {
+        Object.keys(marineData).forEach(function(region) {
+          regionsGeo.getLayers().forEach(function(r) {
+            if (region == getRegionName(r)) {
+              r.setStyle({
+                color: regionFill[r.feature.properties.Region]
+              });
             }
           });
         });
       }
-    });
-    
-    Object.keys(progressData).forEach(function(regionName) {
-      var region = progressData[regionName];
-      Object.keys(region).forEach(function(indicator) {
-        Sammy('#main', function() {
-          var condition = region[indicator];
-          var name = indicator.substring(0,1).toUpperCase() + indicator.substring(1);
-          var $button = $('<button/>').addClass('condition').text(name);
-          $button.addClass(condition.toLowerCase().replace(' ', '-'));
-          $button.attr('data-indicator', indicator);
-          $('.progress-list.'+regionName).append($button);
+      
+      function setRegionFills(indicator) {
+        var data;
+        if (marineData.gbr[indicator]) {
+          data = marineData;
+        } else if (progressData.gbr[indicator]) {
+          data = progressData;
+        } else {
+          clearRegionFills();
+          return;
+        }
+        Object.keys(data).forEach(function(region) {
+          regionsGeo.getLayers().forEach(function(r) {
+            if (region == getRegionName(r)) {
+              var value = data[region][indicator];
+              if (value == 'NA') {
+                r.setStyle({ color: '#dddddd'});
+              } else {
+                r.setStyle({ color: getFill(value).active });
+              }
+            }
+          });
+        });
+      }
+  
+      Sammy('#main', function() {
+        this.bind('indicator:show', function(evt, id) {
+          setRegionFills(id);
+        });
+        this.bind('region:show', function(evt, id) {
+          if (id == 'gbr') {
+            clearRegionFills();
+          }
         });
       });
-    });
-    
-    loadSvg('#marine-chart', 'marine.svg', 'Mid').done(function(marine) {
-      $('.marine-chart').html($('#marine-chart').html());
-      $('#marine-chart').remove();
-      // Run app now that regions & marine are loaded
-      app.run('#/');
-    });
-  });
+      
+      Object.keys(progressData).forEach(function(regionName) {
+        var region = progressData[regionName];
+        Object.keys(region).forEach(function(indicator) {
+          Sammy('#main', function() {
+            var condition = region[indicator];
+            var name = indicator.substring(0,1).toUpperCase() + indicator.substring(1);
+            var $button = $('<button/>').addClass('condition').text(name);
+            $button.addClass(condition.toLowerCase().replace(' ', '-'));
+            $button.attr('data-indicator', indicator);
+            $('.progress-list.'+regionName).append($button);
+          });
+        });
+      });
+      
+      loadSvg('#marine-chart', 'marine.svg', 'Mid').done(function(marine) {
+        $('.marine-chart').html($('#marine-chart').html());
+        $('#marine-chart').remove();
+        // Run app now that regions & marine are loaded
+        app.run('#/');
+      });
+    }, 'json');
+  })();
 });
