@@ -7,15 +7,6 @@ var regionFill = {
   'Burnett-Mary': '#e4ac24'
 };
 
-var viewboxes = {
-  'cape-york': '100 50 100 450',
-  'wet-tropics': '270 460 300 260',
-  'burdekin': '220 640 100 550',
-  'mackay-whitsunday': '520 740 100 300',
-  'fitzroy': '410 880 100 480',
-  'burnett-mary': '700 1120 100 268'
-};
-
 var app = Sammy('#main', function() {
     
   // Default lander
