@@ -165,10 +165,20 @@ $(document).ready(function() {
   
     map.setView(new L.LatLng(-18.00, 150.00), 6);
     map.addLayer(osm);
+    $.get("./reef.geojson", function(data) {
+      L.geoJson(data, {
+        style: function (feature) {
+          return { color: '#64b8fc', weight: 1 };
+        }
+      }).addTo(map);
+    }, 'json');
     $.get("./regions.geojson", function(data) {
       var regionsGeo = L.geoJson(data, {
         style: function (feature) {
-          return { color: regionFill[feature.properties.Region] };
+          return {
+            color: regionFill[feature.properties.Region],
+            weight: 1 
+          };
         }
       });
       function getRegionName(region) {
