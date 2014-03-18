@@ -168,7 +168,7 @@ $(document).ready(function() {
     $.get("./reef.geojson", function(data) {
       L.geoJson(data, {
         style: function (feature) {
-          return { color: '#64b8fc', weight: 1 };
+          return { color: '#64b8fc', weight: 1, clickable: false };
         }
       }).addTo(map);
     }, 'json');
