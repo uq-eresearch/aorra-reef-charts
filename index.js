@@ -181,14 +181,36 @@ $(document).ready(function() {
           };
         }
       });
-      function getRegionName(region) {
-        return region.feature.properties
+      // Fast hash-based lookups
+      var regionLookup = (function regionLookupInit() {
+        function getRegionId(region) {
+          return region.feature.properties.OBJECTID;
+        }
+        var regionById = regionsGeo.getLayers().reduce(function(h, region) {
+          h[getRegionId(region)] = region;
+          return h;
+        }, {});
+        var regionNameToId = {};
+        var regionIdToName = {};
+        regionsGeo.getLayers().forEach(function(region) {
+          var regionName = region.feature.properties
             .Region.toLowerCase().replace(' ', '-');
-      }
+          regionNameToId[regionName] = getRegionId(region);
+          regionIdToName[getRegionId(region)] = regionName;
+        });
+        return {
+          nameToRegion: function nameToRegion(regionName) {
+            return regionById[regionNameToId[regionName]];
+          },
+          regionToName: function regionToName(region) {
+            return regionIdToName[getRegionId(region)];
+          }
+        }
+      })();
       var zoomed = regionsGeo;
       regionsGeo.getLayers().forEach(function(region) {
         region.on('click', function() {
-          var regionName = getRegionName(region);
+          var regionName = regionLookup.regionToName(region);
           if (zoomed == region) {
             app.setLocation('#/');
           } else {
@@ -197,15 +219,11 @@ $(document).ready(function() {
         });
       });
       Sammy('#main', function() {
-        this.bind('region:show', function(evt, region) {
-          if (region == 'gbr') {
+        this.bind('region:show', function(evt, regionName) {
+          if (regionName == 'gbr') {
             zoomed = regionsGeo;
           } else {
-            regionsGeo.getLayers().forEach(function(r) {
-              if (region == getRegionName(r)) {
-                zoomed = r;
-              }
-            });
+            zoomed = regionLookup.nameToRegion(regionName);
           }
           map.fitBounds(zoomed.getBounds());
         })
@@ -217,14 +235,13 @@ $(document).ready(function() {
       });
 
       function clearRegionFills() {
-        Object.keys(marineData).forEach(function(region) {
-          regionsGeo.getLayers().forEach(function(r) {
-            if (region == getRegionName(r)) {
-              r.setStyle({
-                color: regionFill[r.feature.properties.Region]
-              });
-            }
-          });
+        Object.keys(marineData).forEach(function(regionName) {
+          var region = regionLookup.nameToRegion(regionName);
+          if (region != null) {
+            region.setStyle({
+              color: regionFill[region.feature.properties.Region]
+            });
+          }
         });
       }
       
@@ -238,17 +255,16 @@ $(document).ready(function() {
           clearRegionFills();
           return;
         }
-        Object.keys(data).forEach(function(region) {
-          regionsGeo.getLayers().forEach(function(r) {
-            if (region == getRegionName(r)) {
-              var value = data[region][indicator];
-              if (value == 'NA') {
-                r.setStyle({ color: '#dddddd'});
-              } else {
-                r.setStyle({ color: getFill(value).active });
-              }
+        Object.keys(data).forEach(function(regionName) {
+          var region = regionLookup.nameToRegion(regionName);
+          if (region != null) {
+            var value = data[regionName][indicator];
+            if (value == 'NA') {
+              region.setStyle({ color: '#dddddd'});
+            } else {
+              region.setStyle({ color: getFill(value).active });
             }
-          });
+          }
         });
       }
   
