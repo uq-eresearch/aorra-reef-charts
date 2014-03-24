@@ -336,7 +336,6 @@ $(document).ready(function() {
               var condition = region[indicator].qualitative || 'NA';
               var value = region[indicator].quantitative || '';
               var name = indicator.substring(0,1).toUpperCase() + indicator.substring(1);
-              console.log(indicatorImage[indicator]);
               var $button = $('<button/>')
                 .addClass('condition')
                 .addClass(condition.toLowerCase().replace(' ', '-'))

@@ -71,9 +71,31 @@ body {
   font-size: 15px;
 }
 
+.management-data img, .catchment-data img {
+  width: 4em;
+}
+
+.carousel .carousel-control, .carousel .carousel-caption {
+  color: black;
+}
+
+.carousel .carousel-caption {
+  position: static;
+  bottom: auto;
+  text-shadow: none;
+}
+
+.carousel .carousel-indicators li {
+  border-color: black;
+}
+
+.carousel .carousel-indicators li.active {
+  background-color: black;
+}
+
 @media all and (max-width: 1065px) {
   .marine-chart {
-    max-height: 300px;
+    max-height: 60%;
   }
   .management-data button, .catchment-data button {
     font-size: 14px;
@@ -97,7 +119,6 @@ body {
   }
   .marine-chart {
     max-width: 60%;
-    float: left;
   }
   .management-data button, .catchment-data button {
     font-size: 10px;
