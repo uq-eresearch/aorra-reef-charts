@@ -64,11 +64,11 @@ body {
   text-align: center;
   border: none;
   outline: none;
-  height: 4em;
-  width: 7em;
+  width: 7.5em;
   margin: 10px;
+  padding: 5px;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 @media all and (max-width: 1065px) {

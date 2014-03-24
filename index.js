@@ -7,6 +7,21 @@ var regionFill = {
   'Burnett-Mary': '#e4ac24'
 };
 
+var indicatorImage = (function() {
+  function img(imgName) {
+    return $('<img />').attr('src', 'images/'+imgName+'.png')[0].outerHTML;
+  }
+  return {
+    'grazing': img('grazing'),
+    'sugarcane': img('cane'),
+    'horticulture': img('banana'),
+    'groundcover': img('groundcover'),
+    'nitrogen': img('beaker'),
+    'sediment': img('beaker'),
+    'pesticides': img('beaker')
+  };
+})();
+
 var app = Sammy('#main', function() {
     
   // Default lander
@@ -79,7 +94,7 @@ var app = Sammy('#main', function() {
   ['catchment', 'management'].forEach(function(arg) {
     this.bind(arg + ':show', function() {
       this.$element().find('button[data-indicator]').click(function(evt) {
-        var $button = $(evt.target);
+        var $button = $(evt.delegateTarget);
         this.redirect('#', arg, $button.attr('data-indicator'));
       }.bind(this));
     });
@@ -321,12 +336,15 @@ $(document).ready(function() {
               var condition = region[indicator].qualitative || 'NA';
               var value = region[indicator].quantitative || '';
               var name = indicator.substring(0,1).toUpperCase() + indicator.substring(1);
+              console.log(indicatorImage[indicator]);
               var $button = $('<button/>')
                 .addClass('condition')
                 .addClass(condition.toLowerCase().replace(' ', '-'))
                 .attr('title', value)
                 .attr('data-indicator', indicator)
-                .html(name+'<br />'+value);
+                .append($('<div/>').css('font-weight', 'bold').text(name))
+                .append(indicatorImage[indicator])
+                .append($('<div/>').text(value));
               $('.'+dataType+'-data.'+regionName).append($button);
             });
           });
