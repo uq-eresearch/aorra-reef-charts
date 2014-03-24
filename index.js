@@ -258,8 +258,10 @@ $(document).ready(function() {
         var data;
         if (marineData.gbr[indicator]) {
           data = marineData;
-        } else if (progressData.gbr[indicator]) {
-          data = progressData;
+        } else if (managementData.gbr[indicator]) {
+          data = managementData;
+        } else if (catchmentData.gbr[indicator]) {
+          data = catchmentData;
         } else {
           clearRegionFills();
           return;
@@ -288,16 +290,23 @@ $(document).ready(function() {
         });
       });
       
-      Object.keys(progressData).forEach(function(regionName) {
-        var region = progressData[regionName];
-        Object.keys(region).forEach(function(indicator) {
-          Sammy('#main', function() {
-            var condition = region[indicator];
-            var name = indicator.substring(0,1).toUpperCase() + indicator.substring(1);
-            var $button = $('<button/>').addClass('condition').text(name);
-            $button.addClass(condition.toLowerCase().replace(' ', '-'));
-            $button.attr('data-indicator', indicator);
-            $('.progress-list.'+regionName).append($button);
+      var progressData = {
+        'catchment' : catchmentData,
+        'management': managementData
+      };
+      Object.keys(progressData).forEach(function(dataType) {
+        var data = progressData[dataType];
+        Object.keys(data).forEach(function(regionName) {
+          var region = data[regionName];
+          Object.keys(region).forEach(function(indicator) {
+            Sammy('#main', function() {
+              var condition = region[indicator];
+              var name = indicator.substring(0,1).toUpperCase() + indicator.substring(1);
+              var $button = $('<button/>').addClass('condition').text(name);
+              $button.addClass(condition.toLowerCase().replace(' ', '-'));
+              $button.attr('data-indicator', indicator);
+              $('.'+dataType+'-data.'+regionName).append($button);
+            });
           });
         });
       });

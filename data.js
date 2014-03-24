@@ -106,65 +106,82 @@ var marineData = {
   }
 };
 
-var progressData = {
+var managementData = {
   "gbr": {
     "grazing": "Moderate",
     "sugarcane": "Good",
-    "horticulture": "Moderate",
+    "horticulture": "Moderate"
+  },
+  "cape-york": {
+    "grazing": "Very Good",
+    "sugarcane": "NA",
+    "horticulture": "Good"
+  },
+  "wet-tropics": {
+    "grazing": "Moderate",
+    "sugarcane": "Good",
+    "horticulture": "Moderate"
+  },
+  "burdekin": {
+    "grazing": "Good",
+    "sugarcane": "Moderate",
+    "horticulture": "Moderate"
+  },
+  "mackay-whitsunday": {
+    "grazing": "Very Good",
+    "sugarcane": "Good",
+    "horticulture": "Very Good"
+  },
+  "fitzroy": {
+    "grazing": "Moderate",
+    "sugarcane": "Moderate",
+    "horticulture": "Poor"
+  },
+  "burnett-mary": {
+    "grazing": "Moderate",
+    "sugarcane": "Very Good",
+    "horticulture": "Moderate"
+  }
+};
+
+var catchmentData = {
+  "gbr": {
     "groundcover": "Very Good",
     "nitrogen": "Moderate",
     "sediment": "Very Good",
     "pesticides": "Good"
   },
   "cape-york": {
-    "grazing": "Very Good",
-    "sugarcane": "NA",
-    "horticulture": "Good",
     "groundcover": "NA",
     "nitrogen": "Poor",
     "sediment": "Good",
     "pesticides": "NA"
   },
   "wet-tropics": {
-    "grazing": "Moderate",
-    "sugarcane": "Good",
-    "horticulture": "Moderate",
     "groundcover": "Very Good",
     "nitrogen": "Poor",
     "sediment": "Good",
     "pesticides": "Moderate"
   },
   "burdekin": {
-    "grazing": "Good",
-    "sugarcane": "Moderate",
-    "horticulture": "Moderate",
     "groundcover": "Very Good",
     "nitrogen": "Poor",
     "sediment": "Very Good",
     "pesticides": "Good"
   },
   "mackay-whitsunday": {
-    "grazing": "Very Good",
-    "sugarcane": "Good",
-    "horticulture": "Very Good",
     "groundcover": "Very Good",
     "nitrogen": "Good",
     "sediment": "Very Good",
     "pesticides": "Very Good"
   },
   "fitzroy": {
-    "grazing": "Moderate",
-    "sugarcane": "Moderate",
-    "horticulture": "Poor",
     "groundcover": "Very Good",
     "nitrogen": "Poor",
     "sediment": "Good",
     "pesticides": "Moderate"
   },
   "burnett-mary": {
-    "grazing": "Moderate",
-    "sugarcane": "Very Good",
-    "horticulture": "Moderate",
     "groundcover": "Very Good",
     "nitrogen": "Moderate",
     "sediment": "Good",

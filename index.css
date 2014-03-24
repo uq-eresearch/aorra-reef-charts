@@ -53,13 +53,13 @@ body {
   height: 400px;
 }
 
-.progress-list {
+.management-data, .catchment-data {
   width: 100%;
   padding: 10px;
   text-align: center;
 }
 
-.progress-list button {
+.management-data button, .catchment-data button {
   display: inline;
   text-align: center;
   border: none;
@@ -75,7 +75,7 @@ body {
   .marine-chart {
     max-height: 300px;
   }
-  .progress-list button {
+  .management-data button, .catchment-data button {
     font-size: 14px;
     margin: 5px;
   }
@@ -99,7 +99,7 @@ body {
     max-width: 60%;
     float: left;
   }
-  .progress-list button {
+  .management-data button, .catchment-data button {
     font-size: 10px;
   }
 }
