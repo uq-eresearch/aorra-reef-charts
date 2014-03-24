@@ -32,14 +32,28 @@ var app = Sammy('#main', function() {
     this.trigger('indicator:show', this.params['indicator']);
   });
   
-  this.get('#/progress', function() {
+  this.get('#/management', function() {
     this.$element()
-        .html($('#tmpl-progress-select').html());
+        .html($('#tmpl-management-select').html());
     this.trigger('region:show', 'gbr');
-    this.trigger('progress:show');
+    this.trigger('management:show');
   });
   
-  this.get('#/progress/:indicator', function() {
+  this.get('#/management/:indicator', function() {
+    this.$element()
+        .html($('#tmpl-'+this.params['indicator']+'-info').html());
+    this.trigger('region:show', 'gbr');
+    this.trigger('indicator:show', this.params['indicator']);
+  });
+  
+  this.get('#/catchment', function() {
+    this.$element()
+        .html($('#tmpl-catchment-select').html());
+    this.trigger('region:show', 'gbr');
+    this.trigger('catchment:show');
+  });
+  
+  this.get('#/catchment/:indicator', function() {
     this.$element()
         .html($('#tmpl-'+this.params['indicator']+'-info').html());
     this.trigger('region:show', 'gbr');
@@ -51,7 +65,8 @@ var app = Sammy('#main', function() {
         .html($('#tmpl-'+this.params['region']+'-info').html());
     this.trigger('region:show', this.params['region']);
     this.trigger('marine:show');
-    this.trigger('progress:show');
+    this.trigger('catchment:show');
+    this.trigger('management:show');
   });
   
   this.bind('marine:show', function() {
@@ -61,12 +76,14 @@ var app = Sammy('#main', function() {
     }.bind(this));
   });
   
-  this.bind('progress:show', function() {
-    this.$element().find('button[data-indicator]').click(function(evt) {
-      var $button = $(evt.target);
-      this.redirect('#', 'progress', $button.attr('data-indicator'));
-    }.bind(this));
-  });
+  ['catchment', 'management'].forEach(function(arg) {
+    this.bind(arg + ':show', function() {
+      this.$element().find('button[data-indicator]').click(function(evt) {
+        var $button = $(evt.target);
+        this.redirect('#', arg, $button.attr('data-indicator'));
+      }.bind(this));
+    });
+  }.bind(this));
   
 });
 
