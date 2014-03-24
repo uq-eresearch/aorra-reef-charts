@@ -242,8 +242,12 @@ $(document).ready(function() {
       regionsGeo.addTo(map);
       regionsGeo.getLayers().forEach(function(region) {
         var displayName = region.feature.properties.Region;
-        label = new L.Label({ clickable: true, direction: 'right' });
-        label.setContent(displayName);
+        var label = new L.Label({ clickable: true, direction: 'right' });
+        region.setQuantitativeValue = function setContent(newContent) {
+          label.setContent( newContent ?
+            displayName + "<br />" + newContent : displayName );
+        };
+        region.setQuantitativeValue(null);
         label.setLatLng(region.getBounds().getCenter());
         label.on('click', region.onClickHandler);
         map.showLabel(label);
@@ -260,6 +264,7 @@ $(document).ready(function() {
             region.setStyle({
               color: regionFill[region.feature.properties.Region]
             });
+            region.setQuantitativeValue(null);
           }
         });
       }
@@ -279,11 +284,14 @@ $(document).ready(function() {
         Object.keys(data).forEach(function(regionName) {
           var region = regionLookup.nameToRegion(regionName);
           if (region != null) {
-            var value = data[regionName][indicator].qualitative;
-            if (value == null) {
+            var condition = data[regionName][indicator].qualitative;
+            var value = data[regionName][indicator].quantitative;
+            if (condition == null) {
               region.setStyle({ color: '#dddddd'});
+              region.setQuantitativeValue(null);
             } else {
-              region.setStyle({ color: getFill(value).active });
+              region.setStyle({ color: getFill(condition).active });
+              region.setQuantitativeValue(value);
             }
           }
         });
@@ -310,13 +318,15 @@ $(document).ready(function() {
           var region = data[regionName];
           Object.keys(region).forEach(function(indicator) {
             Sammy('#main', function() {
-              var condition = region[indicator].qualitative;
-              var value = region[indicator].quantitative;
+              var condition = region[indicator].qualitative || 'NA';
+              var value = region[indicator].quantitative || '';
               var name = indicator.substring(0,1).toUpperCase() + indicator.substring(1);
-              var $button = $('<button/>').addClass('condition').text(name);
-              $button.addClass(condition.toLowerCase().replace(' ', '-'));
-              $button.attr('title', value);
-              $button.attr('data-indicator', indicator);
+              var $button = $('<button/>')
+                .addClass('condition')
+                .addClass(condition.toLowerCase().replace(' ', '-'))
+                .attr('title', value)
+                .attr('data-indicator', indicator)
+                .html(name+'<br />'+value);
               $('.'+dataType+'-data.'+regionName).append($button);
             });
           });
