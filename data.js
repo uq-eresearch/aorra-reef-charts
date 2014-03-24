@@ -1,190 +1,190 @@
 var marineData = {
   "gbr": {
-    "overall": "Poor",
-    "coral": "Poor",
-    "coral-change": "Poor",
-    "coral-cover": "Poor",
-    "coral-juvenile": "Very Poor",
-    "coral-macroalgae": "Good",
-    "seagrass": "Very Poor",
-    "seagrass-abundance": "Very Poor",
-    "seagrass-reproduction": "Very Poor",
-    "seagrass-nutrient": "Poor",
-    "water": "Poor",
-    "water-solids": "Moderate",
-    "water-chlorophyll": "Very Poor"
+    "overall": { "qualitative": "Poor" , "quantitative": null },
+    "coral": { "qualitative": "Poor" , "quantitative": null },
+    "coral-change": { "qualitative": "Poor" , "quantitative": null },
+    "coral-cover": { "qualitative": "Poor" , "quantitative": null },
+    "coral-juvenile": { "qualitative": "Very Poor" , "quantitative": null },
+    "coral-macroalgae": { "qualitative": "Good" , "quantitative": null },
+    "seagrass": { "qualitative": "Very Poor" , "quantitative": null },
+    "seagrass-abundance": { "qualitative": "Very Poor" , "quantitative": null },
+    "seagrass-reproduction": { "qualitative": "Very Poor" , "quantitative": null },
+    "seagrass-nutrient": { "qualitative": "Poor" , "quantitative": null },
+    "water": { "qualitative": "Poor" , "quantitative": null },
+    "water-solids": { "qualitative": "Moderate" , "quantitative": null },
+    "water-chlorophyll": { "qualitative": "Very Poor" , "quantitative": null }
   },
   "cape-york": {
-    "overall": "Poor",
-    "coral": "NA",
-    "coral-change": "NA",
-    "coral-cover": "NA",
-    "coral-juvenile": "NA",
-    "coral-macroalgae": "NA",
-    "seagrass": "Moderate",
-    "seagrass-abundance": "Very Poor",
-    "seagrass-reproduction": "Good",
-    "seagrass-nutrient": "Moderate",
-    "water": "Poor",
-    "water-solids": "Moderate",
-    "water-chlorophyll": "Poor"
+    "overall": { "qualitative": "Poor" , "quantitative": null },
+    "coral": { "qualitative": null , "quantitative": null },
+    "coral-change": { "qualitative": null , "quantitative": null },
+    "coral-cover": { "qualitative": null , "quantitative": null },
+    "coral-juvenile": { "qualitative": null , "quantitative": null },
+    "coral-macroalgae": { "qualitative": null , "quantitative": null },
+    "seagrass": { "qualitative": "Moderate" , "quantitative": null },
+    "seagrass-abundance": { "qualitative": "Very Poor" , "quantitative": null },
+    "seagrass-reproduction": { "qualitative": "Good" , "quantitative": null },
+    "seagrass-nutrient": { "qualitative": "Moderate" , "quantitative": null },
+    "water": { "qualitative": "Poor" , "quantitative": null },
+    "water-solids": { "qualitative": "Moderate" , "quantitative": null },
+    "water-chlorophyll": { "qualitative": "Poor" , "quantitative": null }
   },
   "wet-tropics": {
-    "overall": "Poor",
-    "coral": "Moderate",
-    "coral-change": "Poor",
-    "coral-cover": "Poor",
-    "coral-juvenile": "Very Poor",
-    "coral-macroalgae": "Good",
-    "seagrass": "Poor",
-    "seagrass-abundance": "Poor",
-    "seagrass-reproduction": "Very Poor",
-    "seagrass-nutrient": "Poor",
-    "water": "Poor",
-    "water-solids": "Good",
-    "water-chlorophyll": "Very Poor"
+    "overall": { "qualitative": "Poor" , "quantitative": null },
+    "coral": { "qualitative": "Moderate" , "quantitative": null },
+    "coral-change": { "qualitative": "Poor" , "quantitative": null },
+    "coral-cover": { "qualitative": "Poor" , "quantitative": null },
+    "coral-juvenile": { "qualitative": "Very Poor" , "quantitative": null },
+    "coral-macroalgae": { "qualitative": "Good" , "quantitative": null },
+    "seagrass": { "qualitative": "Poor" , "quantitative": null },
+    "seagrass-abundance": { "qualitative": "Poor" , "quantitative": null },
+    "seagrass-reproduction": { "qualitative": "Very Poor" , "quantitative": null },
+    "seagrass-nutrient": { "qualitative": "Poor" , "quantitative": null },
+    "water": { "qualitative": "Poor" , "quantitative": null },
+    "water-solids": { "qualitative": "Good" , "quantitative": null },
+    "water-chlorophyll": { "qualitative": "Very Poor" , "quantitative": null }
   },
   "burdekin": {
-    "overall": "Poor",
-    "coral": "Poor",
-    "coral-change": "Poor",
-    "coral-cover": "Very Poor",
-    "coral-juvenile": "Very Poor",
-    "coral-macroalgae": "Good",
-    "seagrass": "Very Poor",
-    "seagrass-abundance": "Very Poor",
-    "seagrass-reproduction": "Very Poor",
-    "seagrass-nutrient": "Very Poor",
-    "water": "Moderate",
-    "water-solids": "Moderate",
-    "water-chlorophyll": "Poor"
+    "overall": { "qualitative": "Poor" , "quantitative": null },
+    "coral": { "qualitative": "Poor" , "quantitative": null },
+    "coral-change": { "qualitative": "Poor" , "quantitative": null },
+    "coral-cover": { "qualitative": "Very Poor" , "quantitative": null },
+    "coral-juvenile": { "qualitative": "Very Poor" , "quantitative": null },
+    "coral-macroalgae": { "qualitative": "Good" , "quantitative": null },
+    "seagrass": { "qualitative": "Very Poor" , "quantitative": null },
+    "seagrass-abundance": { "qualitative": "Very Poor" , "quantitative": null },
+    "seagrass-reproduction": { "qualitative": "Very Poor" , "quantitative": null },
+    "seagrass-nutrient": { "qualitative": "Very Poor" , "quantitative": null },
+    "water": { "qualitative": "Moderate" , "quantitative": null },
+    "water-solids": { "qualitative": "Moderate" , "quantitative": null },
+    "water-chlorophyll": { "qualitative": "Poor" , "quantitative": null }
   },
   "mackay-whitsunday": {
-    "overall": "Poor",
-    "coral": "Moderate",
-    "coral-change": "Very Poor",
-    "coral-cover": "Moderate",
-    "coral-juvenile": "Poor",
-    "coral-macroalgae": "Very Good",
-    "seagrass": "Very Poor",
-    "seagrass-abundance": "Very Poor",
-    "seagrass-reproduction": "Very Poor",
-    "seagrass-nutrient": "Very Poor",
-    "water": "Poor",
-    "water-solids": "Very Poor",
-    "water-chlorophyll": "Poor"
+    "overall": { "qualitative": "Poor" , "quantitative": null },
+    "coral": { "qualitative": "Moderate" , "quantitative": null },
+    "coral-change": { "qualitative": "Very Poor" , "quantitative": null },
+    "coral-cover": { "qualitative": "Moderate" , "quantitative": null },
+    "coral-juvenile": { "qualitative": "Poor" , "quantitative": null },
+    "coral-macroalgae": { "qualitative": "Very Good" , "quantitative": null },
+    "seagrass": { "qualitative": "Very Poor" , "quantitative": null },
+    "seagrass-abundance": { "qualitative": "Very Poor" , "quantitative": null },
+    "seagrass-reproduction": { "qualitative": "Very Poor" , "quantitative": null },
+    "seagrass-nutrient": { "qualitative": "Very Poor" , "quantitative": null },
+    "water": { "qualitative": "Poor" , "quantitative": null },
+    "water-solids": { "qualitative": "Very Poor" , "quantitative": null },
+    "water-chlorophyll": { "qualitative": "Poor" , "quantitative": null }
   },
   "fitzroy": {
-    "overall": "Poor",
-    "coral": "Poor",
-    "coral-change": "Poor",
-    "coral-cover": "Poor",
-    "coral-juvenile": "Very Poor",
-    "coral-macroalgae": "Good",
-    "seagrass": "Poor",
-    "seagrass-abundance": "Poor",
-    "seagrass-reproduction": "Moderate",
-    "seagrass-nutrient": "Moderate",
-    "water": "Poor",
-    "water-solids": "Moderate",
-    "water-chlorophyll": "Very Poor"
+    "overall": { "qualitative": "Poor" , "quantitative": null },
+    "coral": { "qualitative": "Poor" , "quantitative": null },
+    "coral-change": { "qualitative": "Poor" , "quantitative": null },
+    "coral-cover": { "qualitative": "Poor" , "quantitative": null },
+    "coral-juvenile": { "qualitative": "Very Poor" , "quantitative": null },
+    "coral-macroalgae": { "qualitative": "Good" , "quantitative": null },
+    "seagrass": { "qualitative": "Poor" , "quantitative": null },
+    "seagrass-abundance": { "qualitative": "Poor" , "quantitative": null },
+    "seagrass-reproduction": { "qualitative": "Moderate" , "quantitative": null },
+    "seagrass-nutrient": { "qualitative": "Moderate" , "quantitative": null },
+    "water": { "qualitative": "Poor" , "quantitative": null },
+    "water-solids": { "qualitative": "Moderate" , "quantitative": null },
+    "water-chlorophyll": { "qualitative": "Very Poor" , "quantitative": null }
   },
   "burnett-mary": {
-    "overall": "Poor",
-    "coral": "NA",
-    "coral-change": "NA",
-    "coral-cover": "NA",
-    "coral-juvenile": "NA",
-    "coral-macroalgae": "NA",
-    "seagrass": "Very Poor",
-    "seagrass-abundance": "Very Poor",
-    "seagrass-reproduction": "Very Poor",
-    "seagrass-nutrient": "Poor",
-    "water": "Moderate",
-    "water-solids": "Good",
-    "water-chlorophyll": "Very Poor"
+    "overall": { "qualitative": "Poor" , "quantitative": null },
+    "coral": { "qualitative": null , "quantitative": null },
+    "coral-change": { "qualitative": null , "quantitative": null },
+    "coral-cover": { "qualitative": null , "quantitative": null },
+    "coral-juvenile": { "qualitative": null , "quantitative": null },
+    "coral-macroalgae": { "qualitative": null , "quantitative": null },
+    "seagrass": { "qualitative": "Very Poor" , "quantitative": null },
+    "seagrass-abundance": { "qualitative": "Very Poor" , "quantitative": null },
+    "seagrass-reproduction": { "qualitative": "Very Poor" , "quantitative": null },
+    "seagrass-nutrient": { "qualitative": "Poor" , "quantitative": null },
+    "water": { "qualitative": "Moderate" , "quantitative": null },
+    "water-solids": { "qualitative": "Good" , "quantitative": null },
+    "water-chlorophyll": { "qualitative": "Very Poor" , "quantitative": null }
   }
 };
 
 var managementData = {
   "gbr": {
-    "grazing": "Moderate",
-    "sugarcane": "Good",
-    "horticulture": "Moderate"
+    "grazing": { "qualitative": "Moderate" , "quantitative": "17%" },
+    "sugarcane": { "qualitative": "Good" , "quantitative": "34%" },
+    "horticulture": { "qualitative": "Moderate" , "quantitative": "25%" }
   },
   "cape-york": {
-    "grazing": "Very Good",
-    "sugarcane": "NA",
-    "horticulture": "Good"
+    "grazing": { "qualitative": "Very Good" , "quantitative": "33%" },
+    "sugarcane": { "qualitative": null , "quantitative": null },
+    "horticulture": { "qualitative": "Good" , "quantitative": "40%" }
   },
   "wet-tropics": {
-    "grazing": "Moderate",
-    "sugarcane": "Good",
-    "horticulture": "Moderate"
+    "grazing": { "qualitative": "Moderate" , "quantitative": "16%" },
+    "sugarcane": { "qualitative": "Good" , "quantitative": "37%" },
+    "horticulture": { "qualitative": "Moderate" , "quantitative": "24%" }
   },
   "burdekin": {
-    "grazing": "Good",
-    "sugarcane": "Moderate",
-    "horticulture": "Moderate"
+    "grazing": { "qualitative": "Good" , "quantitative": "20%" },
+    "sugarcane": { "qualitative": "Moderate" , "quantitative": "28%" },
+    "horticulture": { "qualitative": "Moderate" , "quantitative": "27%" }
   },
   "mackay-whitsunday": {
-    "grazing": "Very Good",
-    "sugarcane": "Good",
-    "horticulture": "Very Good"
+    "grazing": { "qualitative": "Very Good" , "quantitative": "36%" },
+    "sugarcane": { "qualitative": "Good" , "quantitative": "30%" },
+    "horticulture": { "qualitative": "Very Good" , "quantitative": "47%" }
   },
   "fitzroy": {
-    "grazing": "Moderate",
-    "sugarcane": "Moderate",
-    "horticulture": "Poor"
+    "grazing": { "qualitative": "Moderate" , "quantitative": "16%" },
+    "sugarcane": { "qualitative": "Moderate" , "quantitative": "18%" },
+    "horticulture": { "qualitative": "Poor" , "quantitative": "13%" }
   },
   "burnett-mary": {
-    "grazing": "Moderate",
-    "sugarcane": "Very Good",
-    "horticulture": "Moderate"
+    "grazing": { "qualitative": "Moderate" , "quantitative": "13%" },
+    "sugarcane": { "qualitative": "Very Good" , "quantitative": "42%" },
+    "horticulture": { "qualitative": "Moderate" , "quantitative": "25%" }
   }
 };
 
 var catchmentData = {
   "gbr": {
-    "groundcover": "Very Good",
-    "nitrogen": "Moderate",
-    "sediment": "Very Good",
-    "pesticides": "Good"
+    "groundcover": { "qualitative": "Very Good" , "quantitative": "91%" },
+    "nitrogen": { "qualitative": "Moderate" , "quantitative": "7%" },
+    "sediment": { "qualitative": "Very Good" , "quantitative": "6%" },
+    "pesticides": { "qualitative": "Good" , "quantitative": "15%" }
   },
   "cape-york": {
-    "groundcover": "NA",
-    "nitrogen": "Poor",
-    "sediment": "Good",
-    "pesticides": "NA"
+    "groundcover": { "qualitative": null , "quantitative": null },
+    "nitrogen": { "qualitative": "Poor" , "quantitative": "4%" },
+    "sediment": { "qualitative": "Good" , "quantitative": "4%" },
+    "pesticides": { "qualitative": null , "quantitative": null }
   },
   "wet-tropics": {
-    "groundcover": "Very Good",
-    "nitrogen": "Poor",
-    "sediment": "Good",
-    "pesticides": "Moderate"
+    "groundcover": { "qualitative": "Very Good" , "quantitative": "95%" },
+    "nitrogen": { "qualitative": "Poor" , "quantitative": "4%" },
+    "sediment": { "qualitative": "Good" , "quantitative": "3%" },
+    "pesticides": { "qualitative": "Moderate" , "quantitative": "10%" }
   },
   "burdekin": {
-    "groundcover": "Very Good",
-    "nitrogen": "Poor",
-    "sediment": "Very Good",
-    "pesticides": "Good"
+    "groundcover": { "qualitative": "Very Good" , "quantitative": "92%" },
+    "nitrogen": { "qualitative": "Poor" , "quantitative": "8%" },
+    "sediment": { "qualitative": "Very Good" , "quantitative": "10%" },
+    "pesticides": { "qualitative": "Good" , "quantitative": "17%" }
   },
   "mackay-whitsunday": {
-    "groundcover": "Very Good",
-    "nitrogen": "Good",
-    "sediment": "Very Good",
-    "pesticides": "Very Good"
+    "groundcover": { "qualitative": "Very Good" , "quantitative": "92%" },
+    "nitrogen": { "qualitative": "Good" , "quantitative": "13%" },
+    "sediment": { "qualitative": "Very Good" , "quantitative": "6%" },
+    "pesticides": { "qualitative": "Very Good" , "quantitative": "31%" }
   },
   "fitzroy": {
-    "groundcover": "Very Good",
-    "nitrogen": "Poor",
-    "sediment": "Good",
-    "pesticides": "Moderate"
+    "groundcover": { "qualitative": "Very Good" , "quantitative": "90%" },
+    "nitrogen": { "qualitative": "Poor" , "quantitative": "2%" },
+    "sediment": { "qualitative": "Good" , "quantitative": "3%" },
+    "pesticides": { "qualitative": "Moderate" , "quantitative": "4%" }
   },
   "burnett-mary": {
-    "groundcover": "Very Good",
-    "nitrogen": "Moderate",
-    "sediment": "Good",
-    "pesticides": "Good"
+    "groundcover": { "qualitative": "Very Good" , "quantitative": "93%" },
+    "nitrogen": { "qualitative": "Moderate" , "quantitative": "8%" },
+    "sediment": { "qualitative": "Good" , "quantitative": "3%" },
+    "pesticides": { "qualitative": "Good" , "quantitative": "17%" }
   }
 };

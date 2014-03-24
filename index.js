@@ -117,18 +117,11 @@ function getFill(v) {
   }
 }
 
-function getRegionData(data, indicator) {
-  return Object.keys(data).reduce(function(h, k) {
-    h[k] = data[k][indicator];
-    return h;
-  }, {});
-}
-
 function getMarineStyle(data) {
   return Object.keys(data).reduce(function(lr, region) {
     var values = data[region];
     return lr.concat(Object.keys(values).reduce(function(li, indicator) {
-      var value = values[indicator];
+      var value = values[indicator].qualitative;
       return li.concat(
         '.marine-chart.'+region+' #'+indicator+" { fill: "+getFill(value).normal+"; pointer-events: all; }",
         '.marine-chart.'+region+' #'+indicator+':hover, .marine-chart.'+region+' #'+indicator+".active { fill: "+getFill(value).active+"; cursor: pointer; }"
@@ -286,8 +279,8 @@ $(document).ready(function() {
         Object.keys(data).forEach(function(regionName) {
           var region = regionLookup.nameToRegion(regionName);
           if (region != null) {
-            var value = data[regionName][indicator];
-            if (value == 'NA') {
+            var value = data[regionName][indicator].qualitative;
+            if (value == null) {
               region.setStyle({ color: '#dddddd'});
             } else {
               region.setStyle({ color: getFill(value).active });
@@ -317,10 +310,12 @@ $(document).ready(function() {
           var region = data[regionName];
           Object.keys(region).forEach(function(indicator) {
             Sammy('#main', function() {
-              var condition = region[indicator];
+              var condition = region[indicator].qualitative;
+              var value = region[indicator].quantitative;
               var name = indicator.substring(0,1).toUpperCase() + indicator.substring(1);
               var $button = $('<button/>').addClass('condition').text(name);
               $button.addClass(condition.toLowerCase().replace(' ', '-'));
+              $button.attr('title', value);
               $button.attr('data-indicator', indicator);
               $('.'+dataType+'-data.'+regionName).append($button);
             });
