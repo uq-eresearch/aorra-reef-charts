@@ -193,8 +193,8 @@ $(document).ready(function() {
         var regionNameToId = {};
         var regionIdToName = {};
         regionsGeo.getLayers().forEach(function(region) {
-          var regionName = region.feature.properties
-            .Region.toLowerCase().replace(' ', '-');
+          var displayName = region.feature.properties.Region;
+          var regionName = displayName.toLowerCase().replace(' ', '-');
           regionNameToId[regionName] = getRegionId(region);
           regionIdToName[getRegionId(region)] = regionName;
         });
@@ -209,14 +209,15 @@ $(document).ready(function() {
       })();
       var zoomed = regionsGeo;
       regionsGeo.getLayers().forEach(function(region) {
-        region.on('click', function() {
+        region.onClickHandler = function() {
           var regionName = regionLookup.regionToName(region);
           if (zoomed == region) {
             app.setLocation('#/');
           } else {
             app.setLocation('#/region/'+regionName);
           }
-        });
+        };
+        region.on('click', region.onClickHandler);
       });
       Sammy('#main', function() {
         this.bind('region:show', function(evt, regionName) {
@@ -229,6 +230,14 @@ $(document).ready(function() {
         })
       }); 
       regionsGeo.addTo(map);
+      regionsGeo.getLayers().forEach(function(region) {
+        var displayName = region.feature.properties.Region;
+        label = new L.Label({ clickable: true, direction: 'right' });
+        label.setContent(displayName);
+        label.setLatLng(region.getBounds().getCenter());
+        label.on('click', region.onClickHandler);
+        map.showLabel(label);
+      });
       map.fitBounds(regionsGeo.getBounds());
       $(window).resize(function() {
         map.fitBounds(zoomed.getBounds());  
