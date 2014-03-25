@@ -190,13 +190,6 @@ $(document).ready(function() {
   
     map.setView(new L.LatLng(-18.00, 150.00), 6);
     map.addLayer(osm);
-    $.get("./reef.geojson", function(data) {
-      L.geoJson(data, {
-        style: function (feature) {
-          return { color: '#64b8fc', weight: 1, clickable: false };
-        }
-      }).addTo(map);
-    }, 'json');
     $.get("./regions.geojson", function(data) {
       var regionsGeo = L.geoJson(data, {
         style: function (feature) {
@@ -357,5 +350,8 @@ $(document).ready(function() {
         app.run('#/');
       });
     }, 'json');
+
+    var imageBounds = [[-24.444389342999955,153.2289409640001], [-9.999868392999815,142.6685123440003]];
+    L.imageOverlay('reef.svg', imageBounds, {opacity: 1}).addTo(map);
   })();
 });

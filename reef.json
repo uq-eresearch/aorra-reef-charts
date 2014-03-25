@@ -1,0 +1,10 @@
+{
+   "layers": {
+       "banks": {"src": "shapefiles/Banks_GBR/Banks_GBR.shp"}
+   },
+   "proj": {
+    "id": "mercator",
+    "lon0": 0,
+    "lat0": 0
+   }
+}
