@@ -109,6 +109,12 @@ body {
 }
 
 @media all and (max-width: 650px) {
+  .management-data button, .catchment-data button {
+    font-size: 10px;
+  }
+}
+
+@media all and (max-width: 650px) and (orientation:portrait) {
   .inset-paper {
     bottom: 0;
     top: auto;
@@ -124,9 +130,6 @@ body {
   }
   .marine-chart {
     max-width: 60%;
-  }
-  .management-data button, .catchment-data button {
-    font-size: 10px;
   }
 }
 
