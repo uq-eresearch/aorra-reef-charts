@@ -1,3 +1,8 @@
+/* Override leaflet.css so reef SVG displays correctly */
+.leaflet-container img.leaflet-image-layer {
+  max-width: none !important;
+}
+
 body {
   margin: 0;
   padding: 0;
