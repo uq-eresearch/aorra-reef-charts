@@ -190,7 +190,11 @@ $(document).ready(function() {
   
     map.setView(new L.LatLng(-18.00, 150.00), 6);
     map.addLayer(osm);
-    $.get("./regions.geojson", function(data) {
+    // Detect low-res device and use simpler regions
+    var regionsUrl = 768 < window.screen.width ?
+      "./regions.geojson" :
+      "./regions-simplified.geojson";
+    $.get(regionsUrl, function(data) {
       var regionsGeo = L.geoJson(data, {
         style: function (feature) {
           return {
