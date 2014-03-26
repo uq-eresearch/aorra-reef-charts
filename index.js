@@ -254,7 +254,8 @@ $(document).ready(function() {
       regionsGeo.addTo(map);
       regionsGeo.getLayers().forEach(function(region) {
         var displayName = region.feature.properties.Region;
-        var label = new L.Label({ clickable: true, direction: 'right' });
+        var labelDir = displayName == 'Burdekin' ? 'left' : 'right';
+        var label = new L.Label({ clickable: true, direction: labelDir });
         region.setQuantitativeValue = function setContent(newContent) {
           label.setContent( newContent ?
             displayName + "<br />" + newContent : displayName );
