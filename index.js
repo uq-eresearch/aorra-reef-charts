@@ -286,6 +286,8 @@ $(document).ready(function() {
       });
 
       function clearRegionFills() {
+        $('.leaflet-label')
+          .removeClass('condition na very-good good moderate poor very-poor');
         Object.keys(marineData).forEach(function(regionName) {
           var region = regionLookup.nameToRegion(regionName);
           if (region != null) {
@@ -312,13 +314,19 @@ $(document).ready(function() {
         Object.keys(data).forEach(function(regionName) {
           var region = regionLookup.nameToRegion(regionName);
           if (region != null) {
+            var displayName = region.feature.properties.Region;
             var condition = data[regionName][indicator].qualitative;
             var value = data[regionName][indicator].quantitative;
             if (condition == null) {
-              region.setStyle({ color: '#dddddd'});
+              $('.leaflet-label:contains("'+displayName+'")')
+                .addClass('condition na');
+              //region.setStyle({ color: '#dddddd'});
               region.setQuantitativeValue(null);
             } else {
-              region.setStyle({ color: getFill(condition).active });
+              var conditionClass = condition.toLowerCase().replace(' ','-');
+              $('.leaflet-label:contains("'+displayName+'")')
+                .addClass('condition '+conditionClass);
+              //region.setStyle({ color: getFill(condition).active });
               region.setQuantitativeValue(value);
             }
           }
