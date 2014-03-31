@@ -169,12 +169,12 @@ div[id*="tmpl-"] {
 
 .condition.na                                           { display: none; }
 .condition.very-good                                    { background-color: hsla(150, 100%, 23%, 1); }
-.condition.very-good.active, .condition.very-good:hover { background-color: hsla(150, 100%, 23%, 1); }
+.condition.very-good.active, .condition.very-good:hover { background-color: hsla(150, 100%, 13%, 1); }
 .condition.good                                         { background-color: hsla(110, 24%, 71%, 1); }
-.condition.good.active, .condition.good:hover           { background-color: hsla(110, 24%, 71%, 1); }
+.condition.good.active, .condition.good:hover           { background-color: hsla(110, 24%, 61%, 1); }
 .condition.moderate                                     { background-color: hsla(46, 97%, 57%, 1); }
-.condition.moderate.active, .condition.moderate:hover   { background-color: hsla(46, 97%, 57%, 1); }
+.condition.moderate.active, .condition.moderate:hover   { background-color: hsla(46, 97%, 47%, 1); }
 .condition.poor                                         { background-color: hsla(26, 89%, 60%, 1); }
-.condition.poor.active, .condition.poor:hover           { background-color: hsla(26, 89%, 60%, 1); }
+.condition.poor.active, .condition.poor:hover           { background-color: hsla(26, 89%, 50%, 1); }
 .condition.very-poor                                    { background-color: hsla(359, 81%, 54%, 1); }
-.condition.very-poor.active, .condition.very-poor:hover { background-color: hsla(359, 81%, 54%, 1); }
+.condition.very-poor.active, .condition.very-poor:hover { background-color: hsla(359, 81%, 44%, 1); }

@@ -102,35 +102,50 @@ var app = Sammy('#main', function() {
   
 });
 
-function getFill(v) {
-  var fills = {
-    'Very Good': {
-      'normal': $('#legend .very-good').css('background-color'),
-      'active': $('#legend .very-good').css('background-color')
-    },
-    'Good': {
-      'normal': $('#legend .good').css('background-color'),
-      'active': $('#legend .good').css('background-color')
-    },
-    'Moderate': {
-      'normal': $('#legend .moderate').css('background-color'),
-      'active': $('#legend .moderate').css('background-color')
-    },
-    'Poor': {
-      'normal': $('#legend .poor').css('background-color'),
-      'active': $('#legend .poor').css('background-color')
-    },
-    'Very Poor': {
-      'normal': $('#legend .very-poor').css('background-color'),
-      'active': $('#legend .very-poor').css('background-color')
-    }
-  };
-  if (fills[v]) {
-    return fills[v];
-  } else {
-    return { normal: '#e5e5e5', active: '#e5e5e5' };
+var getFill = (function IIFE() {
+  var fills;
+  function getFillsFromCSS() {
+    function getFillFromCSS(conditionClasses) {
+      var $testEl = $('<div/>').addClass('condition '+conditionClasses);
+      $testEl.appendTo('body');
+      var bgc = $testEl.css('background-color');
+      $testEl.remove();
+      return bgc;
+    };
+    return {
+      'Very Good': {
+        'normal': getFillFromCSS('very-good'),
+        'active': getFillFromCSS('very-good active')
+      },
+      'Good': {
+        'normal': getFillFromCSS('good'),
+        'active': getFillFromCSS('good active'),
+      },
+      'Moderate': {
+        'normal': getFillFromCSS('moderate'),
+        'active': getFillFromCSS('moderate active'),
+      },
+      'Poor': {
+        'normal': getFillFromCSS('poor'),
+        'active': getFillFromCSS('poor active'),
+      },
+      'Very Poor': {
+        'normal': getFillFromCSS('very-poor'),
+        'active': getFillFromCSS('very-poor active')
+      }
+    };
   }
-}
+  return function getFillImpl(v) {
+    if (!fills) {
+      fills = getFillsFromCSS();
+    }
+    if (fills[v]) {
+      return fills[v];
+    } else {
+      return { normal: '#e5e5e5', active: '#e5e5e5' };
+    }
+  }
+})();
 
 function getMarineStyle(data) {
   return Object.keys(data).reduce(function(lr, region) {
