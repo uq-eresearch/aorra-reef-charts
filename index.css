@@ -36,7 +36,6 @@ body {
   width: 50%;
   background-color: white;
   box-shadow: 0px 0px 3px #888888;
-  padding: 0px 20px 20px 20px;
   overflow-y: auto;
 }
 
@@ -146,7 +145,6 @@ body {
 #legend li {
   width: 8em;
   text-align: center;
-  color: white;
 }
 
 #legend li:first-child {
@@ -166,6 +164,32 @@ div[id*="tmpl-"] {
 #mackay-whitsunday, #fitzroy, #burnett-mary {
   cursor: pointer;
 }
+
+.top-banner {
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  font-weight: bold;
+}
+
+.top-banner.gbr                { background-color: black; }
+.top-banner.cape-york          { background-color: #ca6722; }
+.top-banner.wet-tropics        { background-color: #82be40; }
+.top-banner.burdekin           { background-color: #686a57; }
+.top-banner.mackay-whitsunday  { background-color: #dca256; }
+.top-banner.fitzroy            { background-color: #833e15; }
+.top-banner.burnett-mary       { background-color: #e4ac24; }
+
+path.cape-york          { stroke: #ca6722; fill: #ca6722; }
+path.wet-tropics        { stroke: #82be40; fill: #82be40; }
+path.burdekin           { stroke: #686a57; fill: #686a57; }
+path.mackay-whitsunday  { stroke: #dca256; fill: #dca256; }
+path.fitzroy            { stroke: #833e15; fill: #833e15; }
+path.burnett-mary       { stroke: #e4ac24; fill: #e4ac24; }
+
+.condition                            { color: white; }
+.condition.moderate, .condition.good  { color: black; }
 
 .condition.na                                           { display: none; }
 .condition.very-good                                    { background-color: hsla(150, 100%, 23%, 1); }

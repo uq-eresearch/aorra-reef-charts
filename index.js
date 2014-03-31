@@ -1,12 +1,3 @@
-var regionFill = {
-  'Cape York': '#ca6722',
-  'Wet Tropics': '#82be40',
-  'Burdekin': '#686a57',
-  'Mackay-Whitsunday': '#dca256',
-  'Fitzroy': '#833e15',
-  'Burnett-Mary': '#e4ac24'
-};
-
 var indicatorImage = (function() {
   function img(imgName) {
     return $('<img />').attr('src', 'images/'+imgName+'.png')[0].outerHTML;
@@ -213,7 +204,6 @@ $(document).ready(function() {
       var regionsGeo = L.geoJson(data, {
         style: function (feature) {
           return {
-            color: regionFill[feature.properties.Region],
             weight: 1 
           };
         }
@@ -246,8 +236,11 @@ $(document).ready(function() {
       })();
       var zoomed = regionsGeo;
       regionsGeo.getLayers().forEach(function(region) {
+        var regionName = regionLookup.regionToName(region);
+        region.setStyle({
+          className: regionName
+        });
         region.onClickHandler = function() {
-          var regionName = regionLookup.regionToName(region);
           if (zoomed == region) {
             app.setLocation('#/');
           } else {
@@ -291,9 +284,6 @@ $(document).ready(function() {
         Object.keys(marineData).forEach(function(regionName) {
           var region = regionLookup.nameToRegion(regionName);
           if (region != null) {
-            region.setStyle({
-              color: regionFill[region.feature.properties.Region]
-            });
             region.setQuantitativeValue(null);
           }
         });
@@ -320,13 +310,11 @@ $(document).ready(function() {
             if (condition == null) {
               $('.leaflet-label:contains("'+displayName+'")')
                 .addClass('condition na');
-              //region.setStyle({ color: '#dddddd'});
               region.setQuantitativeValue(null);
             } else {
               var conditionClass = condition.toLowerCase().replace(' ','-');
               $('.leaflet-label:contains("'+displayName+'")')
                 .addClass('condition '+conditionClass);
-              //region.setStyle({ color: getFill(condition).active });
               region.setQuantitativeValue(value);
             }
           }
