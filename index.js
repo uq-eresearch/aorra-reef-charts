@@ -203,7 +203,7 @@ $(document).ready(function() {
     var osmAttrib='Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">';
     var osm = new L.TileLayer(osmUrl, {minZoom: 2, maxZoom: 12, attribution: osmAttrib});		
   
-    map.setView(new L.LatLng(-18.00, 150.00), 6);
+    map.setView(new L.LatLng(-18.83, 147.68), 6);
     map.addLayer(osm);
     // Detect low-res device and use simpler regions
     var regionsUrl = 768 < window.screen.width ?
@@ -282,7 +282,7 @@ $(document).ready(function() {
       });
       map.fitBounds(regionsGeo.getBounds());
       $(window).resize(function() {
-        map.fitBounds(zoomed.getBounds());  
+        map.fitBounds(zoomed.getBounds());
       });
 
       function clearRegionFills() {
