@@ -74,6 +74,7 @@ body {
   padding: 5px;
   border-radius: 5px;
   font-size: 15px;
+  color: white;
 }
 
 .management-data img, .catchment-data img {
@@ -145,6 +146,7 @@ body {
 #legend li {
   width: 8em;
   text-align: center;
+  color: white;
 }
 
 #legend li:first-child {
@@ -166,13 +168,13 @@ div[id*="tmpl-"] {
 }
 
 .condition.na                                           { display: none; }
-.condition.very-good                                    { background-color: #7aff66; }
-.condition.very-good.active, .condition.very-good:hover { background-color: #22ff00; }
-.condition.good                                         { background-color: #cfff66; }
-.condition.good.active, .condition.good:hover           { background-color: #b0ff00; }
-.condition.moderate                                     { background-color: #fff666; }
-.condition.moderate.active, .condition.moderate:hover   { background-color: #fff000; }
-.condition.poor                                         { background-color: #ffc766; }
-.condition.poor.active, .condition.poor:hover           { background-color: #ffa200; }
-.condition.very-poor                                    { background-color: #ff6966; }
-.condition.very-poor.active, .condition.very-poor:hover { background-color: #ff0400; }
+.condition.very-good                                    { background-color: hsla(150, 100%, 23%, 1); }
+.condition.very-good.active, .condition.very-good:hover { background-color: hsla(150, 100%, 23%, 1); }
+.condition.good                                         { background-color: hsla(110, 24%, 71%, 1); }
+.condition.good.active, .condition.good:hover           { background-color: hsla(110, 24%, 71%, 1); }
+.condition.moderate                                     { background-color: hsla(46, 97%, 57%, 1); }
+.condition.moderate.active, .condition.moderate:hover   { background-color: hsla(46, 97%, 57%, 1); }
+.condition.poor                                         { background-color: hsla(26, 89%, 60%, 1); }
+.condition.poor.active, .condition.poor:hover           { background-color: hsla(26, 89%, 60%, 1); }
+.condition.very-poor                                    { background-color: hsla(359, 81%, 54%, 1); }
+.condition.very-poor.active, .condition.very-poor:hover { background-color: hsla(359, 81%, 54%, 1); }

@@ -105,24 +105,24 @@ var app = Sammy('#main', function() {
 function getFill(v) {
   var fills = {
     'Very Good': {
-      'normal': '#7aff66',
-      'active': '#22ff00'
+      'normal': $('#legend .very-good').css('background-color'),
+      'active': $('#legend .very-good').css('background-color')
     },
     'Good': {
-      'normal': '#cfff66',
-      'active': '#b0ff00'
+      'normal': $('#legend .good').css('background-color'),
+      'active': $('#legend .good').css('background-color')
     },
     'Moderate': {
-      'normal': '#fff666',
-      'active': '#fff000'
+      'normal': $('#legend .moderate').css('background-color'),
+      'active': $('#legend .moderate').css('background-color')
     },
     'Poor': {
-      'normal': '#ffc766',
-      'active': '#ffa200'
+      'normal': $('#legend .poor').css('background-color'),
+      'active': $('#legend .poor').css('background-color')
     },
     'Very Poor': {
-      'normal': '#ff6966',
-      'active': '#ff0400'
+      'normal': $('#legend .very-poor').css('background-color'),
+      'active': $('#legend .very-poor').css('background-color')
     }
   };
   if (fills[v]) {
