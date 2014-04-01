@@ -203,7 +203,7 @@ path.fitzroy            { stroke: #833e15; fill: #833e15; }
 path.burnett-mary       { stroke: #e4ac24; fill: #e4ac24; }
 
 .condition                            { color: white; }
-.condition.moderate, .condition.good  { color: black; }
+.condition.good, .condition.moderate, .condition.poor  { color: black; }
 
 .condition.na                                           { display: none; }
 .condition.very-good                                    { background-color: hsla(150, 100%, 23%, 1); }
