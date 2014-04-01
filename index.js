@@ -280,6 +280,7 @@ $(document).ready(function() {
 
       function clearRegionFills() {
         $('.leaflet-label')
+          .removeAttr('title')
           .removeClass('condition na very-good good moderate poor very-poor');
         Object.keys(marineData).forEach(function(regionName) {
           var region = regionLookup.nameToRegion(regionName);
@@ -314,6 +315,7 @@ $(document).ready(function() {
             } else {
               var conditionClass = condition.toLowerCase().replace(' ','-');
               $('.leaflet-label:contains("'+displayName+'")')
+                .attr('title', condition)
                 .addClass('condition '+conditionClass);
               region.setQuantitativeValue(value);
             }
@@ -344,15 +346,18 @@ $(document).ready(function() {
             Sammy('#main', function() {
               var condition = region[indicator].qualitative || 'NA';
               var value = region[indicator].quantitative || '';
+              var target = region[indicator].target || '';
               var name = indicator.substring(0,1).toUpperCase() + indicator.substring(1);
               var $button = $('<button/>')
+                .addClass('progress-indicator')
                 .addClass('condition')
                 .addClass(condition.toLowerCase().replace(' ', '-'))
-                .attr('title', value)
+                .attr('title', condition)
                 .attr('data-indicator', indicator)
-                .append($('<div/>').css('font-weight', 'bold').text(name))
+                .append($('<div/>').addClass('name').text(name))
                 .append(indicatorImage[indicator])
-                .append($('<div/>').text(value));
+                .append($('<div/>').text(value))
+                .append($('<div/>').addClass('target').html("Target &rarr; "+target));
               $('.'+dataType+'-data.'+regionName).append($button);
             });
           });

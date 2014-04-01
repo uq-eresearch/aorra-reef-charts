@@ -63,12 +63,12 @@ body {
   text-align: center;
 }
 
-.management-data button, .catchment-data button {
+button.progress-indicator {
   display: inline;
   text-align: center;
   border: none;
   outline: none;
-  width: 7.5em;
+  width: 8em;
   margin: 10px;
   padding: 5px;
   border-radius: 5px;
@@ -76,7 +76,17 @@ body {
   color: white;
 }
 
-.management-data img, .catchment-data img {
+button.progress-indicator .name {
+  font-weight: bold;
+}
+
+button.progress-indicator .target {
+  font-style: italic;
+  font-weight: lighter;
+  font-size: 75%;
+}
+
+.progress-indicator img {
   width: 4em;
 }
 
@@ -102,14 +112,14 @@ body {
   .marine-chart {
     max-height: 60%;
   }
-  .management-data button, .catchment-data button {
+  button.progress-indicator  {
     font-size: 14px;
     margin: 5px;
   }
 }
 
 @media all and (max-width: 650px) {
-  .management-data button, .catchment-data button {
+  button.progress-indicator {
     font-size: 10px;
   }
 }
