@@ -195,6 +195,11 @@ div[id*="tmpl-"] {
 .top-banner.fitzroy            { background-color: #833e15; }
 .top-banner.burnett-mary       { background-color: #e4ac24; }
 
+path.cape-york, path.wet-tropics, path.burdekin,
+path.mackay-whitsunday, path.fitzroy, path.burnett-mary {
+  fill-opacity: 0.4;
+}
+
 path.cape-york          { stroke: #ca6722; fill: #ca6722; }
 path.wet-tropics        { stroke: #82be40; fill: #82be40; }
 path.burdekin           { stroke: #686a57; fill: #686a57; }
