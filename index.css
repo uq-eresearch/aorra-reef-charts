@@ -28,6 +28,10 @@ body {
   height: 100%;
 }
 
+#marine-labels {
+  pointer-events: none;
+}
+
 .inset-paper {
   position: absolute;
   top: 0;

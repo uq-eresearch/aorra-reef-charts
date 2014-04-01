@@ -77,7 +77,7 @@ var app = Sammy('#main', function() {
   
   this.bind('marine:show', function() {
     this.$element().find('.marine-chart #indicators path').click(function(evt) {
-      var indicator = evt.target.id;
+      var indicator = evt.delegateTarget.id;
       this.redirect('#', 'marine', indicator);
     }.bind(this));
   });
