@@ -263,7 +263,11 @@ $(document).ready(function() {
       regionsGeo.getLayers().forEach(function(region) {
         var displayName = region.feature.properties.Region;
         var labelDir = displayName == 'Burdekin' ? 'left' : 'right';
-        var label = new L.Label({ clickable: true, direction: labelDir });
+        var label = new L.Label({
+          clickable: true,
+          direction: labelDir,
+          noHide: true
+        });
         region.setQuantitativeValue = function setContent(newContent) {
           label.setContent( newContent ?
             displayName + "<br />" + newContent : displayName );
