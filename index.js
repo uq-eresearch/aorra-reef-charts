@@ -36,7 +36,10 @@ var app = Sammy('#main', function() {
   this.get('#/', function() {
     // this context is a Sammy.EventContext
     this.$element() // $('#main')
-        .html(template('home'));
+        .html(template('home', {
+      baseYear: baseYear,
+      reportYear: reportYear
+    }));
     this.trigger('region:show', 'gbr');
   });
   
