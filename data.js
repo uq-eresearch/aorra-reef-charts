@@ -36,6 +36,16 @@ var indicatorNames = {
   "water-chlorophyll": "Chlorophyll &alpha;"
 };
 
+var marineCaptions = {
+  'gbr':                'The overall condition of the reef in 2010-2011 declined from moderate to poor. Inshore water quality was poor overall and varied from moderate to poor depending on the region. Inshore seagrass was in very poor condition overall, and its condition has continued to decline since 2006-2007. Inshore coral reefs were in poor condition overall.',
+  'cape-york':          'The marine condition off Cape York was poor. Inshore water quality was poor and the one southern seagrass bed monitored was in moderate condition.',
+  'wet-tropics':        'The Wet Tropics’ marine condition declined from moderate to poor. Inshore water quality and seagrass meadows were in poor condition and coral reefs were in moderate condition.',
+  'burdekin':           'The Burdekin’s marine condition remained poor. Inshore water quality was moderate overall, while inshore seagrass meadows declined from poor to very poor and coral reefs remained in poor condition.',
+  'mackay-whitsunday':  'The Mackay Whitsunday’s marine condition declined from moderate to poor. Inshore water quality also declined from moderate to poor, inshore seagrass meadows declined from poor to very poor and coral reefs remained in moderate condition.',
+  'fitzroy':            'The Fitzroy’s marine condition declined from moderate to poor. Inshore water quality and inshore seagrass meadows also declined from moderate to poor and coral reefs remained in poor condition',
+  'burnett-mary':       'The Burnett Mary’s marine condition remained poor. Inshore water quality remained moderate and the condition of seagrass declined from poor to very poor.'
+};
+
 var marineData = {
   "gbr": {
     "overall": { "qualitative": "Poor" },

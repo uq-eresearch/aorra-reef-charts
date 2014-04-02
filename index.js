@@ -91,7 +91,8 @@ var app = Sammy('#main', function() {
     var regionId = this.params['region'];
     this.$element().html(template('region-info', {
       id: regionId,
-      name: regionNames[regionId]
+      name: regionNames[regionId],
+      caption: marineCaptions[regionId]
     }));
     this.trigger('region:show', regionId);
     this.trigger('marine:show');
