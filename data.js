@@ -1,6 +1,32 @@
 var baseYear = "2009";
 var reportYear = "2011";
 
+var indicatorNames = {
+  // Management
+  "grazing": "Grazing",
+  "sugarcane": "Sugarcane / Grains",
+  "horticulture": "Horticulture",
+  // Catchment
+  "groundcover": "Groundcover",
+  "nitrogen": "Nitrogen",
+  "sediment": "Sediment",
+  "pesticides": "Pesticides",
+  // Marine
+  "overall": "Overall Marine Condition",
+  "coral": "Coral",
+  "coral-change": "Coral change",
+  "coral-cover": "Coral cover",
+  "coral-juvenile": "Coral juvenile density",
+  "coral-macroalgae": "Coral macroalgal cover",
+  "seagrass": "Seagrass",
+  "seagrass-abundance": "Seagrass abundance",
+  "seagrass-reproduction": "Seagrass reproduction",
+  "seagrass-nutrient": "Seagrass nutrients",
+  "water": "Water Quality",
+  "water-solids": "Total suspended solids",
+  "water-chlorophyll": "Chlorophyll &alpha;"
+};
+
 var marineData = {
   "gbr": {
     "overall": { "qualitative": "Poor" },

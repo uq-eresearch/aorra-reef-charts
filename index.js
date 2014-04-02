@@ -40,20 +40,6 @@ var app = Sammy('#main', function() {
     this.trigger('region:show', 'gbr');
   });
   
-  this.get('#/marine', function() {
-    var context = this;
-    this.$element().html(template('marine-select'));
-    this.trigger('region:show', 'gbr');
-    this.trigger('marine:show');
-  });
-  
-  this.get('#/marine/:indicator', function() {
-    this.$element()
-        .html($('#tmpl-'+this.params['indicator']+'-info').html());
-    this.trigger('region:show', 'gbr');
-    this.trigger('indicator:show', this.params['indicator']);
-  });
-  
   this.get('#/management', function() {
     this.$element()
         .html(template('management-select'));
@@ -68,17 +54,24 @@ var app = Sammy('#main', function() {
     this.trigger('catchment:show');
   });
   
+  this.get('#/marine', function() {
+    var context = this;
+    this.$element().html(template('marine-select'));
+    this.trigger('region:show', 'gbr');
+    this.trigger('marine:show');
+  });
+  
   // Same handling for management and catchment indicators, just different
   // data sources and URLs.
   [
     ['management', managementData], 
-    ['catchment', catchmentData]
+    ['catchment', catchmentData],
+    ['marine', marineData]
   ].forEach(function(args) {
     var indicatorType = args[0];
     var data = args[1];
     this.get('#/'+indicatorType+'/:indicator', function() {
       var indicator = this.params['indicator'];
-      var indicatorName = indicator.charAt(0).toUpperCase() + indicator.slice(1);
       var indicatorData = data['gbr'][indicator];
       var caption = template(indicator+"-caption", {
         baseYear: baseYear,
@@ -86,7 +79,7 @@ var app = Sammy('#main', function() {
         target: indicatorData['target']
       });
       this.$element().html(template(indicatorType+'-indicator-info', {
-        name: indicatorName,
+        name: indicatorNames[indicator],
         caption: caption
       }));
       this.trigger('region:show', 'gbr');

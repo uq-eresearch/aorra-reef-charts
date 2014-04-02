@@ -172,171 +172,66 @@
   {{baseYear}} and {{reportYear}}. The target was {{target}}.
 </script>
 <!-- Marine info -->
-<div id="tmpl-overall-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
+<script id="tmpl-marine-indicator-info" type="text/html">
+  {{>gbr-banner}}
   <div class="container-fluid">
-  <h1>Overall</h1>
+  <h1>{{{name}}}</h1>
   <p>
-  <!-- Description pending -->
+  {{{caption}}}
   </p>
   <a class="btn btn-default" href="#/marine">
     Back
   </a>
   </div>
-</div>
-<div id="tmpl-coral-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
-  <div class="container-fluid">
-  <h1>Coral</h1>
-  <p>
+</script>
+<script id="tmpl-overall-caption" type="text/html">
   <!-- Description pending -->
-  </p>
-  <a class="btn btn-default" href="#/marine">
-    Back
-  </a>
-  </div>
-</div>
-<div id="tmpl-seagrass-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
-  <div class="container-fluid">
-  <h1>Seagrass</h1>
-  <p>
+</script>
+<script id="tmpl-coral-caption" type="text/html">
   <!-- Description pending -->
-  </p>
-  <a class="btn btn-default" href="#/marine">
-    Back
-  </a>
-  </div>
-</div>
-<div id="tmpl-water-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
-  <div class="container-fluid">
-  <h1>Water Quality</h1>
-  <p>
+</script>
+<script id="tmpl-seagrass-caption" type="text/html">
   <!-- Description pending -->
-  </p>
-  <a class="btn btn-default" href="#/marine">
-    Back
-  </a>
-  </div>
-</div>
-<div id="tmpl-water-chlorophyll-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
-  <div class="container-fluid">
-  <h1>Chlorophyll &alpha;</h1>
-  <p>
+</script>
+<script id="tmpl-water-caption" type="text/html">
+  <!-- Description pending -->
+</script>
+<script id="tmpl-water-chlorophyll-caption" type="text/html">
   Indicates nutrient availability and productivity.
-  </p>
-  <a class="btn btn-default" href="#/marine">
-    Back
-  </a>
-  </div>
-</div>
-<div id="tmpl-water-solids-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
-  <div class="container-fluid">
-  <h1>Total suspended solids</h1>
-  <p>
+</script>
+<script id="tmpl-water-solids-caption" type="text/html">
   Measures particulate matter in water.
-  </p>
-  <a class="btn btn-default" href="#/marine">
-    Back
-  </a>
-  </div>
-</div>
-<div id="tmpl-seagrass-abundance-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
-  <div class="container-fluid">
-  <h1>Seagrass abundance</h1>
-  <p>
+</script>
+<script id="tmpl-seagrass-abundance-caption" type="text/html">
   Includes the cover and change in cover.
-  </p>
-  <a class="btn btn-default" href="#/marine">
-    Back
-  </a>
-  </div>
-</div>
-<div id="tmpl-seagrass-reproduction-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
-  <div class="container-fluid">
-  <h1>Seagrass reproduction</h1>
-  <p>
+</script>
+<script id="tmpl-seagrass-reproduction-caption" type="text/html">
   Indicates the potential of seagrass meadows to recover from
   disturbances.
-  </p>
-  <a class="btn btn-default" href="#/marine">
-    Back
-  </a>
-  </div>
-</div>
-<div id="tmpl-seagrass-nutrient-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
-  <div class="container-fluid">
-  <h1>Seagrass nutrients</h1>
-  <p>
+</script>
+<script id="tmpl-seagrass-nutrient-caption" type="text/html">
   Nutrient status measures the response of seagrass to nutrient conditions
   in surrounding waters.
-  </p>
-  <a class="btn btn-default" href="#/marine">
-    Back
-  </a>
-  </div>
-</div>
-<div id="tmpl-coral-cover-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
-  <div class="container-fluid">
-  <h1>Coral cover</h1>
-  <p>
+</script>
+<script id="tmpl-coral-cover-caption" type="text/html">
   Coral cover is a measure of the percentage of coral across reefs, and
   indicates the capacity of coral to persist under the current
   environmental conditions and its potential to recover.
-  </p>
-  <a class="btn btn-default" href="#/marine">
-    Back
-  </a>
-  </div>
-</div>
-<div id="tmpl-coral-change-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
-  <div class="container-fluid">
-  <h1>Coral change</h1>
-  <p>
+</script>
+<script id="tmpl-coral-change-caption" type="text/html">
   Coral change measures change in coral cover which indicates coral
   resilience to disturbance.
-  </p>
-  <a class="btn btn-default" href="#/marine">
-    Back
-  </a>
-  </div>
-</div>
-<div id="tmpl-coral-macroalgae-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
-  <div class="container-fluid">
-  <h1>Coral macroalgal cover</h1>
-  <p>
+</script>
+<script id="tmpl-coral-macroalgae-caption" type="text/html">
   Macroalgal cover - high abundance indicates poor water quality and
   negatively affects the resilience of coral communities.
-  </p>
-  <a class="btn btn-default" href="#/marine">
-    Back
-  </a>
-  </div>
-</div>
-<div id="tmpl-coral-juvenile-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
-  <div class="container-fluid">
-  <h1>Coral juvenile density</h1>
-  <p>
+</script>
+<script id="tmpl-coral-juvenile-caption" type="text/html">
   Coral juvenile density measures the abundance of corals less than 10
   centimetres in diameter which indicates the recovery potential from
   disturbances.
-  </p>
-  <a class="btn btn-default" href="#/marine">
-    Back
-  </a>
-  </div>
-</div>
-<div id="tmpl-cape-york-info">
+</script>
+<script id="tmpl-cape-york-info" type="text/html">
   <div class="top-banner cape-york">Cape York</div>
   <div class="container-fluid">
   <div class="carousel cape-york slide" style="height: 80%"
@@ -386,8 +281,8 @@
     </a>
   </div>
   </div>
-</div>
-<div id="tmpl-wet-tropics-info">
+</script>
+<script id="tmpl-wet-tropics-info" type="text/html">
   <div class="top-banner wet-tropics">Wet Tropics</div>
   <div class="container-fluid">
   <div class="carousel wet-tropics slide" style="height: 80%"
@@ -437,8 +332,8 @@
     </a>
   </div>
   </div>
-</div>
-<div id="tmpl-burdekin-info">
+</script>
+<script id="tmpl-burdekin-info" type="text/html">
   <div class="top-banner burdekin">Burdekin</div>
   <div class="container-fluid">
   <div class="carousel burdekin slide" style="height: 80%"
@@ -488,8 +383,8 @@
     </a>
   </div>
   </div>
-</div>
-<div id="tmpl-mackay-whitsunday-info">
+</script>
+<script id="tmpl-mackay-whitsunday-info" type="text/html">
   <div class="top-banner mackay-whitsunday">Mackay-Whitsunday</div>
   <div class="container-fluid">
   <div class="carousel mackay-whitsunday slide" style="height: 80%"
@@ -539,8 +434,8 @@
     </a>
   </div>
   </div>
-</div>
-<div id="tmpl-fitzroy-info">
+</script>
+<script id="tmpl-fitzroy-info" type="text/html">
   <div class="top-banner fitzroy">Fitzroy</div>
   <div class="container-fluid">
   <div class="carousel fitzroy slide" style="height: 80%"
@@ -590,8 +485,8 @@
     </a>
   </div>
   </div>
-</div>
-<div id="tmpl-burnett-mary-info">
+</script>
+<script id="tmpl-burnett-mary-info" type="text/html">
   <div class="top-banner burnett-mary">Burnett Mary</div>
   <div class="container-fluid">
   <div class="carousel burnett-mary slide" style="height: 80%"
@@ -641,7 +536,7 @@
     </a>
   </div>
   </div>
-</div>
+</script>
 
 </body>
 </html>
