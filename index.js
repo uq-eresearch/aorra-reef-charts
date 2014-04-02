@@ -196,6 +196,34 @@ $(document).ready(function() {
   
     map.setView(new L.LatLng(-18.83, 147.68), 6);
     map.addLayer(osm);
+    $.get("./reef-regions.geojson", function(data) {
+      var reefGeo = L.geoJson(data, {
+        style: function (feature) {
+          return {
+            stroke: true,
+            color: '#000000',
+            weight: 0.5,
+            fill: true,
+            fillOpacity: 0.1,
+            fillColor: '#0000ff'
+          };
+        }
+      });
+      reefGeo.getLayers().forEach(function(region) {
+        region.on('click', function() {
+          function endsWith(str, suffix) {
+            return str.indexOf(suffix, str.length - suffix.length) !== -1;
+          };
+          var regionName = region.feature.properties.Region.toLowerCase().replace(' ', '-');
+          if(endsWith(app.getLocation(), regionName)) {
+            app.setLocation('#/');
+          } else {
+            app.setLocation('#/region/'+regionName);
+          }
+        });
+      });
+      reefGeo.addTo(map);
+    }, 'json');
     // Detect low-res device and use simpler regions
     var regionsUrl = 768 < window.screen.width ?
       "./regions.geojson" :
