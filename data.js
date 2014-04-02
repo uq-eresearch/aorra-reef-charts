@@ -1,5 +1,5 @@
 var baseYear = "2009";
-var reportYear = "2011";
+var reportYears = "2011";
 
 var regionNames = {
   'cape-york': 'Cape York',

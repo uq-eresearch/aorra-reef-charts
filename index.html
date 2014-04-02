@@ -39,13 +39,16 @@
 
 <script id="tmpl-home" type="text/html">
   <div class="container-fluid">
-  <h1>Reef Report Card Summary</h1>
+  <h1>
+    Reef Report Card Summary
+    <span class="nobr">{{reportYears}}</span>
+  </h1>
   <p>
-  This report card measures progress from the {{baseYear}} baseline towards Reef
-  Water Quality Protection Plan (Reef Plan) targets. It assesses the combined
-  results of all Reef Plan actions up to June {{reportYear}}. Click on a region
-  on the map for regional results or use the indicators buttons below to explore
-  the Great Barrier Reef-wide results.
+  This report card measures progress from the {{baseYear}} baseline towards 
+  Reef Water Quality Protection Plan (Reef Plan) targets. It assesses the
+  combined results of all Reef Plan actions up to June {{reportFinalYear}}.
+  Click on a region on the map for regional results or use the indicators
+  buttons below to explore the Great Barrier Reef-wide results.
   </p>
   <p>Click on a region, or explore the reef-wide view.</p>
   <div class="row" style="padding-top: 2em; padding-bottom: 2em;">
@@ -132,15 +135,18 @@
 </script>
 <script id="tmpl-grazing-caption" type="text/html">
   The map shows the proportion of graziers in each region who adopted improved
-  practices between {{baseYear}} and {{reportYear}}. The target was {{target}}.
+  practices between {{baseYear}} and {{reportFinalYear}}.
+  The target was {{target}}.
 </script>
 <script id="tmpl-sugarcane-caption" type="text/html">
   The map shows the proportion of growers in each region who adopted improved
-  practices between {{baseYear}} and {{reportYear}}. The target was {{target}}.
+  practices between {{baseYear}} and {{reportFinalYear}}.
+  The target was {{target}}.
 </script>
 <script id="tmpl-horticulture-caption" type="text/html">
   The map shows the proportion of producers in each region who adopted improved
-  practices between {{baseYear}} and {{reportYear}}. The target was {{target}}.
+  practices between {{baseYear}} and {{reportFinalYear}}.
+  The target was {{target}}.
 </script>
 <!-- Catchment info -->
 <script id="tmpl-catchment-indicator-info" type="text/html">
@@ -157,19 +163,19 @@
 </script>
 <script id="tmpl-groundcover-caption" type="text/html">
   The maps show late dry season groundcover for each region as at 
-  {{reportYear}}. The target was {{target}}.
+  {{reportFinalYear}}. The target was {{target}}.
 </script>
 <script id="tmpl-nitrogen-caption" type="text/html">
   Reduction in annual average total nitrogen load for each region between 
-  {{baseYear}} and {{reportYear}}. The target was {{target}}.
+  {{baseYear}} and {{reportFinalYear}}. The target was {{target}}.
 </script>
 <script id="tmpl-sediment-caption" type="text/html">
   Reduction in annual average sediment load for each region between
-  {{baseYear}} and {{reportYear}}. The target is {{target}}.
+  {{baseYear}} and {{reportFinalYear}}. The target is {{target}}.
 </script>
 <script id="tmpl-pesticides-caption" type="text/html">
   Reduction in annual average pesticide load for each region between
-  {{baseYear}} and {{reportYear}}. The target was {{target}}.
+  {{baseYear}} and {{reportFinalYear}}. The target was {{target}}.
 </script>
 <!-- Marine info -->
 <script id="tmpl-marine-indicator-info" type="text/html">

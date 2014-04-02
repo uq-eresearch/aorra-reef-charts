@@ -30,6 +30,8 @@ var template = (function IIFE() {
   };
 })();
 
+var reportFinalYear = reportYears.match(/\d{4}$/g)[0];
+
 var app = Sammy('#main', function() {
     
   // Default lander
@@ -38,7 +40,8 @@ var app = Sammy('#main', function() {
     this.$element() // $('#main')
         .html(template('home', {
       baseYear: baseYear,
-      reportYear: reportYear
+      reportYears: reportYears,
+      reportFinalYear: reportFinalYear
     }));
     this.trigger('region:show', 'gbr');
   });
@@ -78,7 +81,8 @@ var app = Sammy('#main', function() {
       var indicatorData = data['gbr'][indicator];
       var caption = template(indicator+"-caption", {
         baseYear: baseYear,
-        reportYear: reportYear,
+        reportYears: reportYears,
+        reportFinalYear: reportFinalYear,
         target: indicatorData['target']
       });
       this.$element().html(template(indicatorType+'-indicator-info', {

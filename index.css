@@ -11,6 +11,10 @@ body {
   overflow: hidden;
 }
 
+.nobr {
+  white-space: nowrap;
+}
+
 #map {
   position: absolute;
   top: 0;
