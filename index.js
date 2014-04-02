@@ -210,17 +210,38 @@ $(document).ready(function() {
         }
       });
       reefGeo.getLayers().forEach(function(region) {
-        region.on('click', function() {
+        var regionName = region.feature.properties.Region.toLowerCase().replace(' ', '-');
+        region.onClickHandler = function() {
           function endsWith(str, suffix) {
             return str.indexOf(suffix, str.length - suffix.length) !== -1;
           };
-          var regionName = region.feature.properties.Region.toLowerCase().replace(' ', '-');
           if(endsWith(app.getLocation(), regionName)) {
             app.setLocation('#/');
           } else {
             app.setLocation('#/region/'+regionName);
           }
+        };
+        region.onMouseOverHandler = function() {
+          map.fire('highlight-on-'+regionName);
+        };
+        region.onMouseOutHandler = function() {
+          map.fire('highlight-off-'+regionName);
+        };
+        region.highlightOn = function() {
+          region.setStyle({weight: 2});
+        };
+        region.highlightOff = function() {
+          reefGeo.resetStyle(region);
+        };
+        region.on({
+          click : region.onClickHandler,
+          mouseover : region.onMouseOverHandler,
+          mouseout : region.onMouseOutHandler
         });
+        var mapEventHandler = {};
+        mapEventHandler['highlight-on-'+regionName] = region.highlightOn;
+        mapEventHandler['highlight-off-'+regionName] = region.highlightOff;
+        map.on(mapEventHandler);
       });
       reefGeo.addTo(map);
     }, 'json');
@@ -275,7 +296,28 @@ $(document).ready(function() {
             app.setLocation('#/region/'+regionName);
           }
         };
-        region.on('click', region.onClickHandler);
+        region.onMouseOverHandler = function() {
+          map.fire('highlight-on-'+regionName);
+        };
+        region.onMouseOutHandler = function() {
+          map.fire('highlight-off-'+regionName);
+        };
+        region.highlightOn = function() {
+          region.bringToFront();
+          region.setStyle({weight: 4});
+        };
+        region.highlightOff = function() {
+          regionsGeo.resetStyle(region);
+        };
+        region.on({
+          click : region.onClickHandler,
+          mouseover : region.onMouseOverHandler,
+          mouseout : region.onMouseOutHandler
+        });
+        var mapEventHandler = {};
+        mapEventHandler['highlight-on-'+regionName] = region.highlightOn;
+        mapEventHandler['highlight-off-'+regionName] = region.highlightOff;
+        map.on(mapEventHandler);
       });
       Sammy('#main', function() {
         this.bind('region:show', function(evt, regionName) {
@@ -302,7 +344,11 @@ $(document).ready(function() {
         };
         region.setQuantitativeValue(null);
         label.setLatLng(region.getBounds().getCenter());
-        label.on('click', region.onClickHandler);
+        label.on({
+          click : region.onClickHandler,
+          mouseover : region.onMouseOverHandler,
+          mouseout : region.onMouseOutHandler
+        });
         map.showLabel(label);
       });
       map.fitBounds(regionsGeo.getBounds());
