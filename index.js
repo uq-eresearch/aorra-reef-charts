@@ -13,13 +13,27 @@ var indicatorImage = (function() {
   };
 })();
 
+var template = (function IIFE() {
+  var templates = {};
+  $(function whenDocumentLoads() {
+    $('script[id^="tmpl-"]').each(function(i, e) {
+      var templateName = $(e).attr('id').replace(/^tmpl-/,"");
+      var tmpl = e.innerHTML;
+      templates[templateName] = Hogan.compile(tmpl);
+    });
+  });
+  return function template(templateName, context) {
+    return templates[templateName].render(context, templates)
+  };
+})();
+
 var app = Sammy('#main', function() {
     
   // Default lander
   this.get('#/', function() {
     // this context is a Sammy.EventContext
     this.$element() // $('#main')
-        .html($('#tmpl-home').html());
+        .html(template('home'));
     this.trigger('region:show', 'gbr');
   });
   
@@ -40,7 +54,7 @@ var app = Sammy('#main', function() {
   
   this.get('#/management', function() {
     this.$element()
-        .html($('#tmpl-management-select').html());
+        .html(template('management-select'));
     this.trigger('region:show', 'gbr');
     this.trigger('management:show');
   });
@@ -54,7 +68,7 @@ var app = Sammy('#main', function() {
   
   this.get('#/catchment', function() {
     this.$element()
-        .html($('#tmpl-catchment-select').html());
+        .html(template('catchment-select'));
     this.trigger('region:show', 'gbr');
     this.trigger('catchment:show');
   });
@@ -412,13 +426,8 @@ $(document).ready(function() {
         });
       });
       
-      var progressData = {
-        'catchment' : catchmentData,
-        'management': managementData
-      };
-      Object.keys(progressData).forEach(function(dataType) {
-        var data = progressData[dataType];
-        Object.keys(data).forEach(function(regionName) {
+      Sammy('#main', function() {
+        function addProgressButtons(data, regionName, e) {
           var region = data[regionName];
           Object.keys(region).forEach(function(indicator) {
             Sammy('#main', function() {
@@ -436,8 +445,20 @@ $(document).ready(function() {
                 .append(indicatorImage[indicator])
                 .append($('<div/>').text(value))
                 .append($('<div/>').addClass('target').html("Target &rarr; "+target));
-              $('.'+dataType+'-data.'+regionName).append($button);
+              $(e).append($button);
             });
+          });
+        }
+        this.bind('management:show', function(evt) {
+          this.$element().find('.management-data').each(function(i, e) {
+            var regionName = $(e).data('region');
+            addProgressButtons(managementData, regionName, e);
+          });
+        });
+        this.bind('catchment:show', function(evt) {
+          this.$element().find('.catchment-data').each(function(i, e) {
+            var regionName = $(e).data('region');
+            addProgressButtons(catchmentData, regionName, e);
           });
         });
       });

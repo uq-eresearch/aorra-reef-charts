@@ -9,6 +9,7 @@
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/2.3.0/es5-shim.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/hogan.js/3.0.0/hogan.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/sammy.js/0.7.4/sammy.min.js"></script>
 <script src="jquery.svg.min.js"></script>
 <script src="jquery.svganim.min.js"></script>
@@ -36,7 +37,7 @@
 </div>
 
 
-<div id="tmpl-home">
+<script id="tmpl-home" type="text/html">
   <div class="container-fluid">
   <h1>Reef Report Card Summary</h1>
   <p>
@@ -65,11 +66,15 @@
     </div>
   </div>
   </div>
-</div>
+</script>
 
 <div id="marine-chart"></div>
 
-<div id="tmpl-marine-select">
+<script id="tmpl-gbr-banner" type="text/html">
+  <div class="top-banner gbr">Great Barrier Reef</div>
+</script>
+
+<div id="tmpl-marine-select" type="text/html">
   <div class="top-banner gbr">Great Barrier Reef</div>
   <div class="container-fluid">
     <h1>Marine condition</h1>
@@ -83,8 +88,8 @@
     </a>
   </div>
 </div>
-<div id="tmpl-management-select">
-  <div class="top-banner gbr">Great Barrier Reef</div>
+<script id="tmpl-management-select" type="text/html">
+  {{>gbr-banner}}
   <div class="container-fluid">
   <h1>Management practice indicators</h1>
   <p>
@@ -92,26 +97,26 @@
   land management practices that will reduce the amount of pollutants entering
   the reef.
   </p>
-  <div class="management-data gbr"></div>
+  <div class="management-data" data-region="gbr"></div>
   <a class="btn btn-default" href="#/">
     Back
   </a>
   </div>
-</div>
-<div id="tmpl-catchment-select">
-  <div class="top-banner gbr">Great Barrier Reef</div>
+</script>
+<script id="tmpl-catchment-select" type="text/html">
+  {{>gbr-banner}}
   <div class="container-fluid">
   <h1>Catchment indicators</h1>
   <p>
   Reductions in key pollutants leaving the end of catchments as a result of
   changes in land management practices.
   </p>
-  <div class="catchment-data gbr"></div>
+  <div class="catchment-data" data-region="gbr"></div>
   <a class="btn btn-default" href="#/">
     Back
   </a>
   </div>
-</div>
+</script>
 <!-- Management info -->
 <div id="tmpl-grazing-info">
   <div class="top-banner gbr">Great Barrier Reef</div>
@@ -388,7 +393,7 @@
         </div>
       </div>
       <div class="item">
-        <div class="management-data cape-york"></div>
+        <div class="management-data" data-region="cape-york"></div>
         <div class="carousel-caption">
           <h4>Management practice indicators</h4>
           <p>
@@ -399,7 +404,7 @@
         </div>
       </div>
       <div class="item">
-        <div class="catchment-data cape-york"></div>
+        <div class="catchment-data" data-region="cape-york"></div>
         <div class="carousel-caption">
           <h4>Catchment indicators</h4>
           <p>
@@ -439,7 +444,7 @@
         </div>
       </div>
       <div class="item">
-        <div class="management-data wet-tropics"></div>
+        <div class="management-data" data-region="wet-tropics"></div>
         <div class="carousel-caption">
           <h4>Management practice indicators</h4>
           <p>
@@ -450,7 +455,7 @@
         </div>
       </div>
       <div class="item">
-        <div class="catchment-data wet-tropics"></div>
+        <div class="catchment-data" data-region="wet-tropics"></div>
         <div class="carousel-caption">
           <h4>Catchment indicators</h4>
           <p>
@@ -490,7 +495,7 @@
         </div>
       </div>
       <div class="item">
-        <div class="management-data burdekin"></div>
+        <div class="management-data" data-region="burdekin"></div>
         <div class="carousel-caption">
           <h4>Management practice indicators</h4>
           <p>
@@ -501,7 +506,7 @@
         </div>
       </div>
       <div class="item">
-        <div class="catchment-data burdekin"></div>
+        <div class="catchment-data" data-region="burdekin"></div>
         <div class="carousel-caption">
           <h4>Catchment indicators</h4>
           <p>
@@ -541,7 +546,7 @@
         </div>
       </div>
       <div class="item">
-        <div class="management-data mackay-whitsunday"></div>
+        <div class="management-data" data-region="mackay-whitsunday"></div>
         <div class="carousel-caption">
           <h4>Management practice indicators</h4>
           <p>
@@ -552,7 +557,7 @@
         </div>
       </div>
       <div class="item">
-        <div class="catchment-data mackay-whitsunday"></div>
+        <div class="catchment-data" data-region="mackay-whitsunday"></div>
         <div class="carousel-caption">
           <h4>Catchment indicators</h4>
           <p>
@@ -592,7 +597,7 @@
         </div>
       </div>
       <div class="item">
-        <div class="management-data fitzroy"></div>
+        <div class="management-data" data-region="fitzroy"></div>
         <div class="carousel-caption">
           <h4>Management practice indicators</h4>
           <p>
@@ -603,7 +608,7 @@
         </div>
       </div>
       <div class="item">
-        <div class="catchment-data fitzroy"></div>
+        <div class="catchment-data" data-region="fitzroy"></div>
         <div class="carousel-caption">
           <h4>Catchment indicators</h4>
           <p>
@@ -643,7 +648,7 @@
         </div>
       </div>
       <div class="item">
-        <div class="management-data burnett-mary"></div>
+        <div class="management-data" data-region="burnett-mary"></div>
         <div class="carousel-caption">
           <h4>Management practice indicators</h4>
           <p>
@@ -654,7 +659,7 @@
         </div>
       </div>
       <div class="item">
-        <div class="catchment-data burnett-mary"></div>
+        <div class="catchment-data" data-region="burnett-mary"></div>
         <div class="carousel-caption">
           <h4>Catchment indicators</h4>
           <p>
