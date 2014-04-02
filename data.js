@@ -1,6 +1,15 @@
 var baseYear = "2009";
 var reportYear = "2011";
 
+var regionNames = {
+  'cape-york': 'Cape York',
+  'wet-tropics': 'Wet Tropics',
+  'burdekin': 'Burdekin',
+  'mackay-whitsunday': 'Mackay-Whitsunday',
+  'fitzroy': 'Fitzroy',
+  'burnett-mary': 'Burnett-Mary'
+};
+
 var indicatorNames = {
   // Management
   "grazing": "Grazing",

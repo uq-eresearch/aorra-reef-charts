@@ -231,15 +231,15 @@
   centimetres in diameter which indicates the recovery potential from
   disturbances.
 </script>
-<script id="tmpl-cape-york-info" type="text/html">
-  <div class="top-banner cape-york">Cape York</div>
+<script id="tmpl-region-info" type="text/html">
+  <div class="top-banner {{id}}">{{name}}</div>
   <div class="container-fluid">
-  <div class="carousel cape-york slide" style="height: 80%"
+  <div class="carousel {{id}} slide" style="height: 80%"
     data-ride="carousel" data-interval="false" data-wrap="true">
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
-        <div class="marine-chart cape-york"></div>
+        <div class="marine-chart {{id}}"></div>
         <div class="carousel-caption">
           <h4>Marine Condition</h4>
           <p>
@@ -249,7 +249,7 @@
         </div>
       </div>
       <div class="item">
-        <div class="management-data" data-region="cape-york"></div>
+        <div class="management-data" data-region="{{id}}"></div>
         <div class="carousel-caption">
           <h4>Management practice indicators</h4>
           <p>
@@ -260,7 +260,7 @@
         </div>
       </div>
       <div class="item">
-        <div class="catchment-data" data-region="cape-york"></div>
+        <div class="catchment-data" data-region="{{id}}"></div>
         <div class="carousel-caption">
           <h4>Catchment indicators</h4>
           <p>
@@ -271,266 +271,11 @@
       </div>
     </div>
     <!-- Controls -->
-    <a class="left carousel-control" href=".carousel.cape-york"
+    <a class="left carousel-control" href=".carousel.{{id}}"
       data-slide="prev" style="background-image: none">
       <span class="glyphicon glyphicon-chevron-left"></span>
     </a>
-    <a class="right carousel-control" href=".carousel.cape-york"
-      data-slide="next" style="background-image: none">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
-  </div>
-  </div>
-</script>
-<script id="tmpl-wet-tropics-info" type="text/html">
-  <div class="top-banner wet-tropics">Wet Tropics</div>
-  <div class="container-fluid">
-  <div class="carousel wet-tropics slide" style="height: 80%"
-    data-ride="carousel" data-interval="false" data-wrap="true">
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-      <div class="item active">
-        <div class="marine-chart wet-tropics"></div>
-        <div class="carousel-caption">
-          <h4>Marine Condition</h4>
-          <p>
-          Condition of the marine environment including results for water
-          quality, seagrass and coral.
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="management-data" data-region="wet-tropics"></div>
-        <div class="carousel-caption">
-          <h4>Management practice indicators</h4>
-          <p>
-          Proportion of the agriculture industry that have adopted individual
-          improved land management practices that will reduce the amount of
-          pollutants entering the reef.
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="catchment-data" data-region="wet-tropics"></div>
-        <div class="carousel-caption">
-          <h4>Catchment indicators</h4>
-          <p>
-          Reductions in key pollutants leaving the end of catchments as a result
-          of changes in land management practices.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!-- Controls -->
-    <a class="left carousel-control" href=".carousel.wet-tropics"
-      data-slide="prev" style="background-image: none">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-    </a>
-    <a class="right carousel-control" href=".carousel.wet-tropics"
-      data-slide="next" style="background-image: none">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
-  </div>
-  </div>
-</script>
-<script id="tmpl-burdekin-info" type="text/html">
-  <div class="top-banner burdekin">Burdekin</div>
-  <div class="container-fluid">
-  <div class="carousel burdekin slide" style="height: 80%"
-    data-ride="carousel" data-interval="false" data-wrap="true">
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-      <div class="item active">
-        <div class="marine-chart burdekin"></div>
-        <div class="carousel-caption">
-          <h4>Marine Condition</h4>
-          <p>
-          Condition of the marine environment including results for water
-          quality, seagrass and coral.
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="management-data" data-region="burdekin"></div>
-        <div class="carousel-caption">
-          <h4>Management practice indicators</h4>
-          <p>
-          Proportion of the agriculture industry that have adopted individual
-          improved land management practices that will reduce the amount of
-          pollutants entering the reef.
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="catchment-data" data-region="burdekin"></div>
-        <div class="carousel-caption">
-          <h4>Catchment indicators</h4>
-          <p>
-          Reductions in key pollutants leaving the end of catchments as a result
-          of changes in land management practices.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!-- Controls -->
-    <a class="left carousel-control" href=".carousel.burdekin"
-      data-slide="prev" style="background-image: none">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-    </a>
-    <a class="right carousel-control" href=".carousel.burdekin"
-      data-slide="next" style="background-image: none">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
-  </div>
-  </div>
-</script>
-<script id="tmpl-mackay-whitsunday-info" type="text/html">
-  <div class="top-banner mackay-whitsunday">Mackay-Whitsunday</div>
-  <div class="container-fluid">
-  <div class="carousel mackay-whitsunday slide" style="height: 80%"
-    data-ride="carousel" data-interval="false" data-wrap="true">
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-      <div class="item active">
-        <div class="marine-chart mackay-whitsunday"></div>
-        <div class="carousel-caption">
-          <h4>Marine Condition</h4>
-          <p>
-          Condition of the marine environment including results for water
-          quality, seagrass and coral.
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="management-data" data-region="mackay-whitsunday"></div>
-        <div class="carousel-caption">
-          <h4>Management practice indicators</h4>
-          <p>
-          Proportion of the agriculture industry that have adopted individual
-          improved land management practices that will reduce the amount of
-          pollutants entering the reef.
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="catchment-data" data-region="mackay-whitsunday"></div>
-        <div class="carousel-caption">
-          <h4>Catchment indicators</h4>
-          <p>
-          Reductions in key pollutants leaving the end of catchments as a result
-          of changes in land management practices.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!-- Controls -->
-    <a class="left carousel-control" href=".carousel.mackay-whitsunday"
-      data-slide="prev" style="background-image: none">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-    </a>
-    <a class="right carousel-control" href=".carousel.mackay-whitsunday"
-      data-slide="next" style="background-image: none">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
-  </div>
-  </div>
-</script>
-<script id="tmpl-fitzroy-info" type="text/html">
-  <div class="top-banner fitzroy">Fitzroy</div>
-  <div class="container-fluid">
-  <div class="carousel fitzroy slide" style="height: 80%"
-    data-ride="carousel" data-interval="false" data-wrap="true">
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-      <div class="item active">
-        <div class="marine-chart fitzroy"></div>
-        <div class="carousel-caption">
-          <h4>Marine Condition</h4>
-          <p>
-          Condition of the marine environment including results for water
-          quality, seagrass and coral.
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="management-data" data-region="fitzroy"></div>
-        <div class="carousel-caption">
-          <h4>Management practice indicators</h4>
-          <p>
-          Proportion of the agriculture industry that have adopted individual
-          improved land management practices that will reduce the amount of
-          pollutants entering the reef.
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="catchment-data" data-region="fitzroy"></div>
-        <div class="carousel-caption">
-          <h4>Catchment indicators</h4>
-          <p>
-          Reductions in key pollutants leaving the end of catchments as a result
-          of changes in land management practices.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!-- Controls -->
-    <a class="left carousel-control" href=".carousel.fitzroy"
-      data-slide="prev" style="background-image: none">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-    </a>
-    <a class="right carousel-control" href=".carousel.fitzroy"
-      data-slide="next" style="background-image: none">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
-  </div>
-  </div>
-</script>
-<script id="tmpl-burnett-mary-info" type="text/html">
-  <div class="top-banner burnett-mary">Burnett Mary</div>
-  <div class="container-fluid">
-  <div class="carousel burnett-mary slide" style="height: 80%"
-    data-ride="carousel" data-interval="false" data-wrap="true">
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-      <div class="item active">
-        <div class="marine-chart burnett-mary"></div>
-        <div class="carousel-caption">
-          <h4>Marine Condition</h4>
-          <p>
-          Condition of the marine environment including results for water
-          quality, seagrass and coral.
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="management-data" data-region="burnett-mary"></div>
-        <div class="carousel-caption">
-          <h4>Management practice indicators</h4>
-          <p>
-          Proportion of the agriculture industry that have adopted individual
-          improved land management practices that will reduce the amount of
-          pollutants entering the reef.
-          </p>
-        </div>
-      </div>
-      <div class="item">
-        <div class="catchment-data" data-region="burnett-mary"></div>
-        <div class="carousel-caption">
-          <h4>Catchment indicators</h4>
-          <p>
-          Reductions in key pollutants leaving the end of catchments as a result
-          of changes in land management practices.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!-- Controls -->
-    <a class="left carousel-control" href=".carousel.burnett-mary"
-      data-slide="prev" style="background-image: none">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-    </a>
-    <a class="right carousel-control" href=".carousel.burnett-mary"
+    <a class="right carousel-control" href=".carousel.{{id}}"
       data-slide="next" style="background-image: none">
       <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
