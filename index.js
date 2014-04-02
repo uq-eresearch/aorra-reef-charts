@@ -23,7 +23,10 @@ var template = (function IIFE() {
     });
   });
   return function template(templateName, context) {
-    return templates[templateName].render(context, templates)
+    if (templates[templateName]) {
+      return templates[templateName].render(context, templates)
+    }
+    throw new Error('Template "'+templateName+'" not found.');
   };
 })();
 
@@ -39,8 +42,7 @@ var app = Sammy('#main', function() {
   
   this.get('#/marine', function() {
     var context = this;
-    this.$element()
-        .html($('#tmpl-marine-select').html());
+    this.$element().html(template('marine-select'));
     this.trigger('region:show', 'gbr');
     this.trigger('marine:show');
   });
@@ -59,13 +61,6 @@ var app = Sammy('#main', function() {
     this.trigger('management:show');
   });
   
-  this.get('#/management/:indicator', function() {
-    this.$element()
-        .html($('#tmpl-'+this.params['indicator']+'-info').html());
-    this.trigger('region:show', 'gbr');
-    this.trigger('indicator:show', this.params['indicator']);
-  });
-  
   this.get('#/catchment', function() {
     this.$element()
         .html(template('catchment-select'));
@@ -73,12 +68,31 @@ var app = Sammy('#main', function() {
     this.trigger('catchment:show');
   });
   
-  this.get('#/catchment/:indicator', function() {
-    this.$element()
-        .html($('#tmpl-'+this.params['indicator']+'-info').html());
-    this.trigger('region:show', 'gbr');
-    this.trigger('indicator:show', this.params['indicator']);
-  });
+  // Same handling for management and catchment indicators, just different
+  // data sources and URLs.
+  [
+    ['management', managementData], 
+    ['catchment', catchmentData]
+  ].forEach(function(args) {
+    var indicatorType = args[0];
+    var data = args[1];
+    this.get('#/'+indicatorType+'/:indicator', function() {
+      var indicator = this.params['indicator'];
+      var indicatorName = indicator.charAt(0).toUpperCase() + indicator.slice(1);
+      var indicatorData = data['gbr'][indicator];
+      var caption = template(indicator+"-caption", {
+        baseYear: baseYear,
+        reportYear: reportYear,
+        target: indicatorData['target']
+      });
+      this.$element().html(template(indicatorType+'-indicator-info', {
+        name: indicatorName,
+        caption: caption
+      }));
+      this.trigger('region:show', 'gbr');
+      this.trigger('indicator:show', this.params['indicator']);
+    });
+  }.bind(this));
   
   this.get('#/region/:region', function() {
     this.$element()
@@ -88,22 +102,6 @@ var app = Sammy('#main', function() {
     this.trigger('catchment:show');
     this.trigger('management:show');
   });
-  
-  this.bind('marine:show', function() {
-    this.$element().find('.marine-chart #indicators path').click(function(evt) {
-      var indicator = evt.delegateTarget.id;
-      this.redirect('#', 'marine', indicator);
-    }.bind(this));
-  });
-  
-  ['catchment', 'management'].forEach(function(arg) {
-    this.bind(arg + ':show', function() {
-      this.$element().find('button[data-indicator]').click(function(evt) {
-        var $button = $(evt.delegateTarget);
-        this.redirect('#', arg, $button.attr('data-indicator'));
-      }.bind(this));
-    });
-  }.bind(this));
   
 });
 
@@ -461,11 +459,28 @@ $(document).ready(function() {
             addProgressButtons(catchmentData, regionName, e);
           });
         });
+        ['catchment', 'management'].forEach(function(arg) {
+          this.bind(arg + ':show', function() {
+            this.$element().find('button[data-indicator]').click(function(evt) {
+              var $button = $(evt.delegateTarget);
+              this.redirect('#', arg, $button.attr('data-indicator'));
+            }.bind(this));
+          });
+        }.bind(this));
       });
       
       loadSvg('#marine-chart', 'marine.svg', 'Mid').done(function(marine) {
-        $('.marine-chart').html($('#marine-chart').html());
-        $('#marine-chart').remove();
+        $('#marine-chart').hide();
+        Sammy('#main', function() {
+          this.bind('marine:show', function() {
+            var $chart = this.$element().find('.marine-chart');
+            $chart.html($('#marine-chart').html());
+            $chart.find('#indicators path').click(function(evt) {
+              var indicator = evt.delegateTarget.id;
+              this.redirect('#', 'marine', indicator);
+            }.bind(this));
+          });
+        });
         // Run app now that regions & marine are loaded
         app.run('#/');
       });

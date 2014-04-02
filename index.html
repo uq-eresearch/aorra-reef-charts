@@ -74,8 +74,8 @@
   <div class="top-banner gbr">Great Barrier Reef</div>
 </script>
 
-<div id="tmpl-marine-select" type="text/html">
-  <div class="top-banner gbr">Great Barrier Reef</div>
+<script id="tmpl-marine-select" type="text/html">
+  {{>gbr-banner}}
   <div class="container-fluid">
     <h1>Marine condition</h1>
     <p>
@@ -87,7 +87,7 @@
       Back
     </a>
   </div>
-</div>
+</script>
 <script id="tmpl-management-select" type="text/html">
   {{>gbr-banner}}
   <div class="container-fluid">
@@ -118,98 +118,59 @@
   </div>
 </script>
 <!-- Management info -->
-<div id="tmpl-grazing-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
+<script id="tmpl-management-indicator-info" type="text/html">
+  {{>gbr-banner}}
   <div class="container-fluid">
-  <h1>Grazing</h1>
+  <h1>{{name}}</h1>
   <p>
+  {{caption}}
+  </p>
+  <a class="btn btn-default" href="#/management">
+    Back
+  </a>
+  </div>
+</script>
+<script id="tmpl-grazing-caption" type="text/html">
   The map shows the proportion of graziers in each region who adopted improved
-  practices between 2009 and 2011. The target was 50 per cent.
-  </p>
-  <a class="btn btn-default" href="#/management">
-    Back
-  </a>
-  </div>
-</div>
-<div id="tmpl-sugarcane-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
-  <div class="container-fluid">
-  <h1>Sugarcane</h1>
-  <p>
+  practices between {{baseYear}} and {{reportYear}}. The target was {{target}}.
+</script>
+<script id="tmpl-sugarcane-caption" type="text/html">
   The map shows the proportion of growers in each region who adopted improved
-  practices between 2009 and 2011. The target was 80 per cent.
-  </p>
-  <a class="btn btn-default" href="#/management">
-    Back
-  </a>
-  </div>
-</div>
-<div id="tmpl-horticulture-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
-  <div class="container-fluid">
-  <h1>Horticulture</h1>
-  <p>
+  practices between {{baseYear}} and {{reportYear}}. The target was {{target}}.
+</script>
+<script id="tmpl-horticulture-caption" type="text/html">
   The map shows the proportion of producers in each region who adopted improved
-  practices between 2009 and 2011. The target was 80 per cent.
-  </p>
-  <a class="btn btn-default" href="#/management">
-    Back
-  </a>
-  </div>
-</div>
+  practices between {{baseYear}} and {{reportYear}}. The target was {{target}}.
+</script>
 <!-- Catchment info -->
-<div id="tmpl-groundcover-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
+<script id="tmpl-catchment-indicator-info" type="text/html">
+  {{>gbr-banner}}
   <div class="container-fluid">
-  <h1>Groundcover</h1>
+  <h1>{{name}}</h1>
   <p>
-  The maps show late dry season groundcover for each region as at 2011. The
-  target was 50 per cent.
+  {{caption}}
   </p>
   <a class="btn btn-default" href="#/catchment">
     Back
   </a>
   </div>
-</div>
-<div id="tmpl-nitrogen-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
-  <div class="container-fluid">
-  <h1>Nitrogen</h1>
-  <p>
-  Reduction in annual average total nitrogen load for each region between 2009
-  and 2011. The target was 50 per cent.
-  </p>
-  <a class="btn btn-default" href="#/catchment">
-    Back
-  </a>
-  </div>
-</div>
-<div id="tmpl-sediment-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
-  <div class="container-fluid">
-  <h1>Sediment</h1>
-  <p>
-  Reduction in annual average sediment load for each region between 2009 and
-  2011. The target is 20 per cent by 2020.
-  </p>
-  <a class="btn btn-default" href="#/catchment">
-    Back
-  </a>
-  </div>
-</div>
-<div id="tmpl-pesticides-info">
-  <div class="top-banner gbr">Great Barrier Reef</div>
-  <div class="container-fluid">
-  <h1>Pesticides</h1>
-  <p>
-  Reduction in annual average pesticide load for each region between 2009 and
-  2011. The target was 50 per cent.
-  </p>
-  <a class="btn btn-default" href="#/catchment">
-    Back
-  </a>
-  </div>
-</div>
+</script>
+<script id="tmpl-groundcover-caption" type="text/html">
+  The maps show late dry season groundcover for each region as at 
+  {{reportYear}}. The target was {{target}}.
+</script>
+<script id="tmpl-nitrogen-caption" type="text/html">
+  Reduction in annual average total nitrogen load for each region between 
+  {{baseYear}} and {{reportYear}}. The target was {{target}}.
+</script>
+<script id="tmpl-sediment-caption" type="text/html">
+  Reduction in annual average sediment load for each region between
+  {{baseYear}} and {{reportYear}}. The target is {{target}}.
+</script>
+<script id="tmpl-pesticides-caption" type="text/html">
+  Reduction in annual average pesticide load for each region between
+  {{baseYear}} and {{reportYear}}. The target was {{target}}.
+</script>
 <!-- Marine info -->
 <div id="tmpl-overall-info">
   <div class="top-banner gbr">Great Barrier Reef</div>

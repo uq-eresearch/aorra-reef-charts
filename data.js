@@ -1,3 +1,6 @@
+var baseYear = "2009";
+var reportYear = "2011";
+
 var marineData = {
   "gbr": {
     "overall": { "qualitative": "Poor" },
