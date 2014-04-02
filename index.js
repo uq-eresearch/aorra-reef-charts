@@ -220,7 +220,7 @@ $(document).ready(function() {
             color: '#000000',
             weight: 0.5,
             fill: true,
-            fillOpacity: 0.1,
+            fillOpacity: 0.05,
             fillColor: '#0000ff'
           };
         }
