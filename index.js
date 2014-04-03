@@ -120,7 +120,7 @@ var getFill = (function IIFE() {
       return bgc;
     };
     return {
-      'Very Good': {
+      'Very good': {
         'normal': getFillFromCSS('very-good'),
         'active': getFillFromCSS('very-good active')
       },
@@ -136,7 +136,7 @@ var getFill = (function IIFE() {
         'normal': getFillFromCSS('poor'),
         'active': getFillFromCSS('poor active'),
       },
-      'Very Poor': {
+      'Very poor': {
         'normal': getFillFromCSS('very-poor'),
         'active': getFillFromCSS('very-poor active')
       }
