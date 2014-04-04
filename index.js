@@ -437,20 +437,16 @@ $(document).ready(function() {
               var value = region[indicator].quantitative || '';
               var target = region[indicator].target || '';
               var name = indicator.substring(0,1).toUpperCase() + indicator.substring(1);
-              var $button = $('<button/>')
-                .addClass('progress-indicator')
-                .addClass('condition')
-                .addClass(condition.toLowerCase().replace(' ', '-'))
-                .attr('title', condition)
-                .attr('data-indicator', indicator)
-                .append($('<div/>').addClass('name').text(name))
-                .append(indicatorImage[indicator])
-                .append($('<div/>').text(value))
-                .append($('<div/>').addClass('target').attr('title', 'Target')
-                  .append($('<i/>').addClass('fa fa-dot-circle-o'))
-                  .append('&ensp;')
-                  .append(target));
-              $(e).append($button);
+              var $button = $(template('progress-tile', {
+                conditionId: condition.toLowerCase().replace(' ', '-'),
+                conditionName: condition,
+                indicatorId: indicator,
+                indicatorName: name,
+                indicatorImage: indicatorImage[indicator],
+                target: target,
+                value: value
+              }));
+              $button.appendTo(e);
             });
           });
         }

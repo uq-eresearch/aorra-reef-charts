@@ -288,6 +288,18 @@
   </div>
   </div>
 </script>
+<script id="tmpl-progress-tile" type="text/html">
+  <button class="progress-indicator condition {{conditionId}}"
+    title="{{conditionName}}" data-indicator="{{indicatorId}}">
+    <div class="name">{{indicatorName}}</div>
+    {{{indicatorImage}}}
+    <div>{{value}}</div>
+    <div class="target" title="Target">
+      <i class="fa fa-dot-circle-o"></i>&ensp;{{target}}
+    </div>
+  </button>
+</script>
+
 
 </body>
 </html>
