@@ -156,83 +156,83 @@ var marineData = {
 
 var managementData = {
   "gbr": {
-    "grazing": { "qualitative": "Moderate" , "quantitative": "17%", "target": "50%" },
-    "sugarcane": { "qualitative": "Good" , "quantitative": "34%", "target": "80%" },
-    "horticulture": { "qualitative": "Moderate" , "quantitative": "25%", "target": "80%" }
+    "grazing": { "qualitative": "Moderate" , "quantitative": "17%", "target": "50% by 2013" },
+    "sugarcane": { "qualitative": "Good" , "quantitative": "34%", "target": "80% by 2013" },
+    "horticulture": { "qualitative": "Moderate" , "quantitative": "25%", "target": "80% by 2013" }
   },
   "cape-york": {
-    "grazing": { "qualitative": "Very good" , "quantitative": "33%", "target": "50%" },
-    "sugarcane": { "qualitative": null , "quantitative": null, "target": "80%" },
-    "horticulture": { "qualitative": "Good" , "quantitative": "40%", "target": "80%" }
+    "grazing": { "qualitative": "Very good" , "quantitative": "33%", "target": "50% by 2013" },
+    "sugarcane": { "qualitative": null , "quantitative": null, "target": "80% by 2013" },
+    "horticulture": { "qualitative": "Good" , "quantitative": "40%", "target": "80% by 2013" }
   },
   "wet-tropics": {
-    "grazing": { "qualitative": "Moderate" , "quantitative": "16%", "target": "50%" },
-    "sugarcane": { "qualitative": "Good" , "quantitative": "37%", "target": "80%" },
-    "horticulture": { "qualitative": "Moderate" , "quantitative": "24%", "target": "80%" }
+    "grazing": { "qualitative": "Moderate" , "quantitative": "16%", "target": "50% by 2013" },
+    "sugarcane": { "qualitative": "Good" , "quantitative": "37%", "target": "80% by 2013" },
+    "horticulture": { "qualitative": "Moderate" , "quantitative": "24%", "target": "80% by 2013" }
   },
   "burdekin": {
-    "grazing": { "qualitative": "Good" , "quantitative": "20%", "target": "50%" },
-    "sugarcane": { "qualitative": "Moderate" , "quantitative": "28%", "target": "80%" },
-    "horticulture": { "qualitative": "Moderate" , "quantitative": "27%", "target": "80%" }
+    "grazing": { "qualitative": "Good" , "quantitative": "20%", "target": "50% by 2013" },
+    "sugarcane": { "qualitative": "Moderate" , "quantitative": "28%", "target": "80% by 2013" },
+    "horticulture": { "qualitative": "Moderate" , "quantitative": "27%", "target": "80% by 2013" }
   },
   "mackay-whitsunday": {
-    "grazing": { "qualitative": "Very good" , "quantitative": "36%", "target": "50%" },
-    "sugarcane": { "qualitative": "Good" , "quantitative": "30%", "target": "80%" },
-    "horticulture": { "qualitative": "Very good" , "quantitative": "47%", "target": "80%" }
+    "grazing": { "qualitative": "Very good" , "quantitative": "36%", "target": "50% by 2013" },
+    "sugarcane": { "qualitative": "Good" , "quantitative": "30%", "target": "80% by 2013" },
+    "horticulture": { "qualitative": "Very good" , "quantitative": "47%", "target": "80% by 2013" }
   },
   "fitzroy": {
-    "grazing": { "qualitative": "Moderate" , "quantitative": "16%", "target": "50%" },
-    "sugarcane": { "qualitative": "Moderate" , "quantitative": "18%", "target": "80%" },
-    "horticulture": { "qualitative": "Poor" , "quantitative": "13%", "target": "80%" }
+    "grazing": { "qualitative": "Moderate" , "quantitative": "16%", "target": "50% by 2013" },
+    "sugarcane": { "qualitative": "Moderate" , "quantitative": "18%", "target": "80% by 2013" },
+    "horticulture": { "qualitative": "Poor" , "quantitative": "13%", "target": "80% by 2013" }
   },
   "burnett-mary": {
-    "grazing": { "qualitative": "Moderate" , "quantitative": "13%", "target": "50%" },
-    "sugarcane": { "qualitative": "Very good" , "quantitative": "42%", "target": "80%" },
-    "horticulture": { "qualitative": "Moderate" , "quantitative": "25%", "target": "80%" }
+    "grazing": { "qualitative": "Moderate" , "quantitative": "13%", "target": "50% by 2013" },
+    "sugarcane": { "qualitative": "Very good" , "quantitative": "42%", "target": "80% by 2013" },
+    "horticulture": { "qualitative": "Moderate" , "quantitative": "25%", "target": "80% by 2013" }
   }
 };
 
 var catchmentData = {
   "gbr": {
-    "groundcover": { "qualitative": "Very good" , "quantitative": "91%", "target": "50%" },
-    "nitrogen": { "qualitative": "Moderate" , "quantitative": "7%", "target": "50%" },
-    "sediment": { "qualitative": "Very good" , "quantitative": "6%", "target": "20%" },
-    "pesticides": { "qualitative": "Good" , "quantitative": "15%", "target": "50%" }
+    "groundcover": { "qualitative": "Very good" , "quantitative": "91%", "target": "50% by 2013" },
+    "nitrogen": { "qualitative": "Moderate" , "quantitative": "7%", "target": "50% by 2013" },
+    "sediment": { "qualitative": "Very good" , "quantitative": "6%", "target": "20% by 2020" },
+    "pesticides": { "qualitative": "Good" , "quantitative": "15%", "target": "50% by 2013" }
   },
   "cape-york": {
     "groundcover": { "qualitative": null , "quantitative": null },
-    "nitrogen": { "qualitative": "Poor" , "quantitative": "4%", "target": "50%" },
-    "sediment": { "qualitative": "Good" , "quantitative": "4%", "target": "20%" },
-    "pesticides": { "qualitative": null , "quantitative": null, "target": "50%" }
+    "nitrogen": { "qualitative": "Poor" , "quantitative": "4%", "target": "50% by 2013" },
+    "sediment": { "qualitative": "Good" , "quantitative": "4%", "target": "20% by 2020" },
+    "pesticides": { "qualitative": null , "quantitative": null, "target": "50% by 2013" }
   },
   "wet-tropics": {
-    "groundcover": { "qualitative": "Very good" , "quantitative": "95%", "target": "50%" },
-    "nitrogen": { "qualitative": "Poor" , "quantitative": "4%", "target": "50%" },
-    "sediment": { "qualitative": "Good" , "quantitative": "3%", "target": "20%" },
-    "pesticides": { "qualitative": "Moderate" , "quantitative": "10%", "target": "50%" }
+    "groundcover": { "qualitative": "Very good" , "quantitative": "95%", "target": "50% by 2013" },
+    "nitrogen": { "qualitative": "Poor" , "quantitative": "4%", "target": "50% by 2013" },
+    "sediment": { "qualitative": "Good" , "quantitative": "3%", "target": "20% by 2020" },
+    "pesticides": { "qualitative": "Moderate" , "quantitative": "10%", "target": "50% by 2013" }
   },
   "burdekin": {
-    "groundcover": { "qualitative": "Very good" , "quantitative": "92%", "target": "50%" },
-    "nitrogen": { "qualitative": "Poor" , "quantitative": "8%", "target": "50%" },
-    "sediment": { "qualitative": "Very good" , "quantitative": "10%", "target": "20%" },
-    "pesticides": { "qualitative": "Good" , "quantitative": "17%", "target": "50%" }
+    "groundcover": { "qualitative": "Very good" , "quantitative": "92%", "target": "50% by 2013" },
+    "nitrogen": { "qualitative": "Poor" , "quantitative": "8%", "target": "50% by 2013" },
+    "sediment": { "qualitative": "Very good" , "quantitative": "10%", "target": "20% by 2020" },
+    "pesticides": { "qualitative": "Good" , "quantitative": "17%", "target": "50% by 2013" }
   },
   "mackay-whitsunday": {
-    "groundcover": { "qualitative": "Very good" , "quantitative": "92%", "target": "50%" },
-    "nitrogen": { "qualitative": "Good" , "quantitative": "13%", "target": "50%" },
-    "sediment": { "qualitative": "Very good" , "quantitative": "6%", "target": "20%" },
-    "pesticides": { "qualitative": "Very good" , "quantitative": "31%", "target": "50%" }
+    "groundcover": { "qualitative": "Very good" , "quantitative": "92%", "target": "50% by 2013" },
+    "nitrogen": { "qualitative": "Good" , "quantitative": "13%", "target": "50% by 2013" },
+    "sediment": { "qualitative": "Very good" , "quantitative": "6%", "target": "20% by 2020" },
+    "pesticides": { "qualitative": "Very good" , "quantitative": "31%", "target": "50% by 2013" }
   },
   "fitzroy": {
-    "groundcover": { "qualitative": "Very good" , "quantitative": "90%", "target": "50%" },
-    "nitrogen": { "qualitative": "Poor" , "quantitative": "2%", "target": "50%" },
-    "sediment": { "qualitative": "Good" , "quantitative": "3%", "target": "20%" },
-    "pesticides": { "qualitative": "Moderate" , "quantitative": "4%", "target": "50%" }
+    "groundcover": { "qualitative": "Very good" , "quantitative": "90%", "target": "50% by 2013" },
+    "nitrogen": { "qualitative": "Poor" , "quantitative": "2%", "target": "50% by 2013" },
+    "sediment": { "qualitative": "Good" , "quantitative": "3%", "target": "20% by 2020" },
+    "pesticides": { "qualitative": "Moderate" , "quantitative": "4%", "target": "50% by 2013" }
   },
   "burnett-mary": {
-    "groundcover": { "qualitative": "Very good" , "quantitative": "93%", "target": "50%" },
-    "nitrogen": { "qualitative": "Moderate" , "quantitative": "8%", "target": "50%" },
-    "sediment": { "qualitative": "Good" , "quantitative": "3%", "target": "20%" },
-    "pesticides": { "qualitative": "Good" , "quantitative": "17%", "target": "50%" }
+    "groundcover": { "qualitative": "Very good" , "quantitative": "93%", "target": "50% by 2013" },
+    "nitrogen": { "qualitative": "Moderate" , "quantitative": "8%", "target": "50% by 2013" },
+    "sediment": { "qualitative": "Good" , "quantitative": "3%", "target": "20% by 2020" },
+    "pesticides": { "qualitative": "Good" , "quantitative": "17%", "target": "50% by 2013" }
   }
 };
