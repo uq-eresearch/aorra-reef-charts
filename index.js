@@ -446,7 +446,10 @@ $(document).ready(function() {
                 .append($('<div/>').addClass('name').text(name))
                 .append(indicatorImage[indicator])
                 .append($('<div/>').text(value))
-                .append($('<div/>').addClass('target').html("Target &rarr; "+target));
+                .append($('<div/>').addClass('target').attr('title', 'Target')
+                  .append($('<i/>').addClass('fa fa-dot-circle-o'))
+                  .append('&ensp;')
+                  .append(target));
               $(e).append($button);
             });
           });
