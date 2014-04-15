@@ -69,6 +69,12 @@
       </a>
     </div>
   </div>
+  <p>
+  You can view the full report card <a href="{{fullReportUrl}}">here</a>.
+  </p>
+  {{#otherYears}}
+    {{>other-years-nav}}
+  {{/otherYears}}
   </div>
 </script>
 
@@ -76,6 +82,38 @@
 
 <script id="tmpl-gbr-banner" type="text/html">
   <div class="top-banner gbr">Great Barrier Reef</div>
+</script>
+
+<script id="tmpl-other-years-nav" type="text/html">
+  <nav class="navbar navbar-default navbar-fixed-bottom"
+    role="navigation"
+    style="position: absolute">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#other-years-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        {{#isMostRecent}}
+        <div class="navbar-brand">Previous Years</div>
+        {{/isMostRecent}}
+        {{^isMostRecent}}
+        <div class="navbar-brand">Other Years</div>
+        {{/isMostRecent}}
+      </div>
+      <div class="collapse navbar-collapse" id="other-years-navbar-collapse">
+        <ul class="nav navbar-nav">
+          {{#otherYears}}
+          <li>
+            <a href="{{url}}">{{year}}</a>
+          </li>
+          {{/otherYears}}
+        </ul>
+      </div>
+    </div>
+  </nav>
 </script>
 
 <script id="tmpl-marine-select" type="text/html">

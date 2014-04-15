@@ -1,6 +1,9 @@
 var baseYear = "2009";
 var reportYears = "2011";
 
+var fullReportCardURL = "http://reefplan.qld.gov.au/measuring-success/report-cards/2011-report-card.aspx";
+var otherReportCardsJSONP = "./other.js";
+
 var regionNames = {
   'cape-york': 'Cape York',
   'wet-tropics': 'Wet Tropics',

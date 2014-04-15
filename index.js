@@ -32,6 +32,8 @@ var template = (function IIFE() {
 
 var reportFinalYear = reportYears.match(/\d{4}$/g)[0];
 
+var otherInfographicYears = [];
+
 var app = Sammy('#main', function() {
     
   // Default lander
@@ -41,7 +43,12 @@ var app = Sammy('#main', function() {
         .html(template('home', {
       baseYear: baseYear,
       reportYears: reportYears,
-      reportFinalYear: reportFinalYear
+      reportFinalYear: reportFinalYear,
+      otherYears: otherInfographicYears,
+      isMostRecent: otherInfographicYears.every(function(v) {
+        return v.year < reportYears;
+      }),
+      fullReportUrl: fullReportCardURL
     }));
     this.trigger('region:show', 'gbr');
   });
@@ -484,8 +491,19 @@ $(document).ready(function() {
             }.bind(this));
           });
         });
-        // Run app now that regions & marine are loaded
-        app.run('#/');
+        $.ajax({
+          url: otherReportCardsJSONP,
+          dataType: 'jsonp',
+          jsonpCallback: 'reportCardYearsCallback',
+          success: function(data) {
+            otherInfographicYears = data.infographics.filter(function(v) {
+              return v.year != reportYears;
+            });
+          }
+        }).always(function() {
+          // Run app now that regions & marine are loaded
+          app.run('#/');
+        });
       });
     }, 'json');
 
