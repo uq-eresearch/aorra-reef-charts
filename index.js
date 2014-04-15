@@ -1,3 +1,17 @@
+// Begin wrapper
+(function() {
+    
+var configLoaded = $.getJSON('data.json').promise();
+var app = Sammy('#main', function() {});
+
+var documentLoaded = (function() {
+  var d = $.Deferred();
+  $(document).ready(function() {
+    d.resolve();
+  });
+  return d;
+})();
+
 var indicatorImage = (function() {
   function img(imgName) {
     return $('<img />').attr('src', 'images/'+imgName+'.png')[0].outerHTML;
@@ -29,92 +43,6 @@ var template = (function IIFE() {
     throw new Error('Template "'+templateName+'" not found.');
   };
 })();
-
-var reportFinalYear = reportYears.match(/\d{4}$/g)[0];
-
-var otherInfographicYears = [];
-
-var app = Sammy('#main', function() {
-    
-  // Default lander
-  this.get('#/', function() {
-    // this context is a Sammy.EventContext
-    this.$element() // $('#main')
-        .html(template('home', {
-      baseYear: baseYear,
-      reportYears: reportYears,
-      reportFinalYear: reportFinalYear,
-      otherYears: otherInfographicYears,
-      isMostRecent: otherInfographicYears.every(function(v) {
-        return v.year < reportYears;
-      }),
-      fullReportUrl: fullReportCardURL
-    }));
-    this.trigger('region:show', 'gbr');
-  });
-  
-  this.get('#/management', function() {
-    this.$element()
-        .html(template('management-select'));
-    this.trigger('region:show', 'gbr');
-    this.trigger('management:show');
-  });
-  
-  this.get('#/catchment', function() {
-    this.$element()
-        .html(template('catchment-select'));
-    this.trigger('region:show', 'gbr');
-    this.trigger('catchment:show');
-  });
-  
-  this.get('#/marine', function() {
-    var context = this;
-    this.$element().html(template('marine-select'));
-    this.trigger('region:show', 'gbr');
-    this.trigger('marine:show');
-  });
-  
-  // Same handling for management and catchment indicators, just different
-  // data sources and URLs.
-  [
-    ['management', managementData], 
-    ['catchment', catchmentData],
-    ['marine', marineData]
-  ].forEach(function(args) {
-    var indicatorType = args[0];
-    var data = args[1];
-    this.get('#/'+indicatorType+'/:indicator', function() {
-      var indicator = this.params['indicator'];
-      var indicatorData = data['gbr'][indicator];
-      var caption = template(indicator+"-caption", {
-        baseYear: baseYear,
-        reportYears: reportYears,
-        reportFinalYear: reportFinalYear,
-        target: indicatorData['target']
-      });
-      this.$element().html(template(indicatorType+'-indicator-info', {
-        name: indicatorNames[indicator],
-        caption: caption
-      }));
-      this.trigger('region:show', 'gbr');
-      this.trigger('indicator:show', this.params['indicator']);
-    });
-  }.bind(this));
-  
-  this.get('#/region/:region', function() {
-    var regionId = this.params['region'];
-    this.$element().html(template('region-info', {
-      id: regionId,
-      name: regionNames[regionId],
-      caption: marineCaptions[regionId]
-    }));
-    this.trigger('region:show', regionId);
-    this.trigger('marine:show');
-    this.trigger('catchment:show');
-    this.trigger('management:show');
-  });
-  
-});
 
 var getFill = (function IIFE() {
   var fills;
@@ -174,7 +102,106 @@ function getMarineStyle(data) {
   }, []).join("\n");
 }
 
-$(document).ready(function() {
+var otherInfographicYears = [];
+
+var deferredsBeforeStart = {
+  'regions':   $.Deferred(),
+  'marineSVG': $.Deferred(),
+  'yearLinks': $.Deferred(),
+};
+var promisesBeforeStart = Object.keys(deferredsBeforeStart).map(function (k) {
+  return deferredsBeforeStart[k].promise();
+});
+
+
+var routesCreated = $.when(configLoaded).done(function(config) {
+  var reportFinalYear = config['reportYears'].match(/\d{4}$/g)[0];
+    
+  Sammy('#main', function() {
+      
+    // Default lander
+    this.get('#/', function() {
+      // this context is a Sammy.EventContext
+      this.$element() // $('#main')
+          .html(template('home', {
+        baseYear: config['baseYear'],
+        reportYears: config['reportYears'],
+        reportFinalYear: reportFinalYear,
+        otherYears: otherInfographicYears,
+        isMostRecent: otherInfographicYears.every(function(v) {
+          return v.year < config['reportYears'];
+        }),
+        fullReportUrl: config['fullReportCardURL']
+      }));
+      this.trigger('region:show', 'gbr');
+    });
+    
+    this.get('#/management', function() {
+      this.$element()
+          .html(template('management-select'));
+      this.trigger('region:show', 'gbr');
+      this.trigger('management:show');
+    });
+    
+    this.get('#/catchment', function() {
+      this.$element()
+          .html(template('catchment-select'));
+      this.trigger('region:show', 'gbr');
+      this.trigger('catchment:show');
+    });
+    
+    this.get('#/marine', function() {
+      var context = this;
+      this.$element().html(template('marine-select'));
+      this.trigger('region:show', 'gbr');
+      this.trigger('marine:show');
+    });
+    
+    // Same handling for management and catchment indicators, just different
+    // data sources and URLs.
+    [
+      ['management', config.data.management], 
+      ['catchment', config.data.catchment],
+      ['marine', config.data.marine]
+    ].forEach(function(args) {
+      var indicatorType = args[0];
+      var data = args[1];
+      this.get('#/'+indicatorType+'/:indicator', function() {
+        var indicator = this.params['indicator'];
+        var indicatorData = data['gbr'][indicator];
+        var caption = template(indicator+"-caption", {
+          baseYear: config['baseYear'],
+          reportYears: config['reportYears'],
+          reportFinalYear: reportFinalYear,
+          target: indicatorData['target']
+        });
+        this.$element().html(template(indicatorType+'-indicator-info', {
+          name: config.names.indicators[indicator],
+          caption: caption
+        }));
+        this.trigger('region:show', 'gbr');
+        this.trigger('indicator:show', this.params['indicator']);
+      });
+    }.bind(this));
+    
+    this.get('#/region/:region', function() {
+      var regionId = this.params['region'];
+      this.$element().html(template('region-info', {
+        id: regionId,
+        name: config.names.regions[regionId],
+        caption: config.captions.marine[regionId]
+      }));
+      this.trigger('region:show', regionId);
+      this.trigger('marine:show');
+      this.trigger('catchment:show');
+      this.trigger('management:show');
+    });
+    
+  });
+});
+
+$.when(configLoaded, routesCreated, documentLoaded).done(function(args) {
+  var config = args[0];
   
   function loadSvg(containerSelector, url, align) {
     $(containerSelector).svg();
@@ -206,7 +233,7 @@ $(document).ready(function() {
   })();
   
   $('body').append(
-    $('<style type="text/css"/>').html(getMarineStyle(marineData)));
+    $('<style type="text/css"/>').html(getMarineStyle(config.data.marine)));
     
   (function initmap() {
     // set up the map
@@ -219,7 +246,8 @@ $(document).ready(function() {
   
     map.setView(new L.LatLng(-18.83, 147.68), 6);
     map.addLayer(osm);
-    $.get("./reef-regions.geojson", function(data) {
+    
+    $.getJSON("./reef-regions.geojson").done(function(data) {
       var reefGeo = L.geoJson(data, {
         style: function (feature) {
           return {
@@ -267,7 +295,7 @@ $(document).ready(function() {
         map.on(mapEventHandler);
       });
       reefGeo.addTo(map);
-    }, 'json');
+    });
     // Detect low-res device and use simpler regions
     var regionsUrl = 768 < window.screen.width ?
       "./regions.geojson" :
@@ -383,7 +411,7 @@ $(document).ready(function() {
         $('.leaflet-label')
           .removeAttr('title')
           .removeClass('condition na very-good good moderate poor very-poor');
-        Object.keys(marineData).forEach(function(regionName) {
+        Object.keys(config.data.marine).forEach(function(regionName) {
           var region = regionLookup.nameToRegion(regionName);
           if (region != null) {
             region.setQuantitativeValue(null);
@@ -393,12 +421,12 @@ $(document).ready(function() {
       
       function setRegionFills(indicator) {
         var data;
-        if (marineData.gbr[indicator]) {
-          data = marineData;
-        } else if (managementData.gbr[indicator]) {
-          data = managementData;
-        } else if (catchmentData.gbr[indicator]) {
-          data = catchmentData;
+        if (config.data.marine.gbr[indicator]) {
+          data = config.data.marine;
+        } else if (config.data.management.gbr[indicator]) {
+          data = config.data.management;
+        } else if (config.data.catchment.gbr[indicator]) {
+          data = config.data.catchment;
         } else {
           clearRegionFills();
           return;
@@ -460,13 +488,13 @@ $(document).ready(function() {
         this.bind('management:show', function(evt) {
           this.$element().find('.management-data').each(function(i, e) {
             var regionName = $(e).data('region');
-            addProgressButtons(managementData, regionName, e);
+            addProgressButtons(config.data.management, regionName, e);
           });
         });
         this.bind('catchment:show', function(evt) {
           this.$element().find('.catchment-data').each(function(i, e) {
             var regionName = $(e).data('region');
-            addProgressButtons(catchmentData, regionName, e);
+            addProgressButtons(config.data.catchment, regionName, e);
           });
         });
         ['catchment', 'management'].forEach(function(arg) {
@@ -491,23 +519,40 @@ $(document).ready(function() {
             }.bind(this));
           });
         });
-        $.ajax({
-          url: otherReportCardsJSONP,
-          dataType: 'jsonp',
-          jsonpCallback: 'reportCardYearsCallback',
-          success: function(data) {
-            otherInfographicYears = data.infographics.filter(function(v) {
-              return v.year != reportYears;
-            });
-          }
-        }).always(function() {
-          // Run app now that regions & marine are loaded
-          app.run('#/');
-        });
+        // Marine SVG has been loaded
+        deferredsBeforeStart['marineSVG'].resolve();
       });
+      // Regions have been loaded
+      deferredsBeforeStart['regions'].resolve();
     }, 'json');
 
     var imageBounds = [[-24.444389342999955,153.2289409640001], [-9.999868392999815,142.6685123440003]];
     L.imageOverlay('reef.svg', imageBounds, {opacity: 1}).addTo(map);
   })();
 });
+
+$.when(configLoaded).done(function(config) {
+  $.ajax({
+    url: config.otherReportCardsJSONP,
+    dataType: 'jsonp',
+    jsonpCallback: 'reportCardYearsCallback',
+    success: function(data) {
+      otherInfographicYears = data.infographics.filter(function(v) {
+        return v.year != config.reportYears;
+      });
+    }
+  }).always(function() {
+    // Year links have been loaded
+    deferredsBeforeStart['yearLinks'].resolve();
+  });
+});
+
+window.promisesBeforeStart = promisesBeforeStart;
+
+// Run app when everything has been loaded
+$.when.apply($, promisesBeforeStart).done(function() {
+  app.run('#/');
+});
+
+// End wrapper
+})();
