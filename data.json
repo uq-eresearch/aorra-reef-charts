@@ -2,7 +2,7 @@
   "baseYear": "2009",
   "reportYears": "2011",
   "fullReportCardURL": "http://reefplan.qld.gov.au/measuring-success/report-cards/2011-report-card.aspx",
-  "otherReportCardsJSONP": "./other.js",
+  "otherReportCardsJSONP": "./other-demo.js",
   "names": {
     "regions": {
       "cape-york": "Cape York",

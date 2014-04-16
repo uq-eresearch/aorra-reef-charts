@@ -547,8 +547,6 @@ $.when(configLoaded).done(function(config) {
   });
 });
 
-window.promisesBeforeStart = promisesBeforeStart;
-
 // Run app when everything has been loaded
 $.when.apply($, promisesBeforeStart).done(function() {
   app.run('#/');
