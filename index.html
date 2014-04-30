@@ -166,6 +166,21 @@
   <p>
   {{caption}}
   </p>
+  <table class="table table-bordered">
+    <tbody>
+      {{#regions}}
+      <tr>
+        <td>{{name}}</td>
+        {{#data}}
+        <td>{{qualitative}}</td>
+        {{#quantitative}}
+        <td>{{quantitative}}</td>
+        {{/quantitative}}
+        {{/data}}
+      </tr>
+      {{/regions}}
+    </tbody>
+  </table>
   <a class="btn btn-default" href="#/management">
     Back
   </a>
@@ -194,6 +209,21 @@
   <p>
   {{caption}}
   </p>
+  <table class="table table-bordered">
+    <tbody>
+      {{#regions}}
+      <tr>
+        <td>{{name}}</td>
+        {{#data}}
+        <td>{{qualitative}}</td>
+        {{#quantitative}}
+        <td>{{quantitative}}</td>
+        {{/quantitative}}
+        {{/data}}
+      </tr>
+      {{/regions}}
+    </tbody>
+  </table>
   <a class="btn btn-default" href="#/catchment">
     Back
   </a>
@@ -223,6 +253,21 @@
   <p>
   {{{caption}}}
   </p>
+  <table class="table table-bordered">
+    <tbody>
+      {{#regions}}
+      <tr>
+        <td>{{name}}</td>
+        {{#data}}
+        <td>{{qualitative}}</td>
+        {{#quantitative}}
+        <td>{{quantitative}}</td>
+        {{/quantitative}}
+        {{/data}}
+      </tr>
+      {{/regions}}
+    </tbody>
+  </table>
   <a class="btn btn-default" href="#/marine">
     Back
   </a>

@@ -175,9 +175,20 @@ var routesCreated = $.when(configLoaded).done(function(config) {
           reportFinalYear: reportFinalYear,
           target: indicatorData['target']
         });
+        var regionData = Object.keys(data)
+          .filter(function(k) {
+            return k != 'gbr';
+          }).map(function(k) {
+            return {
+              name: config.names.regions[k],
+              data: data[k][indicator]
+            };
+          });
+        console.log(regionData);
         this.$element().html(template(indicatorType+'-indicator-info', {
           name: config.names.indicators[indicator],
-          caption: caption
+          caption: caption,
+          regions: regionData
         }));
         this.trigger('region:show', 'gbr');
         this.trigger('indicator:show', this.params['indicator']);
