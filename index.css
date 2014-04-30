@@ -153,11 +153,12 @@ button.progress-indicator .target {
 
 #legend {
   position: absolute;
-  bottom: 2em;
-  left: 2em;
+  top: 2em;
+  right: 2em;
   list-style-type: none;
   margin: 0;
   padding: 0;
+  z-index: 1;
 }
 
 #legend li {
