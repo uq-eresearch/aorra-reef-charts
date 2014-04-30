@@ -437,7 +437,7 @@ $.when(configLoaded, routesCreated, documentLoaded).done(function(args) {
         Object.keys(data).forEach(function(regionName) {
           var region = regionLookup.nameToRegion(regionName);
           if (region != null) {
-            var displayName = region.feature.properties.Region;
+            var displayName = regionLookup.regionToDisplayName(region);
             var condition = data[regionName][indicator].qualitative;
             var value = data[regionName][indicator].quantitative;
             if (condition == null) {
