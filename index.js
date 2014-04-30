@@ -331,6 +331,9 @@ $.when(configLoaded, routesCreated, documentLoaded).done(function(args) {
           },
           regionToName: function regionToName(region) {
             return regionIdToName[getRegionId(region)];
+          },
+          regionToDisplayName: function regionToName(region) {
+            return config.names.regions[regionIdToName[getRegionId(region)]];
           }
         }
       })();
@@ -382,7 +385,7 @@ $.when(configLoaded, routesCreated, documentLoaded).done(function(args) {
       }); 
       regionsGeo.addTo(map);
       regionsGeo.getLayers().forEach(function(region) {
-        var displayName = region.feature.properties.Region;
+        var displayName = regionLookup.regionToDisplayName(region);
         var labelDir = displayName == 'Burdekin' ? 'left' : 'right';
         var label = new L.Label({
           clickable: true,
