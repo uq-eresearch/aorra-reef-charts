@@ -188,7 +188,8 @@ var routesCreated = $.when(configLoaded).done(function(config) {
         this.$element().html(template(indicatorType+'-indicator-info', {
           name: config.names.indicators[indicator],
           caption: caption,
-          regions: regionData
+          regions: regionData,
+          'back-link': '#/'+indicatorType
         }));
         this.trigger('region:show', 'gbr');
         this.trigger('indicator:show', this.params['indicator']);
