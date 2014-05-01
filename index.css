@@ -199,12 +199,20 @@ div[id*="tmpl-"] {
 .top-banner.mackay-whitsunday     { background-color: #dca256; }
 .top-banner.fitzroy               { background-color: #833e15; }
 .top-banner.burnett-mary          { background-color: #e4ac24; }
-.table .cape-york         { font-weight: bold; color: #ca6722; }
-.table .wet-tropics       { font-weight: bold; color: #82be40; }
-.table .burdekin          { font-weight: bold; color: #686a57; }
-.table .mackay-whitsunday { font-weight: bold; color: #dca256; }
-.table .fitzroy           { font-weight: bold; color: #833e15; }
-.table .burnett-mary      { font-weight: bold; color: #e4ac24; }
+.region-data .cape-york         { font-weight: bold; color: #ca6722; }
+.region-data .wet-tropics       { font-weight: bold; color: #82be40; }
+.region-data .burdekin          { font-weight: bold; color: #686a57; }
+.region-data .mackay-whitsunday { font-weight: bold; color: #dca256; }
+.region-data .fitzroy           { font-weight: bold; color: #833e15; }
+.region-data .burnett-mary      { font-weight: bold; color: #e4ac24; }
+
+.regional-data {
+  margin-bottom: 10px;
+}
+
+.region-data {
+  margin: 10px;
+}
 
 path.cape-york, path.wet-tropics, path.burdekin,
 path.mackay-whitsunday, path.fitzroy, path.burnett-mary {
