@@ -119,7 +119,7 @@ var routesCreated = $.when(configLoaded).done(function(config) {
     
   Sammy('#main', function() {
     var gbrBreadcrumb = { 
-      name: '<i class="fa fa-home" title="Great Barrier Reef"></i>',
+      name: 'Great Barrier Reef',
       href: '#/'
     };
       
