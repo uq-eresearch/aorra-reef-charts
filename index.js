@@ -180,11 +180,11 @@ var routesCreated = $.when(configLoaded).done(function(config) {
             return k != 'gbr';
           }).map(function(k) {
             return {
+              id: k,
               name: config.names.regions[k],
               data: data[k][indicator]
             };
           });
-        console.log(regionData);
         this.$element().html(template(indicatorType+'-indicator-info', {
           name: config.names.indicators[indicator],
           caption: caption,

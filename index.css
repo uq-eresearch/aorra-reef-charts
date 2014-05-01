@@ -192,13 +192,19 @@ div[id*="tmpl-"] {
   font-weight: bold;
 }
 
-.top-banner.gbr                { background-color: black; }
-.top-banner.cape-york          { background-color: #ca6722; }
-.top-banner.wet-tropics        { background-color: #82be40; }
-.top-banner.burdekin           { background-color: #686a57; }
-.top-banner.mackay-whitsunday  { background-color: #dca256; }
-.top-banner.fitzroy            { background-color: #833e15; }
-.top-banner.burnett-mary       { background-color: #e4ac24; }
+.top-banner.gbr                   { background-color:   black; }
+.top-banner.cape-york             { background-color: #ca6722; }
+.top-banner.wet-tropics           { background-color: #82be40; }
+.top-banner.burdekin              { background-color: #686a57; }
+.top-banner.mackay-whitsunday     { background-color: #dca256; }
+.top-banner.fitzroy               { background-color: #833e15; }
+.top-banner.burnett-mary          { background-color: #e4ac24; }
+.table .cape-york         { font-weight: bold; color: #ca6722; }
+.table .wet-tropics       { font-weight: bold; color: #82be40; }
+.table .burdekin          { font-weight: bold; color: #686a57; }
+.table .mackay-whitsunday { font-weight: bold; color: #dca256; }
+.table .fitzroy           { font-weight: bold; color: #833e15; }
+.table .burnett-mary      { font-weight: bold; color: #e4ac24; }
 
 path.cape-york, path.wet-tropics, path.burdekin,
 path.mackay-whitsunday, path.fitzroy, path.burnett-mary {
