@@ -35,8 +35,21 @@
 
 </div>
 
+<script id="tmpl-breadcrumbs" type="text/html">
+  <ol class="breadcrumb">
+    {{#breadcrumbs}}
+    {{#href}}
+    <li><a href="{{href}}">{{{name}}}</a></li>
+    {{/href}}
+    {{^href}}
+    <li class="active">{{{name}}}</li>
+    {{/href}}
+    {{/breadcrumbs}}
+  </ol>
+</script>
 
 <script id="tmpl-home" type="text/html">
+  {{>gbr-banner}}
   <div class="container-fluid">
   <h1>
     Reef Report Card Summary
@@ -116,19 +129,18 @@
 
 <script id="tmpl-marine-select" type="text/html">
   {{>gbr-banner}}
+  {{>breadcrumbs}}
   <div class="container-fluid">
     <h1>Marine condition</h1>
     <p>
     {{caption}}
     </p>
     <div class="marine-chart gbr"></div>
-    <a class="btn btn-default" href="#/">
-      Back
-    </a>
   </div>
 </script>
 <script id="tmpl-management-select" type="text/html">
   {{>gbr-banner}}
+  {{>breadcrumbs}}
   <div class="container-fluid">
   <h1>Management practice indicators</h1>
   <p>
@@ -137,13 +149,11 @@
   the reef.
   </p>
   <div class="management-data" data-region="gbr"></div>
-  <a class="btn btn-default" href="#/">
-    Back
-  </a>
   </div>
 </script>
 <script id="tmpl-catchment-select" type="text/html">
   {{>gbr-banner}}
+  {{>breadcrumbs}}
   <div class="container-fluid">
   <h1>Catchment indicators</h1>
   <p>
@@ -151,9 +161,6 @@
   changes in land management practices.
   </p>
   <div class="catchment-data" data-region="gbr"></div>
-  <a class="btn btn-default" href="#/">
-    Back
-  </a>
   </div>
 </script>
 <script id="tmpl-regional-indicator-info" type="text/html">
@@ -161,7 +168,7 @@
   {{#regions}}
     <div class="col-xs-6 col-lg-4">
       <div class="region-data">
-        <div class="{{id}}">{{name}}</div>
+        <div><a class="{{id}}" href="{{href}}">{{name}}</a></div>
         <div class="data">
         {{#data}}
           {{#qualitative}}
@@ -181,30 +188,16 @@
   {{/regions}}
   </div>
 </script>
-<script id="tmpl-nav-buttons" type="text/html">
-  <p>
-    <div class="pull-left">
-      <a class="btn btn-default" href="{{back-link}}">
-        Back
-      </a>
-    </div>
-    <div class="pull-right">
-      <a class="btn btn-default" href="#/">
-        Back to reef-wide results
-      </a>
-    </div>
-  </p>
-</script>
 <!-- Management info -->
 <script id="tmpl-management-indicator-info" type="text/html">
   {{>gbr-banner}}
+  {{>breadcrumbs}}
   <div class="container-fluid">
   <h1>{{name}}</h1>
   <p>
   {{caption}}
   </p>
   {{>regional-indicator-info}}
-  {{>nav-buttons}}
   </div>
 </script>
 <script id="tmpl-grazing-caption" type="text/html">
@@ -225,13 +218,13 @@
 <!-- Catchment info -->
 <script id="tmpl-catchment-indicator-info" type="text/html">
   {{>gbr-banner}}
+  {{>breadcrumbs}}
   <div class="container-fluid">
   <h1>{{name}}</h1>
   <p>
   {{caption}}
   </p>
   {{>regional-indicator-info}}
-  {{>nav-buttons}}
   </div>
 </script>
 <script id="tmpl-groundcover-caption" type="text/html">
@@ -253,13 +246,13 @@
 <!-- Marine info -->
 <script id="tmpl-marine-indicator-info" type="text/html">
   {{>gbr-banner}}
+  {{>breadcrumbs}}
   <div class="container-fluid">
   <h1>{{{name}}}</h1>
   <p>
   {{{caption}}}
   </p>
   {{>regional-indicator-info}}
-  {{>nav-buttons}}
   </div>
 </script>
 <script id="tmpl-overall-caption" type="text/html">
@@ -311,6 +304,7 @@
 </script>
 <script id="tmpl-region-info" type="text/html">
   <div class="top-banner {{id}}">{{name}}</div>
+  {{>breadcrumbs}}
   <div class="container-fluid">
   <div class="carousel {{id}} slide" style="height: 80%"
     data-ride="carousel" data-interval="false" data-wrap="true">
@@ -357,13 +351,6 @@
       <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
   </div>
-  <p>
-    <div class="pull-left">
-      <a class="btn btn-default" href="#/">
-        Back to reef-wide results
-      </a>
-    </div>
-  </p>
   </div>
 </script>
 <script id="tmpl-progress-tile" type="text/html">

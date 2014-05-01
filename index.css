@@ -125,6 +125,10 @@ button.progress-indicator .target {
   font-size: 150%;
 }
 
+.top-banner a {
+  color: white;
+}
+
 @media all and (max-width: 1065px) {
   .marine-chart {
     max-height: 60%;
