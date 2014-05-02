@@ -50,7 +50,7 @@
 
 <script id="tmpl-home" type="text/html">
   {{>gbr-banner}}
-  <div class="container-fluid">
+  <div class="container-fluid content">
   <h1>
     Reef Report Card Summary
     <span class="nobr">{{reportYears}}</span>
@@ -62,7 +62,7 @@
   </p>
   <p>Click on a region on the map for regional results or use the indicators
   buttons below to explore the Great Barrier Reef-wide results.</p>
-  <div class="row" style="padding-top: 2em; padding-bottom: 2em;">
+  <div class="row indicator-groups">
     <div class="col-xs-4 text-center">
       <a class="btn btn-default" href="#/management">
         Management <br /> Indicators
@@ -305,30 +305,35 @@
   <div class="top-banner {{id}}">{{name}}</div>
   {{>breadcrumbs}}
   <div class="container-fluid">
-  <h1>Management practice indicators</h1>
-  <p>
-  Proportion of the agriculture industry that have adopted individual
-  improved land management practices that will reduce the amount of
-  pollutants entering the reef.
-  </p>
-  <div class="management-data" data-region="{{id}}"></div>
-  
-  <hr/>
-  
-  <h1>Catchment indicators</h1>
-  <p>
-  Reductions in key pollutants leaving the end of catchments as a result
-  of changes in land management practices.
-  </p>
-  <div class="catchment-data" data-region="{{id}}"></div>
-  
-  <hr/>
-  
-  <h1>Marine Condition</h1>
-  <p>
-  {{caption}}
-  </p>
-  <div class="marine-chart {{id}}"></div>
+    <section>
+      <h1>Management practice indicators</h1>
+      <p>
+      Proportion of the agriculture industry that have adopted individual
+      improved land management practices that will reduce the amount of
+      pollutants entering the reef.
+      </p>
+      <div class="management-data" data-region="{{id}}"></div>
+    </section>
+    
+    <hr/>
+    
+    <section>
+      <h1>Catchment indicators</h1>
+      <p>
+      Reductions in key pollutants leaving the end of catchments as a result
+      of changes in land management practices.
+      </p>
+      <div class="catchment-data" data-region="{{id}}"></div>
+    </section>
+    
+    <hr/>
+    <section>
+      <h1>Marine Condition</h1>
+      <p>
+      {{caption}}
+      </p>
+      <div class="marine-chart {{id}}"></div>
+    </section>
   </div>
 </script>
 <script id="tmpl-progress-tile" type="text/html">

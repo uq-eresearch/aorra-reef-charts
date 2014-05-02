@@ -15,6 +15,14 @@ body {
   white-space: nowrap;
 }
 
+#main > .breadcrumb {
+  margin-bottom: 0;
+}
+
+#main > .container-fluid {
+  padding: 5px 45px 20px 45px;
+}
+
 #map {
   position: absolute;
   top: 0;
@@ -67,7 +75,6 @@ body {
 
 .management-data, .catchment-data {
   width: 100%;
-  padding: 10px;
   text-align: center;
 }
 
@@ -149,6 +156,9 @@ button.progress-indicator .target {
   body {
     overflow-y: auto;
   }
+  #main > .container-fluid {
+    padding: 0px 25px 20px 25px;
+  }
   .inset-paper {
     position: relative;
     width: 100%;
@@ -161,7 +171,7 @@ button.progress-indicator .target {
     height: 50%;
   }
   .marine-chart {
-    max-width: 60%;
+    height: 300px;
   }
 }
 
@@ -187,6 +197,15 @@ button.progress-indicator .target {
 #legend li:last-child {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.indicator-groups {
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+.indicator-groups .btn {
+  width: 100%;
 }
 
 div[id*="tmpl-"] {
