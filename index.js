@@ -497,10 +497,26 @@ $.when(configLoaded, routesCreated, documentLoaded).done(function(args) {
         }
         Object.keys(data).forEach(function(regionName) {
           var region = regionLookup.nameToRegion(regionName);
+          function getRegionData(region) {
+            var group = config.groups.indicators[indicator]
+            if (group) {
+              var firstNonEmpty = function(arr) {
+                if (arr.length === 0) {
+                  return null;
+                } else {
+                  var v = data[region][arr[0]];
+                  return v || firstNonEmpty(arr.slice(1));
+                }
+              };
+              return firstNonEmpty(group);
+            } else {
+              return data[k][indicator];
+            }
+          }
           if (region != null) {
             var displayName = regionLookup.regionToDisplayName(region);
-            var condition = data[regionName][indicator].qualitative;
-            var value = data[regionName][indicator].quantitative;
+            var condition = getRegionData(regionName).qualitative;
+            var value = getRegionData(regionName).quantitative;
             if (condition == null) {
               $('.leaflet-label:contains("'+displayName+'")')
                 .addClass('condition na');
