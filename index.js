@@ -18,7 +18,9 @@ var indicatorImage = (function() {
   }
   return {
     'grazing': img('grazing'),
+    'sugarcane-grains': img('cane-grain'),
     'sugarcane': img('cane'),
+    'grains': img('grain'),
     'horticulture': img('banana'),
     'groundcover': img('groundcover'),
     'nitrogen': img('beaker'),
@@ -200,10 +202,26 @@ var routesCreated = $.when(configLoaded).done(function(config) {
           .filter(function(k) {
             return k != 'gbr';
           }).map(function(k) {
+            function getRegionData(region) {
+              var group = config.groups.indicators[indicator]
+              if (group) {
+                var firstNonEmpty = function(arr) {
+                  if (arr.length === 0) {
+                    return null;
+                  } else {
+                    var v = data[region][arr[0]];
+                    return v || firstNonEmpty(arr.slice(1));
+                  }
+                };
+                return firstNonEmpty(group);
+              } else {
+                return data[k][indicator];
+              }
+            }
             return {
               id: k,
               name: config.names.regions[k],
-              data: data[k][indicator],
+              data: getRegionData(k),
               href: '#/region/'+k
             };
           });
@@ -515,7 +533,7 @@ $.when(configLoaded, routesCreated, documentLoaded).done(function(args) {
               var condition = region[indicator].qualitative || 'NA';
               var value = region[indicator].quantitative || '';
               var target = region[indicator].target || '';
-              var name = indicator.substring(0,1).toUpperCase() + indicator.substring(1);
+              var name = config.names.indicators[indicator];
               var $button = $(template('progress-tile', {
                 conditionId: condition.toLowerCase().replace(' ', '-'),
                 conditionName: condition,
@@ -545,7 +563,16 @@ $.when(configLoaded, routesCreated, documentLoaded).done(function(args) {
           this.bind(arg + ':show', function() {
             this.$element().find('button[data-indicator]').click(function(evt) {
               var $button = $(evt.delegateTarget);
-              this.redirect('#', arg, $button.attr('data-indicator'));
+              var indicator = $button.attr('data-indicator');
+              var gbrIndicator = (function() {
+                var groups = config.groups.indicators;
+                var group = Object.keys(groups).filter(function(k) {
+                  var members = groups[k];
+                  return members && members.indexOf(indicator) != -1;
+                })[0];
+                return group || indicator;
+              })();
+              this.redirect('#', arg, gbrIndicator);
             }.bind(this));
           });
         }.bind(this));

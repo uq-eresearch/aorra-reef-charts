@@ -14,7 +14,9 @@
     },
     "indicators": {
       "grazing": "Grazing",
-      "sugarcane": "Sugarcane / Grains",
+      "sugarcane-grains": "Sugarcane & Grains",
+      "sugarcane": "Sugarcane",
+      "grains": "Grains",
       "horticulture": "Horticulture",
       "groundcover": "Groundcover",
       "nitrogen": "Nitrogen",
@@ -44,6 +46,11 @@
       "mackay-whitsunday":  "The Mackay Whitsunday’s marine condition declined from moderate to poor. Inshore water quality also declined from moderate to poor, inshore seagrass meadows declined from poor to very poor and coral reefs remained in moderate condition.",
       "fitzroy":            "The Fitzroy’s marine condition declined from moderate to poor. Inshore water quality and inshore seagrass meadows also declined from moderate to poor and coral reefs remained in poor condition",
       "burnett-mary":       "The Burnett Mary’s marine condition remained poor. Inshore water quality remained moderate and the condition of seagrass declined from poor to very poor."
+    }
+  },
+  "groups": {
+    "indicators": {
+      "sugarcane-grains": ["sugarcane", "grains"]
     }
   },
   "data": {
@@ -157,7 +164,7 @@
     "management": {
       "gbr": {
         "grazing": { "qualitative": "Moderate" , "quantitative": "17%", "target": "50% by 2013" },
-        "sugarcane": { "qualitative": "Good" , "quantitative": "34%", "target": "80% by 2013" },
+        "sugarcane-grains": { "qualitative": "Good" , "quantitative": "34%", "target": "80% by 2013" },
         "horticulture": { "qualitative": "Moderate" , "quantitative": "25%", "target": "80% by 2013" }
       },
       "cape-york": {
@@ -182,7 +189,7 @@
       },
       "fitzroy": {
         "grazing": { "qualitative": "Moderate" , "quantitative": "16%", "target": "50% by 2013" },
-        "sugarcane": { "qualitative": "Moderate" , "quantitative": "18%", "target": "80% by 2013" },
+        "grains": { "qualitative": "Moderate" , "quantitative": "18%", "target": "80% by 2013" },
         "horticulture": { "qualitative": "Poor" , "quantitative": "13%", "target": "80% by 2013" }
       },
       "burnett-mary": {
