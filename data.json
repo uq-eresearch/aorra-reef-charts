@@ -14,9 +14,9 @@
     },
     "indicators": {
       "grazing": "Grazing",
-      "sugarcane-grains": "Sugarcane & Grains",
+      "sugarcane-grain": "Sugarcane & Grains",
       "sugarcane": "Sugarcane",
-      "grains": "Grains",
+      "grain": "Grains",
       "horticulture": "Horticulture",
       "groundcover": "Groundcover",
       "nitrogen": "Nitrogen",
@@ -50,7 +50,7 @@
   },
   "groups": {
     "indicators": {
-      "sugarcane-grains": ["sugarcane", "grains"]
+      "sugarcane-grain": ["sugarcane", "grain"]
     }
   },
   "data": {
@@ -164,7 +164,7 @@
     "management": {
       "gbr": {
         "grazing": { "qualitative": "Moderate" , "quantitative": "17%", "target": "50% by 2013" },
-        "sugarcane-grains": { "qualitative": "Good" , "quantitative": "34%", "target": "80% by 2013" },
+        "sugarcane-grain": { "qualitative": "Good" , "quantitative": "34%", "target": "80% by 2013" },
         "horticulture": { "qualitative": "Moderate" , "quantitative": "25%", "target": "80% by 2013" }
       },
       "cape-york": {
@@ -189,7 +189,7 @@
       },
       "fitzroy": {
         "grazing": { "qualitative": "Moderate" , "quantitative": "16%", "target": "50% by 2013" },
-        "grains": { "qualitative": "Moderate" , "quantitative": "18%", "target": "80% by 2013" },
+        "grain": { "qualitative": "Moderate" , "quantitative": "18%", "target": "80% by 2013" },
         "horticulture": { "qualitative": "Poor" , "quantitative": "13%", "target": "80% by 2013" }
       },
       "burnett-mary": {

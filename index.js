@@ -18,9 +18,9 @@ var indicatorImage = (function() {
   }
   return {
     'grazing': img('grazing'),
-    'sugarcane-grains': img('cane-grain'),
+    'sugarcane-grain': img('cane-grain'),
     'sugarcane': img('cane'),
-    'grains': img('grain'),
+    'grain': img('grain'),
     'horticulture': img('banana'),
     'groundcover': img('groundcover'),
     'nitrogen': img('beaker'),
