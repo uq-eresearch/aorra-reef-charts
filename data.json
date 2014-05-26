@@ -14,7 +14,6 @@
     },
     "indicators": {
       "grazing": "Grazing",
-      "sugarcane-grain": "Sugarcane & Grains",
       "sugarcane": "Sugarcane",
       "grain": "Grains",
       "horticulture": "Horticulture",
@@ -49,9 +48,7 @@
     }
   },
   "groups": {
-    "indicators": {
-      "sugarcane-grain": ["sugarcane", "grain"]
-    }
+    "indicators": {}
   },
   "data": {
     "marine": {
@@ -164,7 +161,7 @@
     "management": {
       "gbr": {
         "grazing": { "qualitative": "Moderate" , "quantitative": "17%", "target": "50% by 2013" },
-        "sugarcane-grain": { "qualitative": "Good" , "quantitative": "34%", "target": "80% by 2013" },
+        "sugarcane": { "qualitative": "Good" , "quantitative": "34%", "target": "80% by 2013" },
         "horticulture": { "qualitative": "Moderate" , "quantitative": "25%", "target": "80% by 2013" }
       },
       "cape-york": {
