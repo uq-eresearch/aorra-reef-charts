@@ -47,9 +47,6 @@
       "burnett-mary":       "The Burnett Mary’s marine condition remained poor. Inshore water quality remained moderate and the condition of seagrass declined from poor to very poor."
     }
   },
-  "groups": {
-    "indicators": {}
-  },
   "data": {
     "marine": {
       "gbr": {
@@ -69,11 +66,6 @@
       },
       "cape-york": {
         "overall": { "qualitative": "Poor" },
-        "coral": { "qualitative": null },
-        "coral-change": { "qualitative": null },
-        "coral-cover": { "qualitative": null },
-        "coral-juvenile": { "qualitative": null },
-        "coral-macroalgae": { "qualitative": null },
         "seagrass": { "qualitative": "Moderate" },
         "seagrass-abundance": { "qualitative": "Very poor" },
         "seagrass-reproduction": { "qualitative": "Good" },
@@ -144,11 +136,6 @@
       },
       "burnett-mary": {
         "overall": { "qualitative": "Poor" },
-        "coral": { "qualitative": null },
-        "coral-change": { "qualitative": null },
-        "coral-cover": { "qualitative": null },
-        "coral-juvenile": { "qualitative": null },
-        "coral-macroalgae": { "qualitative": null },
         "seagrass": { "qualitative": "Very poor" },
         "seagrass-abundance": { "qualitative": "Very poor" },
         "seagrass-reproduction": { "qualitative": "Very poor" },
@@ -166,7 +153,6 @@
       },
       "cape-york": {
         "grazing": { "qualitative": "Very good" , "quantitative": "33%", "target": "50% by 2013" },
-        "sugarcane": { "qualitative": null , "quantitative": null, "target": "80% by 2013" },
         "horticulture": { "qualitative": "Good" , "quantitative": "40%", "target": "80% by 2013" }
       },
       "wet-tropics": {
@@ -203,10 +189,8 @@
         "pesticides": { "qualitative": "Good" , "quantitative": "15%", "target": "50% by 2013" }
       },
       "cape-york": {
-        "groundcover": { "qualitative": null , "quantitative": null },
         "nitrogen": { "qualitative": "Poor" , "quantitative": "4%", "target": "50% by 2013" },
-        "sediment": { "qualitative": "Good" , "quantitative": "4%", "target": "20% by 2020" },
-        "pesticides": { "qualitative": null , "quantitative": null, "target": "50% by 2013" }
+        "sediment": { "qualitative": "Good" , "quantitative": "4%", "target": "20% by 2020" }
       },
       "wet-tropics": {
         "groundcover": { "qualitative": "Very good" , "quantitative": "95%", "target": "50% by 2013" },
